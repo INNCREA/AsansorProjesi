@@ -7,4 +7,11 @@ class Anasayfa extends CI_Controller {
 	{
 		$this->load->view('anasayfa');
 	}
+
+	public function test()
+	{
+		$this->load->library('encryption');
+		$key = bin2hex($this->encryption->create_key(16));
+		echo $key;
+	}
 }
