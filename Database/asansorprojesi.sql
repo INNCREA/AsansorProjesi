@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 04 Tem 2018, 12:20:04
+-- Üretim Zamanı: 16 Tem 2018, 11:44:37
 -- Sunucu sürümü: 5.7.19
 -- PHP Sürümü: 5.6.31
 
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `ariza` (
   `ariza_tarih` varchar(10) NOT NULL,
   `ariza_asansor` int(11) NOT NULL,
   `ariza_onaran` int(11) NOT NULL,
+  `ariza_tutar` varchar(7) NOT NULL,
   PRIMARY KEY (`ariza_id`),
   KEY `ariza_onaran` (`ariza_onaran`),
   KEY `ariza_asansor` (`ariza_asansor`)
@@ -55,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `asansor` (
   `asansor_latitude` varchar(15) NOT NULL,
   `asansor_longitude` varchar(15) NOT NULL,
   `asansor_adres` varchar(150) NOT NULL,
+  `asansor_adresTarif` varchar(250) NOT NULL,
   `asansor_yetkili` int(11) NOT NULL,
   `asansor_bakimTarihi` varchar(10) NOT NULL,
   `asansor_arizaTarihi` varchar(10) NOT NULL,
@@ -77,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `bakim` (
   `bakim_tarih` varchar(10) NOT NULL,
   `bakim_asansor` int(11) NOT NULL,
   `bakim_yapan` int(11) NOT NULL,
-  `bakim_tutar` varchar(7) NOT NULL,
   PRIMARY KEY (`bakim_id`),
   KEY `bakim_asansor` (`bakim_asansor`),
   KEY `bakim_yapan` (`bakim_yapan`)
@@ -107,14 +108,26 @@ CREATE TABLE IF NOT EXISTS `degisim` (
 
 DROP TABLE IF EXISTS `kullanici`;
 CREATE TABLE IF NOT EXISTS `kullanici` (
-  `kullanici_tckn` int(11) NOT NULL AUTO_INCREMENT,
+  `kullanici_id` int(11) NOT NULL AUTO_INCREMENT,
+  `kullanici_tckn` varchar(11) NOT NULL,
   `kullanici_adi` varchar(20) NOT NULL,
-  `kullanici_sifre` varchar(12) NOT NULL,
+  `kullanici_sifre` varchar(60) NOT NULL,
   `kullanici_adres` varchar(200) NOT NULL,
   `kullanici_tel` varchar(15) NOT NULL,
   `kullanici_rol` int(1) NOT NULL,
-  PRIMARY KEY (`kullanici_tckn`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `kullanici_mail` varchar(50) NOT NULL,
+  `kullanici_hash` varchar(50) NOT NULL,
+  `kullanici_aktivasyon` varchar(50) NOT NULL,
+  `kullanici_durum` tinyint(1) NOT NULL,
+  PRIMARY KEY (`kullanici_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Tablo döküm verisi `kullanici`
+--
+
+INSERT INTO `kullanici` (`kullanici_id`, `kullanici_tckn`, `kullanici_adi`, `kullanici_sifre`, `kullanici_adres`, `kullanici_tel`, `kullanici_rol`, `kullanici_mail`, `kullanici_hash`, `kullanici_aktivasyon`, `kullanici_durum`) VALUES
+(1, '12312312312', 'admin', '$2y$10$O1CEumaM4CpAKcAFJ7RxPuPnocd2.GcWtchvkhJKrSZEyViOPuMAG', 'sivas', '5555555555', 1, 'atahan.duman@hotmail.com', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -125,7 +138,9 @@ CREATE TABLE IF NOT EXISTS `kullanici` (
 DROP TABLE IF EXISTS `musteri`;
 CREATE TABLE IF NOT EXISTS `musteri` (
   `musteri_id` int(11) NOT NULL AUTO_INCREMENT,
-  `musteri_adSoy` varchar(50) NOT NULL,
+  `musteri_adSoyad` varchar(50) NOT NULL,
+  `musteri_kAdi` varchar(12) NOT NULL,
+  `musteri_sifre` int(8) NOT NULL,
   `musteri_adres` varchar(150) NOT NULL,
   `musteri_tel` varchar(11) NOT NULL,
   `musteri_mail` varchar(50) NOT NULL,
@@ -173,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `stok` (
 --
 ALTER TABLE `ariza`
   ADD CONSTRAINT `ariza_asansor` FOREIGN KEY (`ariza_asansor`) REFERENCES `asansor` (`asansor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ariza_onaran` FOREIGN KEY (`ariza_onaran`) REFERENCES `kullanici` (`kullanici_tckn`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ariza_onaran` FOREIGN KEY (`ariza_onaran`) REFERENCES `kullanici` (`kullanici_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Tablo kısıtlamaları `asansor`
@@ -186,7 +201,7 @@ ALTER TABLE `asansor`
 --
 ALTER TABLE `bakim`
   ADD CONSTRAINT `bakim_asansor` FOREIGN KEY (`bakim_asansor`) REFERENCES `asansor` (`asansor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bakim_yapan` FOREIGN KEY (`bakim_yapan`) REFERENCES `kullanici` (`kullanici_tckn`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `bakim_yapan` FOREIGN KEY (`bakim_yapan`) REFERENCES `kullanici` (`kullanici_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Tablo kısıtlamaları `degisim`
