@@ -51,4 +51,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'anasayfa';
 $route['404_override'] = '';
+$route['sifremi-unuttum'] = 'sifremiunuttum';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['sifre-sifirla/(:any)'] = 'sifremiunuttum/reset/$1';
+
+$route['asansorler'] = 'asansor';
+$route['asansor/(:num)'] = 'asansor/view/$1';
+$route['asansor/ekle'] = 'asansor/add';
+$route['asansor/sil/(:num)'] = 'asansor/delete/$1';
+$route['asansor/duzenle/(:num)'] = 'asansor/edit/$1';
+$route['rapor/(:any)'] = 'rapor/index/$1';
+$route['ariza/(:num)'] = 'ariza/view/$1';
+$route['musteriler'] = 'musteri';
+$route['ariza-al/(:any)'] = 'ariza/take/$1';
+$route['ariza-iptal/(:any)'] = 'ariza/drop/$1';
+$route['ajax/get-stock'] = 'ariza/get_stock';
+$route['ajax/add-stock/(:num)'] = 'ariza/add_stock/$1';
+$route['ajax/get-items/(:num)'] = 'ariza/get_items/$1';
+$route['ajax/delete-stock'] = 'ariza/delete_stock';
