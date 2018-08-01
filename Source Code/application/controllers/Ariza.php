@@ -20,7 +20,7 @@ class Ariza extends CI_Controller {
 		$this->load->view('arizalar',$viewData);
 	}
 	public function view($id = false)
-	{
+	{		
 		if(!$id || !is_numeric($id)){
 			redirect('ariza');
 		}
@@ -144,16 +144,17 @@ class Ariza extends CI_Controller {
 	}
 	public function get_items($id = false)
 	{
-		if(!$fid || !is_numeric($fid)){
+		if(!$id || !is_numeric($id)){
 			$this->setResponse(400, false, "Fault ID not be null");
 		}else{
-			$getItem = $this->ariza_model->getItem($fid);
+			$this->load->model('ariza_model');
+			$getItem = $this->ariza_model->getItems($id);
 			if($getItem){
 				$items = [];
 				foreach ($getItem as $item) {
-					$items[] = ['id' => $item->stok_id];
+					$items[] = ['id' => $item->degisim_id, 'name' => $item->stok_adi, 'price' => $item->stok_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->degisim_miktar];
 				}
-				$this->setResponse(200, true, json_encode($getItem));
+				$this->setResponse(200, true, json_encode($items));
 			}else{
 				$this->setResponse(400, false, "not found");
 			}
@@ -178,21 +179,50 @@ class Ariza extends CI_Controller {
 					"degisim_turu" => "Ariza",
 					"degisim_kodu" => $fid,
 					"degisim_stok" => $id,
+					"degisim_miktar" => $amount,
 					"degisim_tutar" => $getItem->stok_fiyat * $amount
 				];
 				$addItem = $this->ariza_model->addStock($array);
 				if($addItem){
-					$this->setResponse(200, true, "Stock Item Added");
+					$this->setResponse(200, true, $addItem);
 				}else{
 					$this->setResponse(400, false, "Stock Item Error");
 				}
 			}
 		}
 	}
+	public function update()
+	{
+		$this->load->model('ariza_model');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('ariza_id', 'Ariza ID', 'trim|required');
+		$this->form_validation->set_rules('ariza_aciklama', 'Ariza Aciklama', 'trim|required');
+		$this->form_validation->set_rules('ariza_tutar', 'Ariza Tutar', 'trim|required');
+		$this->form_validation->set_rules('ariza_durum', 'Ariza Durum', 'trim|required');
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
+		$this->form_validation->set_message('required', '{field} alanı boş bırakılamaz');
+		if($this->form_validation->run() != FALSE){
+			$id = $this->input->post('ariza_id');
+			$data['ariza_icerik'] = $this->input->post('ariza_aciklama');
+			$data['ariza_tutar'] = $this->input->post('ariza_tutar');
+			$data['ariza_durum'] = $this->input->post('ariza_durum');
+			$updateFault = $this->ariza_model->updateFault($id, $data);
+			if(!$updateFault){
+				$this->session->set_flashdata('durum', 'ok');
+				redirect('ariza/'.$id);
+			}else{
+				$this->session->set_flashdata('durum', 'no');
+				redirect('ariza/'.$id);
+			}
+		}else{
+			$this->session->set_flashdata('hata', validation_errors());
+			redirect('ariza/'.$this->input->post('ariza_id'));
+		}
+	}
 	public function delete_stock()
 	{
 		$this->load->model('ariza_model');
-		$id = $this->input->get("id");
+		$id = $this->input->post("id");
 		if(!is_numeric($id)){
 			$this->setResponse(400, false, "Stock ID Error");
 		}else{

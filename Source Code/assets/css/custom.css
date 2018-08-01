@@ -1,0 +1,29 @@
+.sidebar .user-info .info-container {
+	text-align: right;
+	position: relative;
+	float: right;
+	top: 75px;
+	right: -50px;
+}
+.sidebar .user-info .image {
+	position: relative;
+	float: right;
+	top: 15px;
+	right: 25px;
+}
+a .kutu:link{
+	text-decoration: none;
+}
+
+div .text{
+	text-align: center;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+h5{
+	text-align: center;
+}

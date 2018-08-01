@@ -59,7 +59,8 @@ class Giris extends CI_Controller {
 			if($result)
 			{
 				$this->session->set_userdata('control',true);
-				$this->session->set_userdata('info',$result->kullanici_adi);
+				$this->session->set_userdata('isim',$result->kullanici_adSoyad);
+				$this->session->set_userdata('mail',$result->kullanici_mail);
 				$this->session->set_userdata('rol',$result->kullanici_rol);
 				$this->session->set_userdata('id',$result->kullanici_id);
 				if($rememberme == "on")

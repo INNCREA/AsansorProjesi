@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -26,6 +25,7 @@
   <link href="<?php echo base_url('assets/'); ?>plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
   <!-- Custom Css -->
   <link href="<?php echo base_url('assets/'); ?>css/style.css" rel="stylesheet">
+  <link href="<?php echo base_url('assets/'); ?>css/custom.css" rel="stylesheet">
 
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <!-- Jquery Core Js -->
@@ -33,7 +33,8 @@
   <script src="<?php echo base_url('assets/'); ?>js/alert.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
-
+  <!-- Bootstrap Core Js -->
+  <script src="<?php echo base_url('assets/'); ?>plugins/bootstrap/js/bootstrap.js"></script>
 
   <!-- SweetAlert Plugin Js -->
   <script src="<?php echo base_url('assets/'); ?>plugins/sweetalert/sweetalert.min.js"></script>
@@ -104,12 +105,13 @@
       <!-- User Info -->
       <div class="user-info">
         <div class="image">
-          <img src="<?php echo base_url('assets/'); ?>images/user.png" width="48" height="48" alt="User" />
+          <img src="<?php echo base_url('assets/'); ?>images/user.png" width="50" height="50" alt="User" />
         </div>
-        <?php $kullanici = $this->session->userdata('info'); ?>
+        <?php $kullanici = $this->session->userdata('isim'); ?>
+        <?php $mail = $this->session->userdata('mail'); ?>
         <div class="info-container">
           <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $kullanici; ?></div>
-          <div class="email">test@test.com</div>
+          <div class="email"><?php echo $mail; ?></div>
 
         </div>
       </div>

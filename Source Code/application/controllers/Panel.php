@@ -22,10 +22,14 @@ class Panel extends CI_Controller {
 	{
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
-
+        $this->load->model("panel_model");
+        $gunlukAriza=$this->panel_model->gunlukAriza();
+        
 		$viewData = array(
 			"sayfaAdi" => "Ana Sayfa",
-			"id" => $id
+			"id" => $id,
+			"arizalar" => $gunlukAriza
+
 		);
 
 		$this->load->view('panel',$viewData);
@@ -36,4 +40,6 @@ class Panel extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect(base_url("giris"));
 	}
+
+
 }

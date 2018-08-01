@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-23 14:08:20
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   Asus
- * @Last Modified time: 2018-07-30 14:13:20
+ * @Last Modified time: 2018-08-01 13:40:06
  */
 $this->load->view('include/header');
 $this->load->view('include/sidebar');
@@ -97,11 +97,10 @@ $this->load->view('include/sidebar');
 												<h4 class="modal-title" id="defaultModalLabel">Ariza Guncelle</h4>
 											</div>
 											<div class="modal-body">
-												<form action="" method="POST" onsubmit="return false;">
+												<form action="<?=base_url("ariza/guncelle")?>" method="POST">
 													<div class="form-group form-float">
-														<div id="hata"></div>
+														<div id="hata"><?=@$this->session->flashdata('hata') ? $this->session->flashdata('hata') : NULL?></div>
 														<input type="hidden" value="<?=$ariza->ariza_id?>"name="ariza_id" class="form-control">
-														<input type="hidden" name="stock_list" value="">
 													</div>
 													<div class="form-group form-float">
 														<div class="form-line focused">
@@ -111,7 +110,7 @@ $this->load->view('include/sidebar');
 													</div>
 													<div class="form-group form-float">
 														<div class="form-line">
-															<input type="text" name="ariza_tutar" class="form-control">
+															<input type="number" name="ariza_tutar" class="form-control" value="<?=$ariza->ariza_tutar?>">
 															<label class="form-label">Ariza Tutar</label>
 														</div>
 													</div>
@@ -126,8 +125,8 @@ $this->load->view('include/sidebar');
 													<div id="app">
 														<div class="form-group form-float">
 															<div class="col-xs-5">
-																<select class="form-control show-tick" tabindex="-98" name="select" id="products" v-model="selected_item">
-																	<option disabled="">URUN SECINIZ</option>
+																<select class="form-control show-tick" tabindex="-98" name="select" id="products" v-model="selected_item" required="">
+																	<option disabled="" selected="">URUN SECINIZ</option>
 																	<?php
 																	if($stok){
 																		$i = 0;
@@ -158,16 +157,27 @@ $this->load->view('include/sidebar');
 															</thead>
 															<tbody>
 																<tr v-for="(y, index) in stock">
-																	<td>{{ app.items[y.id].name }}</td>
+																	<td>{{ y.name }}</td>
 																	<td>{{ y.amount }}</td>
-																	<td>{{ app.items[y.id].price + " " + app.items[y.id].munit }} / {{ app.items[y.id].unit }}</td>
-																	<td>{{ y.amount * app.items[y.id].price + " " + app.items[y.id].munit }}</td>
-																	<td><button class="btn bg-red" type="button" v-on:click="deleteStock(index)">Kaldir</button></td>
+																	<td>{{ y.price + " " + y.munit }} / {{ y.unit }}</td>
+																	<td>{{ y.amount * y.price + " " + y.munit }}</td>
+																	<td><button class="btn bg-red" type="button" @click="deleteStock(index, y.id)">Kaldir</button></td>
 																</tr>
 															</tbody>
 														</table>
 													</div>
 													<script type="text/javascript">
+														<?php
+														if($this->session->flashdata('durum') == 'ok'){
+															echo 'swal("Guncellenme islemi basarili!", "Ariza basariyla guncellendi !", "success");';
+														}
+														if($this->session->flashdata('durum') == 'no'){
+															echo 'swal("Guncellenme islemi basarisiz!", "Ariza guncellenemedi!", "error");';
+														}
+														if($this->session->flashdata('hata')){
+															echo '$("#guncelle").modal();';
+														}
+														?>
 														var app = new Vue({
 															el: '#app',
 															data: {
@@ -178,12 +188,30 @@ $this->load->view('include/sidebar');
 															},
 															methods: {
 																addStock: function() {
-																	this.stock.push({id: this.selected_item, amount: this.selected_amount});
-																	this.selected_item = 0;
-																	this.selected_amount = 0;
-																	//$("#products").change();
+																	$.ajax({
+																		type: "POST",
+																		url: "<?=base_url("ajax/add-stock/".$ariza->ariza_id)?>",
+																		data: {id: this.items[this.selected_item].id, amount: this.selected_amount},
+																		success: function(res) {
+																			if(res.code==200){
+																				app.stock.push({id: res.data, name: app.items[app.selected_item].name, amount: app.selected_amount, price : app.items[app.selected_item].price, munit: app.items[app.selected_item].munit, unit: app.items[app.selected_item].unit});
+																			}
+																		},
+																		error: function(res) {
+																			console.log(res.responseText);
+																		}
+																	});
+																	$("#products").change();
 																},
-																deleteStock: function(index) {
+																deleteStock: function(index, id) {
+																	$.ajax({
+																		dataType: "json",
+																		type: "POST",
+																		url: "<?=base_url("ajax/delete-stock")?>",
+																		data: {id: id},
+																		success: function(data) {
+																		}
+																	});
 																	this.stock.splice(index, 1);
 																}
 															},
@@ -197,9 +225,20 @@ $this->load->view('include/sidebar');
 																app.items = data;
 															}
 														});
+														$.ajax({
+															dataType: "json",
+															type: "POST",
+															url: "<?=base_url("ajax/get-items/".$ariza->ariza_id)?>",
+															data: {e: 123},
+															success: function(res){
+																if(res.status && res.code == 200){
+																	app.stock = JSON.parse(res.data);
+																}
+															}
+														});
 													</script>
 													<div class="modal-footer">
-														<button type="submit" class="btn btn-success waves-effect">GÜNCELLE</button>
+														<button type="submit" class="btn btn-success waves-effect">Guncelle</button>
 														<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
 													</div>
 												</form>

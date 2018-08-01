@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-23 14:13:40
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   Asus
- * @Last Modified time: 2018-07-31 01:49:59
+ * @Last Modified time: 2018-08-01 01:51:29
  */
 class Ariza_model extends CI_Model {
 
@@ -38,6 +38,15 @@ class Ariza_model extends CI_Model {
 		}
 		return FALSE;
 	}
+	public function updateFault($id, $array)
+	{
+		$this->db->where("ariza_id", $id);
+		$r = $this->db->update("ariza", $array);
+		if($r){
+			return TRUE;
+		}
+		return FALSE;
+	}
 	public function dropFault($id)
 	{
 		$array = [
@@ -61,6 +70,17 @@ class Ariza_model extends CI_Model {
 	}
 	public function getItem($id)
 	{
+		$this->db->where("stok_id", $id);
+		$this->db->limit(1);
+		$r = $this->db->get('stok')->row();
+		if($r){
+			return $r;
+		}
+		return FALSE;
+	}
+	public function getItems($id)
+	{
+		$this->db->join("stok", "stok.stok_id = degisim.degisim_stok", "left");
 		$this->db->where("degisim_kodu", $id);
 		$r = $this->db->get('degisim')->result();
 		if($r){
@@ -70,11 +90,18 @@ class Ariza_model extends CI_Model {
 	}
 	public function addStock($array)
 	{
-		$r = $this->db->insert('degisim', $array);
-		if($r){
-			return TRUE;
+		$this->db->trans_start();
+		$this->db->insert('degisim', $array);
+		$lastID = $this->db->insert_id();
+		$this->db->set('stok_miktar', 'stok_miktar-'.$array["degisim_miktar"], FALSE);
+		$this->db->where('stok_id', $array["degisim_stok"]);
+		$this->db->update('stok');
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return FALSE;
 		}
-		return FALSE;
+		$this->db->trans_commit();
+		return $lastID;
 	}
 	public function deleteStock($id)
 	{
