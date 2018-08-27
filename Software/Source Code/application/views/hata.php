@@ -1,0 +1,1 @@
+<?php echo "Asansör Id = ".$asansor_id."<br> Hata kodu = ".$hatakodu; ?>
