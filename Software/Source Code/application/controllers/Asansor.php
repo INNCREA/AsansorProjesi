@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Umut Tepe
  * @Date:   2018-07-17 01:27:56
  * @Email: tepeumut1@gmail.com
- * @Last Modified by:   Asus
- * @Last Modified time: 2018-08-01 19:15:01
+ * @Last Modified by:   tepeu
+ * @Last Modified time: 2018-08-29 19:33:11
  */
 class Asansor extends CI_Controller {
 	/*
@@ -39,8 +39,14 @@ class Asansor extends CI_Controller {
 		$this->form_validation->set_rules('asansor_adres', 'Asansör Adres', 'trim|required');
 		$this->form_validation->set_rules('asansor_adresTarif', 'Asansör Adres Tarif', 'trim|required');
 		$this->form_validation->set_rules('asansor_tarih', 'Asansör Yapım Tarihi', 'trim|required');
+		$this->form_validation->set_rules('musteri_mail', 'Müşteri Mail', 'trim|required|valid_email|is_unique[musteri.musteri_mail]');
+		$this->form_validation->set_rules('musteri_tel', 'Müşteri Telefon', 'trim|required');
+		$this->form_validation->set_rules('musteri_kAdi', 'Müşteri Kullanıcı Adı', 'trim|required');
+		$this->form_validation->set_rules('musteri_sifre', 'Müşteri Şifre', 'trim|required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_message('required', '%s alanı boş bırakılamaz');
+		$this->form_validation->set_message('valid_email', 'Lütfen geçerli bir e-posta giriniz.');
+		$this->form_validation->set_message('is_unique', 'Bu e-posta ile kayıtlı bir müşteri bulunmaktadır.');
 		$this->load->model("asansor_model");
 		if($this->form_validation->run() != FALSE){
 			/* Gelecek bakım tarihinin hesaplanması. */
@@ -57,12 +63,21 @@ class Asansor extends CI_Controller {
 			$asansor["asansor_adres"] = $this->input->post("asansor_adres");
 			$asansor["asansor_adresTarif"] = $this->input->post("asansor_adresTarif");
 			$asansor["asansor_yapimTarihi"] = $this->input->post("asansor_tarih");
+			$customer["musteri_adSoyad"] = $this->input->post("musteri_adSoyad");
+			$customer["musteri_mail"] = $this->input->post("musteri_mail");
+			$customer["musteri_tel"] = $this->input->post("musteri_tel");
+			$customer["musteri_kAdi"] = $this->input->post("musteri_kAdi");
+			$customer["musteri_sifre"] = password_hash($this->input->post("musteri_sifre"), PASSWORD_DEFAULT);
 			$addLift = $this->asansor_model->addLift($asansor);
-			if($addLift){
+			$addCustomer = $this->asansor_model->addCustomer($customer);
+			if($addLift && $addCustomer){
+				$this->load->library("eposta");
+				$customer["sifre"] = $this->input->post("musteri_sifre");
+				$this->eposta->sendUserMail($customer);
 				redirect("asansorler");
 			}else{
 				$this->load->helper("alert");
-				$viewData["hata"] = setAlertDanger("Asansör eklenemedi. Lütfen tekrar deneyin.");
+				$viewData["hata"] = setAlertDanger("Asansör veya müşteri eklenemedi. Lütfen tekrar deneyin.");
 			}
 		}
 

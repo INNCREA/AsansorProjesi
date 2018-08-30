@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Umut Tepe
  * @Date:   2018-07-23 14:08:20
  * @Email: tepeumut1@gmail.com
- * @Last Modified by:   Asus
- * @Last Modified time: 2018-07-27 00:22:45
+ * @Last Modified by:   tepeu
+ * @Last Modified time: 2018-08-28 20:57:00
  */
 $this->load->view('include/header');
 $this->load->view('include/sidebar');
@@ -34,6 +34,11 @@ $this->load->view('include/sidebar');
 							<li role="presentation" class="">
 								<a href="#messages_with_icon_title" data-toggle="tab" aria-expanded="false">
 									<i class="material-icons">offline_pin</i> ONARILAN ARIZALAR
+								</a>
+							</li>
+							<li role="presentation" class="">
+								<a href="<?=base_url("ariza-olustur")?>">
+									<i class="material-icons">add_box</i> ARIZA EKLE
 								</a>
 							</li>
 						</ul>

@@ -7,7 +7,7 @@ class Stok extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Stok İşlemleri",
+			"sayfaAdi" => "Stok Listesi",
 			"id" => $id
 		);
 		$data = "*";

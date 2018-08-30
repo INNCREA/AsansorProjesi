@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Umut Tepe
  * @Date:   2018-07-23 14:08:20
  * @Email: tepeumut1@gmail.com
- * @Last Modified by:   Asus
- * @Last Modified time: 2018-08-01 14:40:22
+ * @Last Modified by:   tepeu
+ * @Last Modified time: 2018-08-28 21:06:47
  */
 $this->load->view('include/header');
 $this->load->view('include/sidebar');
@@ -86,16 +86,18 @@ $this->load->view('include/sidebar');
 							</table>
 							<div class="col-md-12">
 								<a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?=$ariza->asansor_latitude?>,<?=$ariza->asansor_longitude?>" class="btn bg-yellow waves-effect">Yol Tarifi Al</a>
-								<?php if($ariza->ariza_durum != "Onarıldı"){ ?>
+								<?php if($ariza->ariza_durum != "Onarıldı" && $ariza->ariza_onaran == $this->session->userdata("id")){ ?>
 								<button type="button" class="btn bg-green waves-effect arizaGuncelle" data-url="<?=base_url("ariza/get_stock")?>" data-toggle="modal" data-target="#guncelle">
 									<i class="material-icons">create</i>
 									<span>Güncelle</span>
 								</button>
 								<?php } ?>
+								<?php if($ariza->ariza_durum != "Onarıldı" && $ariza->ariza_onaran == $this->session->userdata("id")){ ?>
 								<button type="button" class="btn bg-green waves-effect" data-toggle="modal" data-target="#degisim">
 									<i class="material-icons">cached</i>
 									<span>Değişim</span>
 								</button>
+								<?php } ?>
 								<div class="modal fade" id="guncelle" tabindex="-1" role="dialog">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
@@ -137,6 +139,7 @@ $this->load->view('include/sidebar');
 										</div>
 									</div>
 								</div>
+								<?php if($ariza->ariza_durum != "Onarıldı"){ ?>
 								<div class="modal fade" id="degisim" tabindex="-1" role="dialog">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
@@ -268,6 +271,7 @@ $this->load->view('include/sidebar');
 										</div>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 							<div class="col-md-12 m-t-10">
 								<div id="map" class="col-md-12" style="height: 500px"></div>

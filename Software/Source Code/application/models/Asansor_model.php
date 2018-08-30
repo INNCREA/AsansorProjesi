@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Umut Tepe
  * @Date:   2018-07-17 05:38:16
  * @Email: tepeumut1@gmail.com
- * @Last Modified by:   Asus
- * @Last Modified time: 2018-08-01 19:15:48
+ * @Last Modified by:   tepeu
+ * @Last Modified time: 2018-08-29 18:43:14
  */
 class Asansor_model extends CI_Model {
 	/*
@@ -108,6 +108,14 @@ class Asansor_model extends CI_Model {
 		$r = $this->db->get("bakim")->result();
 		if($r){
 			return $r;
+		}
+		return FALSE;
+	}
+	/** Musteri ekler */
+	public function addCustomer($array){
+		$result = $this->db->insert("musteri" , $array);
+		if($result){
+			return TRUE;
 		}
 		return FALSE;
 	}

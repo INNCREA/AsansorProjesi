@@ -47,10 +47,10 @@
 				</li>
 			</ul>
 		</li>
-		<li <?php if($sayfaAdi == "Stok İşlemleri" || $sayfaAdi == "Stok Ekle" ){ echo 'class="active";'; } ?> >
+		<li <?php if($sayfaAdi == "Muhasebe İşlemleri" || $sayfaAdi == "Stok Ekle" || $sayfaAdi == "Stok Listesi" ){ echo 'class="active";'; } ?> >
 			<a href="javascript:void(0);" class="menu-toggle">
 				<i class="material-icons">assignment</i>
-				<span>Stok İşlemleri</span>
+				<span>Muhasebe İşlemleri</span>
 			</a>
 			<ul class="ml-menu">
 				<li>

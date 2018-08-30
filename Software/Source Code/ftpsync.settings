@@ -5,12 +5,13 @@
 	"default": {
 
 		"host": "ftp.webcrea.pw",
-		"username": "admin",  // or null for anonymous login
-		"password": "Umut2Tepe1.@",
-		"path": "/web/webcrea.pw/public_html/inncrealift/",
+		"username": "inncrea_inncrea",  // or null for anonymous login
+		"password": "75nAYjXqdIk8",
+		"path": "/public_html/",
 		"download_on_open": true,
 		"upload_on_save": true, // set *false* if you do not want to upload on save!
-
+		"set_remote_lastmodified": true,
+		
 		// "port": 21,
 		// "tls": false,
 		// "timeout": 30, // [seconds]
