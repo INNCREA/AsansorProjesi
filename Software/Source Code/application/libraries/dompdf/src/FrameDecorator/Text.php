@@ -12,6 +12,8 @@ namespace Dompdf\FrameDecorator;
 use Dompdf\Dompdf;
 use Dompdf\Frame;
 use Dompdf\Exception;
+use DOMText;
+use Dompdf\FontMetrics;
 
 /**
  * Decorates Frame objects for text layout

@@ -84,10 +84,10 @@ class FontMetrics
      * Saves the stored font family cache
      *
      * The name and location of the cache file are determined by {@link
-     * FontMetrics::CACHE_FILE}. This file should be writable by the
+     * FontMetrics::CACHE_FILE}.  This file should be writable by the
      * webserver process.
      *
-     * @see FontMetrics::loadFontFamilies()
+     * @see Font_Metrics::load_font_families()
      */
     public function saveFontFamilies()
     {
@@ -118,7 +118,7 @@ class FontMetrics
     /**
      * Loads the stored font family cache
      *
-     * @see FontMetrics::saveFontFamilies()
+     * @see save_font_families()
      */
     public function loadFontFamilies()
     {
@@ -170,6 +170,7 @@ class FontMetrics
      */
     public function registerFont($style, $remoteFile, $context = null)
     {
+        $fontDir = $this->getOptions()->getFontDir();
         $fontname = mb_strtolower($style["family"]);
         $families = $this->getFontFamilies();
 
@@ -178,55 +179,51 @@ class FontMetrics
             $entry = $families[$fontname];
         }
 
-        $styleString = $this->getType("{$style['weight']} {$style['style']}");
-        if (isset($entry[$styleString])) {
-            return true;
-        }
-
-        $fontDir = $this->getOptions()->getFontDir();
-        $remoteHash = md5($remoteFile);
-        $localFile = $fontDir . DIRECTORY_SEPARATOR . $remoteHash;
-        $localTempFile = tempnam($this->options->get("tempDir"), "dompdf-font-");
-
+        $localFile = $fontDir . DIRECTORY_SEPARATOR . md5($remoteFile);
+        $localTempFile = $this->options->get('tempDir') . "/" . md5($remoteFile);
         $cacheEntry = $localFile;
-        $localFile .= ".".strtolower(pathinfo(parse_url($remoteFile, PHP_URL_PATH),PATHINFO_EXTENSION));
+        $localFile .= ".".strtolower(pathinfo($remoteFile,PATHINFO_EXTENSION));
 
-        $entry[$styleString] = $cacheEntry;
+        $styleString = $this->getType("{$style['weight']} {$style['style']}");
 
-        // Download the remote file
-        list($remoteFileContent, $http_response_header) = @Helpers::getFileContent($remoteFile, $context);
-        if (false === $remoteFileContent) {
-            return false;
-        }
-        file_put_contents($localTempFile, $remoteFileContent);
+        if ( !isset($entry[$styleString]) ) {
+            $entry[$styleString] = $cacheEntry;
 
-        $font = Font::load($localTempFile);
+            // Download the remote file
+            list($remoteFileContent, $http_response_header) = @Helpers::getFileContent($remoteFile, $context);
+            if (false === $remoteFileContent) {
+                return false;
+            }
+            file_put_contents($localTempFile, $remoteFileContent);
 
-        if (!$font) {
+            $font = Font::load($localTempFile);
+
+            if (!$font) {
+                unlink($localTempFile);
+                return false;
+            }
+
+            $font->parse();
+            $font->saveAdobeFontMetrics("$cacheEntry.ufm");
+            $font->close();
+
             unlink($localTempFile);
-            return false;
+
+            if ( !file_exists("$cacheEntry.ufm") ) {
+                return false;
+            }
+
+            // Save the changes
+            file_put_contents($localFile, $remoteFileContent);
+
+            if ( !file_exists($localFile) ) {
+                unlink("$cacheEntry.ufm");
+                return false;
+            }
+
+            $this->setFontFamily($fontname, $entry);
+            $this->saveFontFamilies();
         }
-
-        $font->parse();
-        $font->saveAdobeFontMetrics("$cacheEntry.ufm");
-        $font->close();
-
-        unlink($localTempFile);
-
-        if ( !file_exists("$cacheEntry.ufm") ) {
-            return false;
-        }
-
-        // Save the changes
-        file_put_contents($localFile, $remoteFileContent);
-
-        if ( !file_exists($localFile) ) {
-            unlink("$cacheEntry.ufm");
-            return false;
-        }
-
-        $this->setFontFamily($fontname, $entry);
-        $this->saveFontFamilies();
 
         return true;
     }

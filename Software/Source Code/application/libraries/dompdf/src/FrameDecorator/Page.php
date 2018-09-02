@@ -192,6 +192,7 @@ class Page extends AbstractFrameDecorator
         }
 
         if (in_array($style->page_break_before, $page_breaks)) {
+
             // Prevent cascading splits
             $frame->split(null, true);
             // We have to grab the style again here because split() resets
@@ -276,6 +277,7 @@ class Page extends AbstractFrameDecorator
      */
     protected function _page_break_allowed(Frame $frame)
     {
+
         $block_types = array("block", "list-item", "table", "-dompdf-image");
         Helpers::dompdf_debug("page-break", "_page_break_allowed(" . $frame->get_node()->nodeName . ")");
         $display = $frame->get_style()->display;
@@ -389,7 +391,9 @@ class Page extends AbstractFrameDecorator
                 }
 
                 // Skip breaks on empty text nodes
-                if ($frame->is_text_node() && $frame->get_node()->nodeValue == "") {
+                if ($frame->is_text_node() &&
+                    $frame->get_node()->nodeValue == ""
+                ) {
                     return false;
                 }
 
@@ -397,14 +401,14 @@ class Page extends AbstractFrameDecorator
 
                 return true;
 
-            // Table-rows
+                // Table-rows
             } else {
                 if ($display === "table-row") {
+
                     // Simply check if the parent table's page_break_inside property is
                     // not 'avoid'
-                    $table = Table::find_parent_table($frame);
+                    $p = Table::find_parent_table($frame);
 
-                    $p = $table;
                     while ($p) {
                         if ($p->get_style()->page_break_inside === "avoid") {
                             Helpers::dompdf_debug("page-break", "parent->inside: avoid");
@@ -415,7 +419,7 @@ class Page extends AbstractFrameDecorator
                     }
 
                     // Avoid breaking after the first row of a table
-                    if ($table && $table->get_first_child() === $frame || $table->get_first_child()->get_first_child() === $frame) {
+                    if ($p && $p->get_first_child() === $frame) {
                         Helpers::dompdf_debug("page-break", "table: first-row");
 
                         return false;
@@ -459,54 +463,28 @@ class Page extends AbstractFrameDecorator
      */
     function check_page_break(Frame $frame)
     {
-        //FIXME: should not need to do this since we're tracking table status in `$this->_in_table`
-        $p = $frame;
-        $in_table = false;
-        while ($p) {
-            if ($p->is_table()) { $in_table = true; break; }
-            $p = $p->get_parent();
-        }
         // Do not split if we have already or if the frame was already
         // pushed to the next page (prevents infinite loops)
-        if ($in_table) {
-            if ($this->_page_full && $frame->_already_pushed) {
-                return false;
-            }
-        } elseif ($this->_page_full || $frame->_already_pushed) {
+        if ($this->_page_full || $frame->_already_pushed) {
             return false;
         }
-
-        //FIXME: work-around for infinite loop due to tables 
-        if ($in_table && $frame->_already_pushed) {
-            return false;
-        }
-        $p = $frame;
-        do {
-            $display = $p->get_style()->display;
-            if ($display == "table-row") {
-                if ($p->_already_pushed) { return false; }
-            }
-        } while ($p = $p->get_parent());
 
         // If the frame is absolute of fixed it shouldn't break
         $p = $frame;
         do {
-            if ($p->is_absolute()) {
+            if ($p->is_absolute())
                 return false;
-            }
-
-            // FIXME If the row is taller than the page and
-            // if it the first of the page, we don't break
-            $display = $p->get_style()->display;
-            if ($display === "table-row"
-                && !$p->get_prev_sibling()
-                && $p->get_margin_height() > $this->get_margin_height()
-            ) {
-                return false;
-            }
         } while ($p = $p->get_parent());
 
         $margin_height = $frame->get_margin_height();
+
+        // FIXME If the row is taller than the page and
+        // if it the first of the page, we don't break
+        if ($frame->get_style()->display === "table-row" &&
+            !$frame->get_prev_sibling() &&
+            $margin_height > $this->get_margin_height()
+        )
+            return false;
 
         // Determine the frame's maximum y value
         $max_y = (float)$frame->get_position("y") + $margin_height;
@@ -521,10 +499,9 @@ class Page extends AbstractFrameDecorator
 
 
         // Check if $frame flows off the page
-        if ($max_y <= $this->_bottom_page_margin) {
+        if ($max_y <= $this->_bottom_page_margin)
             // no: do nothing
             return false;
-        }
 
         Helpers::dompdf_debug("page-break", "check_page_break");
         Helpers::dompdf_debug("page-break", "in_table: " . $this->_in_table);
@@ -557,9 +534,8 @@ class Page extends AbstractFrameDecorator
             if (!$flg && $next = $iter->get_last_child()) {
                 Helpers::dompdf_debug("page-break", "following last child.");
 
-                if ($next->is_table()) {
+                if ($next->is_table())
                     $this->_in_table++;
-                }
 
                 $iter = $next;
                 continue;
@@ -568,11 +544,11 @@ class Page extends AbstractFrameDecorator
             if ($next = $iter->get_prev_sibling()) {
                 Helpers::dompdf_debug("page-break", "following prev sibling.");
 
-                if ($next->is_table() && !$iter->is_table()) {
+                if ($next->is_table() && !$iter->is_table())
                     $this->_in_table++;
-                } else if (!$next->is_table() && $iter->is_table()) {
+
+                else if (!$next->is_table() && $iter->is_table())
                     $this->_in_table--;
-                }
 
                 $iter = $next;
                 $flg = false;
@@ -582,9 +558,8 @@ class Page extends AbstractFrameDecorator
             if ($next = $iter->get_parent()) {
                 Helpers::dompdf_debug("page-break", "following parent.");
 
-                if ($iter->is_table()) {
+                if ($iter->is_table())
                     $this->_in_table--;
-                }
 
                 $iter = $next;
                 $flg = true;
@@ -602,15 +577,10 @@ class Page extends AbstractFrameDecorator
         // If we are in a table, backtrack to the nearest top-level table row
         if ($this->_in_table) {
             $iter = $frame;
-            while ($iter && $iter->get_style()->display !== "table-row" && $iter->get_style()->display !== 'table-row-group' && $iter->_already_pushed === false) {
+            while ($iter && $iter->get_style()->display !== "table-row" && $iter->get_style()->display !== 'table-row-group')
                 $iter = $iter->get_parent();
-            }
 
-            if ($iter) {
-                $iter->split(null, true);
-            } else {
-                return false;
-            }
+            $iter->split(null, true);
         } else {
             $frame->split(null, true);
         }

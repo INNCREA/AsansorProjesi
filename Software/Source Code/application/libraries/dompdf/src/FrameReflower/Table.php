@@ -270,9 +270,8 @@ class Table extends AbstractFrameReflower
                     $columns[$i]["percent"] *= $scale;
                     $w = min($columns[$i]["percent"] * $remaining_width / 100, $slack);
 
-                    if ($w < $columns[$i]["min-width"]) {
+                    if ($w < $columns[$i]["min-width"])
                         $w = $columns[$i]["min-width"];
-                    }
 
                     $columns[$i]["used-width"] = $w;
                     $used_width += $w;

@@ -405,18 +405,18 @@ interface Canvas
     function new_page();
 
     /**
-     * Streams the PDF directly to the browser.
+     * Streams the PDF directly to the browser
      *
-     * @param string $filename The filename to present to the browser.
-     * @param array $options Associative array: 'compress' => 1 or 0 (default 1); 'Attachment' => 1 or 0 (default 1).
+     * @param string $filename the name of the PDF file
+     * @param array $options associative array, 'Attachment' => 0 or 1, 'compress' => 1 or 0
      */
-    function stream($filename, $options = array());
+    function stream($filename, $options = null);
 
     /**
-     * Returns the PDF as a string.
+     * Returns the PDF as a string
      *
-     * @param array $options Associative array: 'compress' => 1 or 0 (default 1).
+     * @param array $options associative array: 'compress' => 1 or 0
      * @return string
      */
-    function output($options = array());
+    function output($options = null);
 }

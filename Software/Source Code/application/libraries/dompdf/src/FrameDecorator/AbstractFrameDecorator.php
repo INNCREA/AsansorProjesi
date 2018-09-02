@@ -695,7 +695,6 @@ abstract class AbstractFrameDecorator extends Frame
         $split->reset();
         $split->get_original_style()->text_indent = 0;
         $split->_splitted = true;
-        $split->_already_pushed = true;
 
         // The body's properties must be kept
         if ($node->nodeName !== "body") {

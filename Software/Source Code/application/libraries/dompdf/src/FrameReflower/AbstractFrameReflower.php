@@ -93,9 +93,9 @@ abstract class AbstractFrameReflower
 
         // Collapse vertical margins:
         $n = $frame->get_next_sibling();
-        if ( $n && !$n->is_block() & !$n->is_table() ) {
+        if ($n && !$n->is_block()) {
             while ($n = $n->get_next_sibling()) {
-                if ($n->is_block() || $n->is_table()) {
+                if ($n->is_block()) {
                     break;
                 }
 
@@ -108,19 +108,17 @@ abstract class AbstractFrameReflower
 
         if ($n) {
             $n_style = $n->get_style();
-            $n_t = (float)$n_style->length_in_pt($n_style->margin_top, $cb["h"]);
-
-            $b = $this->_get_collapsed_margin_length($b, $n_t);
-            $style->margin_bottom = $b . "pt";
+            $b = max($b, (float)$n_style->length_in_pt($n_style->margin_top, $cb["h"]));
             $n_style->margin_top = "0pt";
+            $style->margin_bottom = $b . "pt";
         }
 
         // Collapse our first child's margin, if there is no border or padding
         if ($style->get_border_top_width() == 0 && $style->length_in_pt($style->padding_top) == 0) {
             $f = $this->_frame->get_first_child();
-            if ( $f && !$f->is_block() && !$f->is_table() ) {
+            if ( $f && !$f->is_block() ) {
                 while ( $f = $f->get_next_sibling() ) {
-                    if ( $f->is_block() || $f->is_table() ) {
+                    if ( $f->is_block() ) {
                         break;
                     }
 
@@ -131,12 +129,10 @@ abstract class AbstractFrameReflower
                 }
             }
 
-            // Margin are collapsed only between block-level boxes
+            // Margin are collapsed only between block elements
             if ($f) {
                 $f_style = $f->get_style();
-                $f_t = (float)$f_style->length_in_pt($f_style->margin_top, $cb["h"]);
-
-                $t = $this->_get_collapsed_margin_length($t, $f_t);
+                $t = max($t, (float)$f_style->length_in_pt($f_style->margin_top, $cb["h"]));
                 $style->margin_top = $t."pt";
                 $f_style->margin_top = "0pt";
             }
@@ -145,9 +141,9 @@ abstract class AbstractFrameReflower
         // Collapse our last child's margin, if there is no border or padding
         if ($style->get_border_bottom_width() == 0 && $style->length_in_pt($style->padding_bottom) == 0) {
             $l = $this->_frame->get_last_child();
-            if ( $l && !$l->is_block() && !$l->is_table() ) {
+            if ($l && !$l->is_block()) {
                 while ( $l = $l->get_prev_sibling() ) {
-                    if ( $l->is_block() || $l->is_table() ) {
+                    if ( $l->is_block() ) {
                         break;
                     }
 
@@ -158,38 +154,14 @@ abstract class AbstractFrameReflower
                 }
             }
 
-            // Margin are collapsed only between block-level boxes
+            // Margin are collapsed only between block elements
             if ($l) {
                 $l_style = $l->get_style();
-                $l_b = (float)$l_style->length_in_pt($l_style->margin_bottom, $cb["h"]);
-
-                $b = $this->_get_collapsed_margin_length($b, $l_b);
+                $b = max($b, (float)$l_style->length_in_pt($l_style->margin_bottom, $cb["h"]));
                 $style->margin_bottom = $b."pt";
                 $l_style->margin_bottom = "0pt";
             }
         }
-    }
-
-    /**
-     * Get the combined (collapsed) length of two adjoining margins.
-     * 
-     * See http://www.w3.org/TR/CSS2/box.html#collapsing-margins.
-     * 
-     * @param number $length1
-     * @param number $length2
-     * @return number
-     */
-    private function _get_collapsed_margin_length($length1, $length2)
-    {
-        if ($length1 < 0 && $length2 < 0) {
-            return min($length1, $length2); // min(x, y) = - max(abs(x), abs(y)), if x < 0 && y < 0
-        }
-        
-        if ($length1 < 0 || $length2 < 0) {
-            return $length1 + $length2; // x + y = x - abs(y), if y < 0
-        }
-        
-        return max($length1, $length2);
     }
 
     /**
@@ -237,7 +209,10 @@ abstract class AbstractFrameReflower
         $low = array();
         $high = array();
 
-        for ($iter = $this->_frame->get_children()->getIterator(); $iter->valid(); $iter->next()) {
+        for ($iter = $this->_frame->get_children()->getIterator();
+             $iter->valid();
+             $iter->next()) {
+
             $inline_min = 0;
             $inline_max = 0;
 
@@ -257,12 +232,8 @@ abstract class AbstractFrameReflower
                 $iter->next();
             }
 
-            if ($inline_max > 0) {
-                $high[] = $inline_max;
-            }
-            if ($inline_min > 0) {
-                $low[] = $inline_min;
-            }
+            if ($inline_max > 0) $high[] = $inline_max;
+            if ($inline_min > 0) $low[] = $inline_min;
 
             if ($iter->valid()) {
                 list($low[], $high[]) = $iter->current()->get_min_max_width();

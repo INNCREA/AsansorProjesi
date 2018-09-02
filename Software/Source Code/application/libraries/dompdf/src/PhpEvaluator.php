@@ -7,6 +7,8 @@
  */
 namespace Dompdf;
 
+use Dompdf\Frame;
+
 /**
  * Executes inline PHP code during the rendering process
  *
@@ -54,7 +56,7 @@ class PhpEvaluator
     }
 
     /**
-     * @param Frame $frame
+     * @param \Dompdf\Frame $frame
      */
     public function render(Frame $frame)
     {

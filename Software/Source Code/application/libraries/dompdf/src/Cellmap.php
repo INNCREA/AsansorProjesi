@@ -7,6 +7,8 @@
  */
 namespace Dompdf;
 
+use Dompdf\Exception;
+use Dompdf\Frame;
 use Dompdf\FrameDecorator\Table as TableFrameDecorator;
 use Dompdf\FrameDecorator\TableCell as TableCellFrameDecorator;
 
@@ -511,6 +513,7 @@ class Cellmap
             $display === "inline-table" ||
             in_array($display, TableFrameDecorator::$ROW_GROUPS)
         ) {
+
             $start_row = $this->__row;
             foreach ($frame->get_children() as $child) {
                 // Ignore all Text frames and :before/:after pseudo-selector elements.
@@ -532,6 +535,7 @@ class Cellmap
             $this->_frames[$key]["frame"] = $frame;
 
             if ($display !== "table-row" && $collapse) {
+
                 $bp = $style->get_border_properties();
 
                 // Resolve the borders
@@ -743,7 +747,7 @@ class Cellmap
 
                     $this->_cells[$r][$c] = null;
                     unset($this->_cells[$r][$c]);
-
+                    
                     // has multiple rows?
                     if (isset($this->_frames[$id]) && count($this->_frames[$id]["rows"]) > 1) {
                         // remove just the desired row, but leave the frame

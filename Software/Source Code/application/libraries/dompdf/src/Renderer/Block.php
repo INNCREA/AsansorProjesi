@@ -37,7 +37,7 @@ class Block extends AbstractRenderer
                         $style->border_top_width,
                         $style->border_bottom_width,
                         $style->margin_bottom),
-                    (float)$style->length_in_pt($style->width));
+                    $style->width);
         }
 
         // Handle anchors & links
