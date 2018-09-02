@@ -13,7 +13,7 @@
 				<span>Arıza</span>
 			</a>
 		</li>
-		<li <?php if($sayfaAdi == "Asansörler" || $sayfaAdi == "Asansör Ekle" ){ echo 'class="active";'; } ?>>
+		<li <?php if($sayfaAdi == "Asansörler" || $sayfaAdi == "Asansör Ekle" || $sayfaAdi == "Hata Kodları" || $sayfaAdi == "Bakım İşlemleri" ){ echo 'class="active";'; } ?>>
 			<a href="javascript:void(0);" class="menu-toggle">
 				<i class="material-icons">location_city</i>
 				<span>Asansör İşlemleri</span>

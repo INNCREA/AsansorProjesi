@@ -12,6 +12,11 @@
 		"upload_on_save": true, // set *false* if you do not want to upload on save!
 		"set_remote_lastmodified": true,
 		
+		"debug_extras": {
+			"print_list_result": true,
+			"debug_mfmt": true
+		}
+		
 		// "port": 21,
 		// "tls": false,
 		// "timeout": 30, // [seconds]

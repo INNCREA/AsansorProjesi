@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Author: Umut Tepe
  * @Date:   2018-07-23 14:13:40
  * @Email: tepeumut1@gmail.com
- * @Last Modified by:   Asus
- * @Last Modified time: 2018-08-01 15:24:08
+ * @Last Modified by:   tepeu
+ * @Last Modified time: 2018-08-31 23:08:56
  */
 class Ariza_model extends CI_Model {
 
@@ -183,6 +183,36 @@ class Ariza_model extends CI_Model {
 		$r = $this->db->get("ariza")->result();
 		if($r){
 			return $r;
+		}
+		return FALSE;
+	}
+	public function getStockPrice($id)
+	{
+		$this->db->select_sum("degisim_tutar");
+		$this->db->where("degisim_kodu", $id);
+		$r = $this->db->get("degisim")->row();
+		if($r){
+			return $r->degisim_tutar;
+		}
+		return 0;
+	}
+	public function getChangeItem($id)
+	{
+		$this->db->limit(1);
+		$this->db->where("degisim_id", $id);
+		$r = $this->db->get("degisim")->row();
+		if($r){
+			return $r;
+		}
+		return FALSE;
+	}
+	public function addStockItem($id, $amount=0)
+	{
+		$this->db->where("stok_id", $id);
+		$this->db->set("stok_miktar", "stok_miktar +".$amount, FALSE);
+		$r = $this->db->update("stok");
+		if($r){
+			return TRUE;
 		}
 		return FALSE;
 	}

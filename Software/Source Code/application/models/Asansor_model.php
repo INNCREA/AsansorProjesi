@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-17 05:38:16
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-29 18:43:14
+ * @Last Modified time: 2018-08-31 22:32:04
  */
 class Asansor_model extends CI_Model {
 	/*

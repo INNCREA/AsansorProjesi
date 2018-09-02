@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-16 23:27:04
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-29 21:06:39
+ * @Last Modified time: 2018-08-31 04:16:31
  */
 class Eposta
 {
@@ -19,14 +19,16 @@ class Eposta
 	public function passwordReset($name, $hash, $email)
 	{
 		$this->ci->load->library('email');
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'in-v3.mailjet.com';
-		$config['smtp_user'] = '2c10fe9be12813d2ca6b8e1d66967944';
-		$config['smtp_pass'] = '90d924e89018cac5874a19b5b527cd98';
+		/*$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'webcrea.pw';
+		$config['smtp_user'] = 'hello';
+		$config['smtp_pass'] = 'world';
 		$config['smtp_port'] = 	587;
+		$config['smtp_crypto'] = 'tls';*/
 		$config['mailtype']  = 'html';
 		$this->ci->email->initialize($config);
-		$this->ci->email->from('no-reply@yazilim.tk');
+		//$this->ci->email->from('no-reply@webcrea.pw');
+		$this->ci->email->from('no-reply@webcrea.pw', 'NoReply');
 		$this->ci->email->to($email);
 		$this->ci->email->subject('Şifre Sıfırlama');
 		$this->ci->email->message('<!doctype html><html>
@@ -166,19 +168,21 @@ class Eposta
 		if($this->ci->email->send()){
 			return TRUE;
 		}
+		echo $this->ci->email->print_debugger();
+		exit;
 		return FALSE;
 	}
 	public function sendUserMail($data)
 	{
 		$this->ci->load->library('email');
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'in-v3.mailjet.com';
-		$config['smtp_user'] = '2c10fe9be12813d2ca6b8e1d66967944';
-		$config['smtp_pass'] = '90d924e89018cac5874a19b5b527cd98';
-		$config['smtp_port'] = 	587;
+		//$config['protocol'] = 'smtp';
+		//$config['smtp_host'] = 'mail.webcrea.pw';
+		//$config['smtp_user'] = 'hello@inncrealift.tk';
+		//$config['smtp_pass'] = '75nAYjXqdIk8';
+		//$config['smtp_port'] = 	587;
 		$config['mailtype']  = 'html';
 		$this->ci->email->initialize($config);
-		$this->ci->email->from('no-reply@yazilim.tk');
+		$this->ci->email->from('hello@inncrealift.tk');
 		$this->ci->email->to($data["musteri_mail"]);
 		$this->ci->email->subject('Kullanıcı Bilgileri: '.$data["musteri_kAdi"]);
 		$this->ci->email->message('<!doctype html>
@@ -260,7 +264,7 @@ class Eposta
       <table role="presentation" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td style="vertical-align:top;width:600px;">
-      <![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["musteri_adSoyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş bilgileriniz aşağıdaki gibidir.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Kullanıcı Adı: '.$data["musteri_kAdi"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Şifre: '.$data["sifre"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Aşağıdaki linkten panele giriş yapabilirsiniz.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş Link: <a target="_blank" href="http://'.base_url("giris").'">'.base_url("giris").'</a></span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+      <![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["musteri_adSoyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş bilgileriniz aşağıdaki gibidir.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Kullanıcı Adı: '.$data["musteri_kAdi"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Şifre: '.$data["sifre"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Aşağıdaki linkten panele giriş yapabilirsiniz.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş Link: <a target="_blank" href="'.base_url("giris").'">'.base_url("giris").'</a></span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
       </td></tr></table>
       <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
       </td></tr></table>
