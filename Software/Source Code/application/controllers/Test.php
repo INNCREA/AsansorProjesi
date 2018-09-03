@@ -5,9 +5,11 @@ class Test extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->view('test');
+		$html = $this->output->get_output();
+
 		$this->load->library('pdf');
 		$filename = "Document_name";
-		$html = $this->load->view('test');
 		$this->pdf->create($html, $filename);
 	}
 }
