@@ -23,7 +23,7 @@ $this->load->view('include/sidebar');
                         $islem = $this->session->flashdata('islem');
                         if ($islem == 'ekle'){ ?>
                             <script>
-                                swal("Kayıt işlemi başarılı !", "Kullanıcı başarıyla eklenmiştir !", "success");
+                                swal("Kayıt işlemi başarılı !", "Stok başarıyla eklenmiştir !", "success");
                             </script>
                         <?php } 
                         else if ($islem == 'guncelle')
@@ -41,7 +41,7 @@ $this->load->view('include/sidebar');
                                 else if ($islem == 'basarisiz')
                                     { ?>
                                         <script>
-                                            swal("İşlemi başarılı !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
+                                            swal("İşlem başarısız !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
                                         </script>
                                     <?php } ?>
                                     <div class="table-responsive">
@@ -50,8 +50,10 @@ $this->load->view('include/sidebar');
                                                 <tr>
                                                     <th>Stok Kodu</th>
                                                     <th>Stok Adı</th>
-                                                    <th>Birim Fiyat</th>
+                                                    <th>Alış Fiyatı</th>
+                                                    <th>Satış Fiyatı</th>
                                                     <th>Para Birimi</th>
+                                                    <th>KDV Değeri</th>
                                                     <th>Birim</th>
                                                     <th>Miktar</th>
                                                     <th>İşlemler</th>
@@ -65,8 +67,10 @@ $this->load->view('include/sidebar');
                                                        <tr>
                                                         <td><?=$stok->stok_kodu?></td>
                                                         <td><?=$stok->stok_adi?></td>
-                                                        <td><?=$stok->stok_fiyat?></td>
+                                                        <td><?=$stok->alis_fiyat?></td>
+                                                        <td><?=$stok->satis_fiyat?></td>
                                                         <td><?=$stok->stok_paraBirimi?></td>
+                                                        <td><?=$stok->stok_kdv?></td>
                                                         <td><?=$stok->stok_birim?></td>
                                                         <td><?=$stok->stok_miktar?></td>
                                                         <td><button type="button" data-id="<?=$stok->stok_id?>" data-url="<?=base_url('stok/stokCek/')?>" class="btn bg-green waves-effect duzenleStok">
@@ -115,20 +119,35 @@ $this->load->view('include/sidebar');
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line focused">
-                                        <input type="text" value="<?=set_value("stok_fiyat")?>" name="stok_fiyat" id="stok_fiyat" class="form-control">
-                                        <label class="form-label">Birim Fiyat</label>
+                                        <input type="text" value="<?=set_value("alis_fiyat")?>" name="alis_fiyat" id="alis_fiyat" class="form-control fiyat">
+                                        <label class="form-label">Alış Fiyat</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
                                     <div class="form-line focused">
-                                        <input type="text" value="<?=set_value("stok_paraBirimi")?>" name="stok_paraBirimi" id="stok_paraBirimi" class="form-control">
-                                        <label class="form-label">Para Birimi</label>
+                                        <input type="text" value="<?=set_value("satis_fiyat")?>" name="satis_fiyat" id="satis_fiyat" class="form-control fiyat">
+                                        <label class="form-label">Satış Fiyat</label>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
-                                    <div class="form-line focused">
-                                        <input type="text" value="<?=set_value("stok_birim")?>" name="stok_birim" id="stok_birim" class="form-control">
-                                        <label class="form-label">Birim</label>
+                                    <div class="form-line">
+                                        <label>KDV Değeri</label>
+                                        <select class="form-control show-tick" tabindex="-98" id="stok_kdv" name="stok_kdv">
+                                            <option>Bir değer seçiniz</option>
+                                            <option value="18">%18</option>
+                                            <option value="8">%8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <label>Birim</label>
+                                        <select class="form-control show-tick" tabindex="-98" id="stok_birim" name="stok_birim">
+                                            <option value="Adet">Adet</option>
+                                            <option value="Metre">Metre</option>
+                                            <option value="Takım">Takım</option>
+                                            <option value="Kilogram">Kilogram</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group form-float">

@@ -42,13 +42,13 @@ $this->load->view('include/sidebar');
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("kullanici_tel")?>" name="kullanici_tel" class="form-control">
+                                    <input type="text" value="<?=set_value("kullanici_tel")?>" name="kullanici_tel" class="form-control telefon">
                                     <label class="form-label">Telefon</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("kullanici_mail")?>" name="kullanici_mail" class="form-control">
+                                    <input type="text" value="<?=set_value("kullanici_mail")?>" name="kullanici_mail" class="form-control email">
                                     <label class="form-label">E-posta</label>
                                 </div>
                             </div>

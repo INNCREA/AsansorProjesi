@@ -39,7 +39,7 @@ $this->load->view('include/sidebar');
 								else if ($islem == 'basarisiz')
 									{ ?>
 										<script>
-											swal("İşlemi başarılı !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
+											swal("İşlem başarısız !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
 										</script>
 									<?php } ?>
 									<div class="table-responsive">
@@ -134,6 +134,7 @@ $this->load->view('include/sidebar');
 											<div class="form-line focused">
 												<label>Rol Seçiniz</label>
 												<select class="form-control show-tick" tabindex="-98" id="kullanici_rol" name="kullanici_rol">
+													<option>Bir rol seçiniz</option>
 													<option value="1">Yönetici</option>
 													<option value="2">Teknik Servis</option>
 												</select>
@@ -143,6 +144,7 @@ $this->load->view('include/sidebar');
 											<div class="form-line">
 												<label>Durum</label>
 												<select class="form-control show-tick" tabindex="-98" id="kullanici_durum" name="kullanici_durum">
+													<option>Bir durum seçiniz</option>
 													<option value="1">Aktif</option>
 													<option value="0">Pasif</option>
 												</select>

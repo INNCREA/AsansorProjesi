@@ -42,8 +42,9 @@
 					$('#stok_id').val(value.stok_id);
 					$('#stok_kodu').val(value.stok_kodu);
 					$('#stok_adi').val(value.stok_adi);
-					$('#stok_fiyat').val(value.stok_fiyat);
-					$('#stok_paraBirimi').val(value.stok_paraBirimi);
+					$('#alis_fiyat').val(value.alis_fiyat);
+					$('#satis_fiyat').val(value.satis_fiyat);
+					$('#stok_kdv').val((value.stok_kdv == 18) ? '18' : '8').change();
 					$('#stok_birim').val(value.stok_birim);
 					$('#stok_miktar').val(value.stok_miktar);
 				});
@@ -98,7 +99,10 @@
 	});
 
 
-	$('.tarih').inputmask('dd.mm.yyyy', { placeholder: '__.__.____' });
+	$('.tarih').inputmask('dd.mm.yyyy', { placeholder: '__.__.____',showMaskOnHover: false });
+	$('.fiyat').inputmask({ mask: ["[999.999,99] ₺"], greedy: true ,  numericInput: true , showMaskOnHover: false, jitMasking: true});
+	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
+	$('.telefon').inputmask();
 
 
 

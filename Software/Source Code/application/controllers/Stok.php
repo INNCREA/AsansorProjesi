@@ -32,8 +32,9 @@ class Stok extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('stok_kodu', 'Stok Kodu', 'trim|required');
 		$this->form_validation->set_rules('stok_adi', 'Stok Adı', 'trim|required');
-		$this->form_validation->set_rules('stok_fiyat', 'Fiyat', 'trim|required');
-		$this->form_validation->set_rules('stok_paraBirimi', 'Para Birimi', 'trim|required');
+		$this->form_validation->set_rules('alis_fiyat', 'Alış Fiyatı', 'trim|required');
+		$this->form_validation->set_rules('satis_fiyat', 'Satış Fiyatı', 'trim|required');
+		$this->form_validation->set_rules('stok_kdv', 'KDV Değeri', 'trim|required');
 		$this->form_validation->set_rules('stok_birim', 'Birim', 'trim|required');
 		$this->form_validation->set_rules('stok_miktar', 'Miktar', 'trim|required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
@@ -44,19 +45,21 @@ class Stok extends CI_Controller {
 		{
 			$stok["stok_kodu"] = $this->input->post("stok_kodu");
 			$stok["stok_adi"] = $this->input->post("stok_adi");
-			$stok["stok_fiyat"] = $this->input->post("stok_fiyat");
-			$stok["stok_paraBirimi"] = $this->input->post("stok_paraBirimi");
+			$stok["alis_fiyat"] = $this->input->post("alis_fiyat");
+			$stok["satis_fiyat"] = $this->input->post("satis_fiyat");
+			$stok["stok_kdv"] = $this->input->post("stok_kdv");
 			$stok["stok_birim"] = $this->input->post("stok_birim");
 			$stok["stok_miktar"] = $this->input->post("stok_miktar");
+			$stok["stok_paraBirimi"] = "Türk Lirası";
 			$stokEkle = $this->stok_model->stokEkle($stok);
 			if($stokEkle)
 			{
-				redirect('stok');
+				$this->session->set_flashdata('islem', 'ekle');
+				redirect("stok");
 			}
 			else
 			{
-				$this->load->helper("alert");
-				$viewData["hata"] = setAlertDanger("Müşteri eklenemedi. Lütfen tekrar deneyin.");
+				$this->session->set_flashdata('islem', 'basarisiz');
 			}
 		}
 		$this->load->view("stok_ekle", $viewData);
@@ -101,8 +104,9 @@ class Stok extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('stok_kodu', 'Stok Kodu', 'trim|required');
 		$this->form_validation->set_rules('stok_adi', 'Stok Adı', 'trim|required');
-		$this->form_validation->set_rules('stok_fiyat', 'Fiyat', 'trim|required');
-		$this->form_validation->set_rules('stok_paraBirimi', 'Para Birimi', 'trim|required');
+		$this->form_validation->set_rules('alis_fiyat', 'Alış Fiyatı', 'trim|required');
+		$this->form_validation->set_rules('satis_fiyat', 'Satış Fiyatı', 'trim|required');
+		$this->form_validation->set_rules('stok_kdv', 'KDV Değeri', 'trim|required');
 		$this->form_validation->set_rules('stok_birim', 'Birim', 'trim|required');
 		$this->form_validation->set_rules('stok_miktar', 'Miktar', 'trim|required');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
@@ -113,10 +117,12 @@ class Stok extends CI_Controller {
 			$stok_id = $this->input->post("stok_id");
 			$stok["stok_kodu"] = $this->input->post("stok_kodu");
 			$stok["stok_adi"] = $this->input->post("stok_adi");
-			$stok["stok_fiyat"] = $this->input->post("stok_fiyat");
-			$stok["stok_paraBirimi"] = $this->input->post("stok_paraBirimi");
+			$stok["alis_fiyat"] = $this->input->post("alis_fiyat");
+			$stok["satis_fiyat"] = $this->input->post("satis_fiyat");
+			$stok["stok_kdv"] = $this->input->post("stok_kdv");
 			$stok["stok_birim"] = $this->input->post("stok_birim");
 			$stok["stok_miktar"] = $this->input->post("stok_miktar");
+			$stok["stok_paraBirimi"] = "Türk Lirası";
 			$stokGuncelle = $this->stok_model->stokGuncelle($stok,$stok_id);
 			if($stokGuncelle)
 			{

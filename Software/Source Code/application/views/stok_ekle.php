@@ -36,20 +36,34 @@ $this->load->view('include/sidebar');
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("stok_fiyat")?>" name="stok_fiyat" class="form-control">
-                                    <label class="form-label">Birim Fiyat</label>
+                                    <input type="text" value="<?=set_value("alis_fiyat")?>" name="alis_fiyat" class="form-control fiyat">
+                                    <label class="form-label">Alış Fiyatı</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("stok_paraBirimi")?>" name="stok_paraBirimi" id="stok_paraBirimi" class="form-control">
-                                    <label class="form-label">Para Birimi</label>
+                                    <input type="text" value="<?=set_value("satis_fiyat")?>" name="satis_fiyat" class="form-control fiyat">
+                                    <label class="form-label">Satış Fiyatı</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("stok_birim")?>" name="stok_birim" class="form-control">
-                                    <label class="form-label">Birim</label>
+                                    <label>KDV Değeri</label>
+                                    <select class="form-control show-tick" tabindex="-98" name="stok_kdv">
+                                        <option value="18">%18</option>
+                                        <option value="8">%8</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <label>Birim</label>
+                                    <select class="form-control show-tick" tabindex="-98" name="stok_birim">
+                                        <option value="Adet">Adet</option>
+                                        <option value="Metre">Metre</option>
+                                        <option value="Takım">Takım</option>
+                                        <option value="Kilogram">Kilogram</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group form-float">
