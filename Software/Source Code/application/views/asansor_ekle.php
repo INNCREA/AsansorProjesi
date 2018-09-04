@@ -88,12 +88,8 @@
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <label>Bakım Periyodu Seçiniz</label>
-                                    <select class="form-control show-tick" tabindex="-98" name="bakim_periyodu">
-                                        <option value="30"> 30 Gün </option>
-                                        <option value="60"> 60 Gün </option>
-                                        <option value="90"> 90 Gün </option>
-                                    </select>
+                                    <input type="text" value="<?=set_value("bakim_tutar")?>" name="bakim_tutar" class="form-control">
+                                    <label class="form-label">Bakım Ücreti</label>
                                 </div>
                             </div>
                             <div class="form-group">

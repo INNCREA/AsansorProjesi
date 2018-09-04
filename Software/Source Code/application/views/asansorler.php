@@ -19,73 +19,116 @@ $this->load->view('include/sidebar');
                         </h2>
                     </div>
                     <div class="body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover temel-tablo dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>Asansör Kod</th>
-                                        <th>Adres</th>
-                                        <th>Yetkili</th>
-                                        <th style="width: 10%;">Sonraki Bakım Tarihi</th>
-                                        <th>Bakım Durumu</th>
-                                        <th>İşlemler</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<?php
-                                	if($asansorler){
-                                		foreach ($asansorler as $asansor) {
-                                           ?>
-                                           <tr>
-                                            <td><?=$asansor->asansor_kodu?></td>
-                                            <td><?=$asansor->asansor_adres?></td>
-                                            <td><?=$asansor->musteri_adSoyad?></td>
-                                            <td><?=$asansor->asansor_bakimTarihi?></td>
-                                            <td>
-                                                <!-- Bakım Durumu ayarlanıyor.  -->
+                        <?php 
+                        $islem = $this->session->flashdata('islem');
+                        if ($islem == 'ekle'){ ?>
+                            <script>
+                                swal("Kayıt işlemi başarılı !", "Asansör başarıyla eklenmiştir !", "success");
+                            </script>
+                        <?php } 
+                        else if ($islem == 'guncelle')
+                            { ?>
+                                <script>
+                                    swal("Güncelleme işlemi başarılı !", "Kayıt başarıyla güncellenmiştir !", "success");
+                                </script>
+                            <?php }
+                            else if ($islem == 'sil')
+                                { ?>
+                                    <script>
+                                        swal("Silme işlemi başarılı !", "Kayıt başarıyla silinmiştir !", "success");
+                                    </script>
+                                <?php }
+                                else if ($islem == 'bakim')
+                                    { ?>
+                                        <script>
+                                            swal("Bakım işlemi başarılı !", "Bakım işlemi başarıyla yapılmıştır. !", "success");
+                                        </script>
+                                    <?php }
+                                    else if ($islem == 'zaman')
+                                        { ?>
+                                            <script>
+                                                swal("Bakım tarihi hatası !", "Asansörün bu ay bakımı yapılmıştır. Lütfen gelecek bakımı bekleyiniz. !", "danger");
+                                            </script>
+                                        <?php }
+                                        else if ($islem == 'basarisiz')
+                                            { ?>
+                                                <script>
+                                                    swal("İşlem başarısız !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
+                                                </script>
+                                            <?php } ?>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover temel-tablo dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Asansör Kod</th>
+                                                            <th>Asansör Adı</th>
+                                                            <th>Adres</th>
+                                                            <th>Yetkili</th>
+                                                            <th style="width: 10%;">Sonraki Bakım Tarihi</th>
+                                                            <th>Bakım Durumu</th>
+                                                            <th>İşlemler</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                     <?php
+                                                     if($asansorler){
+                                                      foreach ($asansorler as $asansor) {
+                                                         ?>
+                                                         <tr>
+                                                            <td><?=$asansor->asansor_kodu?></td>
+                                                            <td><?=$asansor->asansor_adi?></td>
+                                                            <td><?=$asansor->asansor_adres?></td>
+                                                            <td><?=$asansor->musteri_adSoyad?></td>
+                                                            <td><?php
+                                                            $sonraki_bakimTarihi = strtotime('+ 30  day' , strtotime($asansor->asansor_bakimTarihi));
+                                                            $sonraki_bakimTarihi = date("d.m.Y" , $sonraki_bakimTarihi);
+                                                            echo $sonraki_bakimTarihi;
+                                                            ?></td>
+                                                            <td>
+                                                                <!-- Bakım Durumu ayarlanıyor.  -->
 
-                                                <?php if((strtotime($asansor->asansor_bakimTarihi)-strtotime(date("d.m.Y")) < 0) && ($asansor->bakim_durum == ""))
-                                                {
-                                                    echo "<span class='badge bg-red font-12'>Yapılmadı</span>";
-                                                } 
-                                                else if($asansor->bakim_durum == "Yapıldı"){
+                                                                <?php if( strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi) > 59)
+                                                                {
+                                                                    echo "<span class='badge bg-red font-12'>Yapılmadı</span>";
+                                                                } 
+                                                                else if($asansor->bakim_durum == "Yapıldı"){
 
-                                                    echo "<span class='badge bg-green font-12'>".$asansor->bakim_durum."</span>";
+                                                                    echo "<span class='badge bg-green font-12'>".$asansor->bakim_durum."</span>";
 
+                                                                }
+                                                                else if($asansor->bakim_durum == "" && strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi) < 59)
+                                                                {
+                                                                    echo "<span class='badge bg-cyan font-12'>Bakım Bekleniyor</span>";
+                                                                }
+
+                                                                ?>
+                                                            </td>
+                                                            <td><a href="<?=base_url("ariza-olustur/".$asansor->asansor_id)?>" class="btn bg-amber waves-effect">
+                                                                <i class="material-icons">warning</i>
+                                                                <span>Arıza</span>
+                                                            </a> <a href="<?=base_url("bakim/bakimYap/".$asansor->asansor_id)?>" class="btn bg-green waves-effect">
+                                                                <i class="material-icons">build</i>
+                                                                <span>Bakım</span>
+                                                            </a> <a href="<?=base_url("asansor/".$asansor->asansor_id)?>" class="btn bg-cyan waves-effect">
+                                                                <i class="material-icons">search</i>
+                                                                <span>Detay</span>
+                                                            </a> <a href="<?=base_url("asansor/sil/".$asansor->asansor_id)?>" class="btn bg-red waves-effect">
+                                                                <i class="material-icons">delete</i>
+                                                                <span>Sil</span>
+                                                            </a></td>
+                                                        </tr>
+                                                        <?php
+                                                    }
                                                 }
-                                                else if($asansor->bakim_durum == "")
-                                                {
-                                                    echo "<span class='badge bg-cyan font-12'>Bakım Bekleniyor</span>";
-                                                }
-
                                                 ?>
-                                            </td>
-                                            <td><a href="<?=base_url("ariza-olustur/".$asansor->asansor_id)?>" class="btn bg-amber waves-effect">
-                                                <i class="material-icons">warning</i>
-                                                <span>Arıza</span>
-                                            </a> <a href="<?=base_url("bakim/bakimYap/".$asansor->asansor_id)?>" class="btn bg-green waves-effect">
-                                                <i class="material-icons">build</i>
-                                                <span>Bakım</span>
-                                            </a> <a href="<?=base_url("asansor/".$asansor->asansor_id)?>" class="btn bg-cyan waves-effect">
-                                                <i class="material-icons">search</i>
-                                                <span>Detay</span>
-                                            </a> <a href="<?=base_url("asansor/sil/".$asansor->asansor_id)?>" class="btn bg-red waves-effect">
-                                                <i class="material-icons">delete</i>
-                                                <span>Sil</span>
-                                            </a></td>
-                                        </tr>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
+            </section>
 
-<?php $this->load->view('include/footer'); ?>
+            <?php $this->load->view('include/footer'); ?>

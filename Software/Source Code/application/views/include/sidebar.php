@@ -54,6 +54,12 @@
 			</a>
 			<ul class="ml-menu">
 				<li>
+					<a href="<?=base_url("cari")?>">Cari Listesi</a>
+				</li>
+				<li>
+					<a href="<?=base_url("cari/ekle")?>">Cari Ekle</a>
+				</li>
+				<li>
 					<a href="<?=base_url("stok")?>">Stok Listesi</a>
 				</li>
 				<li>

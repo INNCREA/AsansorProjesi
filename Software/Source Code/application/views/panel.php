@@ -10,7 +10,7 @@
 
 		<div class="row clearfix">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				<a class="kutu" href="<?php echo base_url('asansor') ?>">
+				<a class="kutu" href="<?php echo base_url('asansor/ekle') ?>">
 					<div style="cursor: pointer;" class="info-box bg-cyan hover-expand-effect">
 						<div class="icon">
 							<i class="material-icons">meeting_room</i>
@@ -23,7 +23,7 @@
 				</a>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-				<a class="kutu" href="<?php echo base_url('ariza') ?>">
+				<a class="kutu" href="<?php echo base_url('ariza-olustur') ?>">
 					<div style="cursor: pointer;" class="info-box bg-red hover-expand-effect">
 						<div class="icon">
 							<i class="fas fa-exclamation-triangle"></i>

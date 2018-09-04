@@ -22,12 +22,11 @@ class Bakim extends CI_Controller {
 		$user_id = $this->session->userdata("id");
 		$this->load->model("bakim_model");
 		$asansor = $this->bakim_model->asansorCek($id);
-		if((strtotime($asansor->asansor_bakimTarihi)-strtotime(date("d.m.Y")) < 0)){
-			$periyod = $asansor->asansor_bakimPeriyod;
-			$yeni_bakim_tarihi = strtotime('+'.$periyod.' day' , strtotime(date("d.m.Y")));
-			$yeni_bakim_tarihi = date("d.m.Y" , $yeni_bakim_tarihi);
-			$data["asansor_bakimTarihi"] = $yeni_bakim_tarihi;
+		$bakimTarih = explode(".", $asansor->asansor_bakimTarihi);
 
+		if($bakimTarih[1]-date("m") < 0 && $bakimTarih[2]-date("Y") <= 0){
+
+			$data["asansor_bakimTarihi"] = date("d.m.Y");
 			$bakim["bakim_icerik"] = "Bakım yapılmıştır.";
 			$bakim["bakim_durum"] = "Yapıldı";
 			$bakim["bakim_tarih"] = date("d.m.Y");

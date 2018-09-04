@@ -40,7 +40,7 @@ class Ariza extends CI_Controller {
 		$getStock = $this->ariza_model->getStock();
 		if($getStock){
 			foreach ($getStock as $item) {
-				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->stok_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
+				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->satis_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
 			}
 		}
 		$viewData['stok'] = $items;

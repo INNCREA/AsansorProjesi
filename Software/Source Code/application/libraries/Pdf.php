@@ -13,7 +13,7 @@ class Pdf
 		$options->set('defaultFont', 'dejavu sans');
 		$dompdf = new Dompdf($options);
 		$dompdf->loadHtml($html);
-		$dompdf->setPaper('A4', 'portrait');
+		$dompdf->setPaper('A4', 'Portrait');
 		$dompdf->render();
 		$dompdf->stream($filename.'.pdf', array("Attachment"=>0));
 	}

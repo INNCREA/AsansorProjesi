@@ -49,17 +49,13 @@ class Asansor extends CI_Controller {
 		$this->form_validation->set_message('is_unique', 'Bu e-posta ile kayıtlı bir müşteri bulunmaktadır.');
 		$this->load->model("asansor_model");
 		if($this->form_validation->run() != FALSE){
-			/* Gelecek bakım tarihinin hesaplanması. */
-			$bakim_periyodu = $this->input->post("bakim_periyodu");
-			$bakim_tarihi = strtotime('+'.$bakim_periyodu.' day' , strtotime($this->input->post("asansor_tarih")));
-			$bakim_tarihi = date('d.m.Y' , $bakim_tarihi);
-			/* Hesaplama bitişi */
-			$asansor["asansor_bakimTarihi"] = $bakim_tarihi;
+			
+			$asansor["asansor_bakimTarihi"] = $this->input->post("asansor_tarih");
 			$asansor["asansor_kodu"] = $this->input->post("asansor_kod");
 			$asansor["asansor_latitude"] = $this->input->post("asansor_enlem");
 			$asansor["asansor_longitude"] = $this->input->post("asansor_boylam");
 			$asansor["asansor_yetkili"] = $this->input->post("asansor_yetkili");
-			$asansor["asansor_bakimPeriyod"] = $this->input->post("bakim_periyodu");
+			$asansor["asansor_bakimTutar"] = $this->input->post("bakim_tutar");
 			$asansor["asansor_adres"] = $this->input->post("asansor_adres");
 			$asansor["asansor_adresTarif"] = $this->input->post("asansor_adresTarif");
 			$asansor["asansor_yapimTarihi"] = $this->input->post("asansor_tarih");
@@ -74,10 +70,10 @@ class Asansor extends CI_Controller {
 				$this->load->library("eposta");
 				$customer["sifre"] = $this->input->post("musteri_sifre");
 				$this->eposta->sendUserMail($customer);
+				$this->session->set_flashdata('islem', 'ekle');
 				redirect("asansorler");
 			}else{
-				$this->load->helper("alert");
-				$viewData["hata"] = setAlertDanger("Asansör veya müşteri eklenemedi. Lütfen tekrar deneyin.");
+				$this->session->set_flashdata('islem', 'basarisiz');
 			}
 		}
 

@@ -56,7 +56,7 @@ $this->load->view('include/sidebar');
                                         <?php
                                         if($asansor){
                                             foreach ($asansor as $a) {
-                                                echo '<option '.($a->asansor_id == $sid || set_value("asansor_id") == $a->asansor_id ? "selected" : NULL).' value="'.$a->asansor_id.'">'.$a->asansor_kodu.'</option>';
+                                                echo '<option '.($a->asansor_id == $sid || set_value("asansor_id") == $a->asansor_id ? "selected" : NULL).' value="'.$a->asansor_id.'">'.$a->asansor_adi.'</option>';
                                             }
                                         }
                                         ?>
