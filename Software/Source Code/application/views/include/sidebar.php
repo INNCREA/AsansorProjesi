@@ -33,37 +33,53 @@
 				</li>
 			</ul>
 		</li>
-		<li <?php if($sayfaAdi == "Müşteriler" || $sayfaAdi == "Müşteri Ekle" ){ echo 'class="active";'; } ?> >
-			<a href="javascript:void(0);" class="menu-toggle">
-				<i class="material-icons">group</i>
-				<span>Müşteri İşlemleri</span>
-			</a>
-			<ul class="ml-menu">
-				<li>
-					<a href="<?=base_url("musteriler")?>">Müşteri Listesi</a>
-				</li>
-				<li>
-					<a href="<?=base_url("musteri/ekle")?>">Müşteri Ekle</a>
-				</li>
-			</ul>
-		</li>
-		<li <?php if($sayfaAdi == "Muhasebe İşlemleri" || $sayfaAdi == "Stok Ekle" || $sayfaAdi == "Stok Listesi" ){ echo 'class="active";'; } ?> >
+		<li <?php if($sayfaAdi == "Muhasebe İşlemleri" || $sayfaAdi == "Stok Ekle" || $sayfaAdi == "Stok Listesi" || $sayfaAdi == "Müşteriler" || $sayfaAdi == "Cari İşlemleri" || $sayfaAdi == "Cari Ekle" ){ echo 'class="active";'; } ?> >
 			<a href="javascript:void(0);" class="menu-toggle">
 				<i class="material-icons">assignment</i>
 				<span>Muhasebe İşlemleri</span>
 			</a>
 			<ul class="ml-menu">
 				<li>
-					<a href="<?=base_url("cari")?>">Cari Listesi</a>
+					<a href="javascript:void(0);" class="menu-toggle">
+						<i class="material-icons">assessment</i>
+						<span>Cari Hesap İşlemleri</span>
+					</a>
+					<ul class="ml-menu">
+						<li>
+							<a href="<?=base_url("cari")?>">Cari Hesap Özetleri</a>
+						</li>
+						<li>
+							<a href="<?=base_url("cari/ekle")?>">Cari Hesap Ekle</a>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<a href="<?=base_url("cari/ekle")?>">Cari Ekle</a>
+					<a href="javascript:void(0);" class="menu-toggle">
+						<i class="material-icons">assignment_turned_in</i>
+						<span>Stok İşlemleri</span>
+					</a>
+					<ul class="ml-menu">
+						<li>
+							<a href="<?=base_url("stok")?>">Stok Listesi</a>
+						</li>
+						<li>
+							<a href="<?=base_url("stok/ekle")?>">Stok Ekle</a>
+						</li>
+					</ul>
 				</li>
 				<li>
-					<a href="<?=base_url("stok")?>">Stok Listesi</a>
-				</li>
-				<li>
-					<a href="<?=base_url("stok/ekle")?>">Stok Ekle</a>
+					<a href="javascript:void(0);" class="menu-toggle">
+						<i class="material-icons">people</i>
+						<span>Müşteri İşlemleri</span>
+					</a>
+					<ul class="ml-menu">
+						<li>
+							<a href="<?=base_url("musteriler")?>">Müşteri Listesi</a>
+						</li>
+						<li>
+							<a href="<?=base_url("musteri/ekle")?>">Müşteri Ekle</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</li>

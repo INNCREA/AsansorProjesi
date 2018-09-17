@@ -9,7 +9,7 @@ class Ariza extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 
 		$viewData = array(
-			"sayfaAdi" => "Ariza",
+			"sayfaAdi" => "Arıza",
 			"id" => $id,
 			"rol" => $rol
 		);

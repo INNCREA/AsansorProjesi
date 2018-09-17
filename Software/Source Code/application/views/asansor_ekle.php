@@ -32,20 +32,6 @@
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" tabindex="-98" name="asansor_yetkili">
-                                        <option disabled=""> Yetkili Seçiniz </option>
-                                        <?php
-                                        if($yetkililer){
-                                            foreach ($yetkililer as $yetkili) {
-                                                echo '<option value="'.$yetkili->musteri_id.'">'.$yetkili->musteri_adSoyad.'</option>';
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group form-float">
-                                <div class="form-line">
                                     <textarea name="asansor_adres" rows="4" class="form-control no-resize"><?=set_value("asansor_adres")?></textarea>
                                     <label class="form-label">Asansör Adres</label>
                                 </div>
@@ -77,13 +63,19 @@
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <input type="text" value="<?=set_value("musteri_kAdi")?>" name="musteri_kAdi" class="form-control">
-                                    <label class="form-label">Müşteri Adı</label>
+                                    <label class="form-label">Müşteri Kullanıcı Adı</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
                                     <input type="password" value="<?=set_value("musteri_sifre")?>" name="musteri_sifre" class="form-control">
                                     <label class="form-label">Müşteri Şifre</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input type="password" value="<?=set_value("sifre_tekrar")?>" name="sifre_tekrar" class="form-control">
+                                    <label class="form-label">Müşteri Şifre Tekrar</label>
                                 </div>
                             </div>
                             <div class="form-group form-float">

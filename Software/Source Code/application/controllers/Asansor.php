@@ -43,6 +43,7 @@ class Asansor extends CI_Controller {
 		$this->form_validation->set_rules('musteri_tel', 'Müşteri Telefon', 'trim|required');
 		$this->form_validation->set_rules('musteri_kAdi', 'Müşteri Kullanıcı Adı', 'trim|required');
 		$this->form_validation->set_rules('musteri_sifre', 'Müşteri Şifre', 'trim|required');
+		$this->form_validation->set_rules('sifre_tekrar', 'Şifre Tekrar', 'trim|required|matches[musteri_sifre]');
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_message('required', '%s alanı boş bırakılamaz');
 		$this->form_validation->set_message('valid_email', 'Lütfen geçerli bir e-posta giriniz.');

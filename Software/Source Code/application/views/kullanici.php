@@ -66,9 +66,9 @@ $this->load->view('include/sidebar');
 															<td><?=$kullanici->kullanici_adSoyad?></td>
 															<td><?=$kullanici->kullanici_adres?></td>
 															<td><?=$kullanici->kullanici_tel?></td>
-															<td><?=($kullanici->kullanici_rol == 1) ? "Yönetici" : "Teknik Servis" ?></td>
+															<td><?=($kullanici->kullanici_rol == 1) ? "<span class='badge bg-red'> Yönetici</span>" : "<span class='badge bg-cyan'> Teknik Servis</span>" ?></td>
 															<td><?=$kullanici->kullanici_mail?></td>
-															<td><?=($kullanici->kullanici_durum == 1) ? "Aktif" : "Pasif" ?></td>
+															<td><?=($kullanici->kullanici_durum == 1) ? "<span class='badge bg-green'> Aktif</span>" : "<span class='badge bg-grey'> Pasif</span>" ?></td>
 															<td><button type="button" data-id="<?=$kullanici->kullanici_id?>" data-url="<?=base_url('kullanici/kullaniciCek/')?>" class="btn bg-green waves-effect duzenleKullanici" data-toggle="modal" data-target="#duzenle">
 																<i class="material-icons">create</i>
 																<span>Düzenle</span>

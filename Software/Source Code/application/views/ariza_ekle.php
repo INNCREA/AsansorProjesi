@@ -37,12 +37,12 @@ $this->load->view('include/sidebar');
                             <?=validation_errors()?>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" tabindex="-98" name="ariza_kodu">
+                                    <select class="form-control show-tick" tabindex="-98" name="ariza_kodu"  data-show-subtext="true">
                                         <option disabled=""> Arıza Kodu Seçiniz </option>
                                         <?php
                                         if($kodlar){
                                             foreach ($kodlar as $kod) {
-                                                echo '<option '.(set_value("ariza_kodu") == $kod->hata_kodu ? "selected" : NULL).' value="'.$kod->hata_kodu.'">'.$kod->hata_kodu.'</option>';
+                                                echo '<option data-subtext="'.$kod->hata_aciklama.'"'.(set_value("ariza_kodu") == $kod->hata_kodu ? "selected" : NULL).' value="'.$kod->hata_kodu.'">'.$kod->hata_kodu.'</option>';
                                             }
                                         }
                                         ?>

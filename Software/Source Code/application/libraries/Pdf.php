@@ -11,9 +11,10 @@ class Pdf
 	{
 		$options = new Options();
 		$options->set('defaultFont', 'dejavu sans');
+		$options->set('isHtml5ParserEnabled', 'true');
 		$dompdf = new Dompdf($options);
 		$dompdf->loadHtml($html);
-		$dompdf->setPaper('A4', 'Portrait');
+		$dompdf->setPaper('a5', 'Landscape');
 		$dompdf->render();
 		$dompdf->stream($filename.'.pdf', array("Attachment"=>0));
 	}

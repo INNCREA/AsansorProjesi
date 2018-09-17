@@ -73,3 +73,5 @@ $route['ajax/add-stock/(:num)'] = 'ariza/add_stock/$1';
 $route['ajax/get-items/(:num)'] = 'ariza/get_items/$1';
 $route['ajax/delete-stock'] = 'ariza/delete_stock';
 $route['ariza/guncelle'] = 'ariza/update';
+
+$route['bakim/(:num)'] = 'bakim/detay/$1';

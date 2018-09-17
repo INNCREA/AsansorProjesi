@@ -8,4 +8,4 @@ rapor sayfasında tablo dinamik hale getirilecek. + (Bakım kısmı kaldı.)
 Loglama işlemi yapılacak.
 Ariza gune gore cekme
 Breadcrumbs yapılacak.
-Anasayfa arıza bakım günlük liste yapılacak.
+Anasayfa arıza bakım günlük liste yapılacak. +

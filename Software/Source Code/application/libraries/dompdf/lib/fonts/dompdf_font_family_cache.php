@@ -86,4 +86,7 @@
   'glyphicons halflings' => array(
     'normal' => $fontDir . '/658f8cd7ebc52c850b1cb93c41fe5461',
   ),
+  'tangerine' => array(
+    'normal' => $fontDir . '/c059c0e815b69f0f597ec11d9c1766db',
+  ),
 ) ?>

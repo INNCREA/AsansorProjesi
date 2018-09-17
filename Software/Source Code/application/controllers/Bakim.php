@@ -8,7 +8,7 @@ class Bakim extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$this->load->model("bakim_model");
-		$bakim = $this->bakim_model->bakimCek(); 	
+		$bakim = $this->bakim_model->bakimCek();
 		$viewData = array(
 			"sayfaAdi" => "Bakım İşlemleri",
 			"id" => $id,
@@ -52,5 +52,20 @@ class Bakim extends CI_Controller {
 			$this->session->set_flashdata('islem', 'zaman');
 			redirect("asansor");
 		}
+	}
+
+	public function detay($id)
+	{
+		$id = $this->session->userdata("id");
+		$rol = $this->session->userdata("rol");
+		$this->load->model("bakim_model");
+		$bakim = $this->bakim_model->bakimCek();
+		$viewData = array(
+			"sayfaAdi" => "Bakım İşlemleri",
+			"id" => $id,
+			"rol" => $rol,
+			"bakimlar" => $bakim
+		);
+		$this->load->view('bakim_detay', $viewData);
 	}
 }
