@@ -175,30 +175,25 @@ $this->load->view('include/sidebar');
 									</div>
 
 									<div class="row clearfix">
-										<div class="row clearfix">
-											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-												<input type="radio" name="tahsilat_tutari" id="toplam_tutar" class="with-gap">
-												<label for="toplam_tutar">Toplam Tutar :</label>
-											</div>
-											<div class="col-lg-8 col-md-9 col-sm-7 col-xs-6">
-												<div class="form-group">
-													<div class="form-line">
-														<span><b>2.110,00 ₺</b></span>
-													</div>
+										<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+											<input type="radio" name="tahsilat_tutari" id="toplam_tutar" class="with-gap">
+											<label for="toplam_tutar">Toplam Tutar :</label>
+										</div>
+										<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
+											<div class="form-group">
+												<div id="toplam_tutar_div" class="form-line focused warning">
+													<input type="text" value="2.110,00 ₺" name="toplam_tutar" id="toplam_tutar" class="form-control" disabled>
 												</div>
 											</div>
 										</div>
-										
-										<div class="row clearfix">
-											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-												<input type="radio" name="tahsilat_tutari" id="diger" class="with-gap">
-												<label for="diger">Diğer Tutar :</label>
-											</div>
-											<div class="col-lg-8 col-md-9 col-sm-7 col-xs-6">
-												<div class="form-group">
-													<div class="form-line">
-														<input type="text" value="<?=set_value("diger_tutar")?>" name="diger_tutar" id="diger_tutar" class="form-control fiyat" disabled>
-													</div>
+										<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+											<input type="radio" name="tahsilat_tutari" id="diger" class="with-gap">
+											<label for="diger">Diğer Tutar :</label>
+										</div>
+										<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
+											<div class="form-group">
+												<div class="form-line success">
+													<input type="text" value="<?=set_value("diger_tutar")?>" name="diger_tutar" id="diger_tutar" class="form-control fiyat" disabled>
 												</div>
 											</div>
 										</div>

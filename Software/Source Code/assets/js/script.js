@@ -156,10 +156,15 @@
 
 	$('#diger').on("change", function(e){
 		document.getElementById("diger_tutar").disabled = false;
+		$('#toplam_tutar_div').removeClass("success");
+		$('#toplam_tutar_div').addClass("warning");
 	});
 
 	$('#toplam_tutar').on("change", function(e){
 		document.getElementById("diger_tutar").disabled = true;
+		document.getElementById("diger_tutar").value = "";
+		$('#toplam_tutar_div').removeClass("warning");
+		$('#toplam_tutar_div').addClass("success");
 	});
 
 
