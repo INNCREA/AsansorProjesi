@@ -135,24 +135,14 @@
 			data: {id:id},
 			success: function(data){
 				$.each( data, function( key, value ) {
-					$('#cari_id').val(value.cari_id);
-					$('#cari_isim').val(value.cari_isim);
-					$('#cari_mail').val(value.cari_mail);
-					$('#cari_telefon').val(value.cari_telefon);
-					$('#cari_adres').val(value.cari_adres);
-					$('#cari_yetkili').val(value.cari_yetkili);
-					$('#cari_vergiDairesi').val(value.cari_vergiDairesi);
-					$('#cari_vergiNo').val(value.cari_vergiNo);
+					$('#toplam_tutar').val(value.cari_bakiye);
 				});
 				$('#tahsilat').modal();
 			}
 		});
 	});
 
-	$('.tarih').inputmask('dd.mm.yyyy', { placeholder: '__.__.____',showMaskOnHover: false });
-	$('.fiyat').inputmask({ mask: ["[999.999,99] ₺"], greedy: true ,  numericInput: true , showMaskOnHover: false, jitMasking: true});
-	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
-	$('.telefon').inputmask();
+
 
 	$('#diger').on("change", function(e){
 		document.getElementById("diger_tutar").disabled = false;
@@ -160,12 +150,19 @@
 		$('#toplam_tutar_div').addClass("warning");
 	});
 
-	$('#toplam_tutar').on("change", function(e){
+	$('#toplam').on("change", function(e){
 		document.getElementById("diger_tutar").disabled = true;
 		document.getElementById("diger_tutar").value = "";
 		$('#toplam_tutar_div').removeClass("warning");
 		$('#toplam_tutar_div').addClass("success");
 	});
+
+
+
+	$('.tarih').inputmask('dd.mm.yyyy', { placeholder: '__.__.____',showMaskOnHover: false });
+	$('.fiyat').inputmask({ mask: ["[999.999,99] ₺"], greedy: true ,  numericInput: true , showMaskOnHover: false, jitMasking: true});
+	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
+	$('.telefon').inputmask();
 
 
 

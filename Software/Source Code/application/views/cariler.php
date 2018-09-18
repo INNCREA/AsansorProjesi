@@ -71,7 +71,7 @@ $this->load->view('include/sidebar');
 															<td><?=$cari->cari_yetkili?></td>
 															<td><?=$cari->cari_vergiDairesi?></td>
 															<td><?=$cari->cari_vergiNo?></td>
-															<td><b><?=$cari->cari_bakiye?> 2.110,00 ₺</b></td>
+															<td><b class="fiyat"><?=$cari->cari_bakiye?></b></td>
 															<td><button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-cyan waves-effect tahsilat">
 																<i class="material-icons">credit_card</i>
 																<span>Tahsilat</span>
@@ -176,13 +176,13 @@ $this->load->view('include/sidebar');
 
 									<div class="row clearfix">
 										<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-											<input type="radio" name="tahsilat_tutari" id="toplam_tutar" class="with-gap">
-											<label for="toplam_tutar">Toplam Tutar :</label>
+											<input type="radio" name="tahsilat_tutari" id="toplam" class="with-gap">
+											<label for="toplam">Toplam Tutar :</label>
 										</div>
 										<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
 											<div class="form-group">
 												<div id="toplam_tutar_div" class="form-line focused warning">
-													<input type="text" value="2.110,00 ₺" name="toplam_tutar" id="toplam_tutar" class="form-control" disabled>
+													<input type="text" value="" name="toplam_tutar" id="toplam_tutar" class="form-control fiyat" disabled>
 												</div>
 											</div>
 										</div>
