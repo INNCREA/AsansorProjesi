@@ -123,11 +123,37 @@ class Cari extends CI_Controller {
 				$this->session->set_flashdata('islem', 'basarisiz');
 			}
 		}
-		redirect('cari');
+		redirect("cari");
 	}
 
 	public function tahsilat()
 	{
+		if($this->input->post("tahsilat_radio") == "on")
+		{
+			if($this->input->post("tahsilat_tutar") != null)
+			{
+				$cari_id = $this->input->post("tahsilat_id");
+				$tahsilat_tutar = $this->input->post("tahsilat_tutar");
+
+				$tahsilat_tutar = trim($tahsilat_tutar,'₺');
+				$tahsilat_tutar = trim($tahsilat_tutar,' ');
+				$tahsilat_tutar = str_replace(".","",$tahsilat_tutar);
+				$tahsilat_tutar = str_replace(",",".",$tahsilat_tutar);
+				$tahsilat_tutar = floatval($tahsilat_tutar);
+
+				$this->load->model("cari_model");
+				$cari = $this->cari_model->cariCek($cari_id);
+
+				echo ($cari['0']->cari_bakiye) - $tahsilat_tutar;
+
+			}
+			else
+			{
+				$this->session->set_flashdata('islem', 'bos');
+			}
+		}
+
+		//redirect("cari");
 		
 	}
 

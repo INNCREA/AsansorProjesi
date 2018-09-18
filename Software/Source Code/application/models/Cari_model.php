@@ -79,5 +79,19 @@ class Cari_model extends CI_Model
 		}
 		return FALSE;
 	}
+
+	public function tahsilat($data,$id)
+	{
+		$result = $this
+		->db
+		->where("cari_id",$id)
+		->update("cari",$data);
+
+		if($result)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
 }
 ?>

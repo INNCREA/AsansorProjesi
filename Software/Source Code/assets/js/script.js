@@ -135,6 +135,7 @@
 			data: {id:id},
 			success: function(data){
 				$.each( data, function( key, value ) {
+					$('#tahsilat_id').val(value.cari_id);
 					$('#toplam_tutar').val(value.cari_bakiye);
 				});
 				$('#tahsilat').modal();
@@ -154,7 +155,7 @@
 		document.getElementById("diger_tutar").disabled = true;
 		document.getElementById("diger_tutar").value = "";
 		$('#toplam_tutar_div').removeClass("warning");
-		$('#toplam_tutar_div').addClass("success");
+		$('#toplam_tutar_div').addClass("focused success");
 	});
 
 
