@@ -48,174 +48,180 @@ $this->load->view('include/sidebar');
 											<script>
 												swal("İşlem başarısız !", "Tahsil edilecek tutar boş veya sıfır olamaz. Lütfen tekrar deneyiniz !", "warning");
 											</script>
-										<?php } ?>
-										<div class="table-responsive">
-											<table class="table table-bordered table-striped table-hover dataTable temel-tablo">
-												<thead>
-													<tr>
-														<th>Firma İsmi</th>
-														<th>Adres</th>
-														<th>Telefon</th>
-														<th>Mail</th>
-														<th>Firma Yetkilisi</th>
-														<th>Vergi Dairesi</th>
-														<th>Vergi Numarası</th>
-														<th>Bakiye</th>
-														<th>İşlemler</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													if($cariler){
-														foreach ($cariler as $cari) {
-															?>
-															<tr>
-																<td><?=$cari->cari_isim?></td>
-																<td><?=$cari->cari_adres?></td>
-																<td><?=$cari->cari_telefon?></td>
-																<td><?=$cari->cari_mail?></td>
-																<td><?=$cari->cari_yetkili?></td>
-																<td><?=$cari->cari_vergiDairesi?></td>
-																<td><?=$cari->cari_vergiNo?></td>
-																<td><b class="fiyat"><?=$cari->cari_bakiye?></b></td>
-																<td><button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-cyan waves-effect tahsilat">
-																	<i class="material-icons">credit_card</i>
-																	<span>Tahsilat</span>
-																</button> <button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-green waves-effect duzenleCari">
-																	<i class="material-icons">create</i>
-																	<span>Düzenle</span>
-																</button> <a href="<?=base_url("cari/sil/".$cari->cari_id)?>" class="btn bg-red waves-effect sil">
-																	<i class="material-icons">delete</i>
-																	<span>Sil</span>
-																</a></td>
-															</tr>
-															<?php
+										<?php } 
+										else if ($islem == 'tahsilat')
+											{ ?>
+												<script>
+													swal("İşlem başarılı !", "Tahsilat işlemi başarıyla gerçekleştirilmiştir !", "success");
+												</script>
+											<?php } ?>
+											<div class="table-responsive">
+												<table class="table table-bordered table-striped table-hover dataTable temel-tablo">
+													<thead>
+														<tr>
+															<th>Firma İsmi</th>
+															<th>Adres</th>
+															<th>Telefon</th>
+															<th>Mail</th>
+															<th>Firma Yetkilisi</th>
+															<th>Vergi Dairesi</th>
+															<th>Vergi Numarası</th>
+															<th>Bakiye</th>
+															<th>İşlemler</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php
+														if($cariler){
+															foreach ($cariler as $cari) {
+																?>
+																<tr>
+																	<td><?=$cari->cari_isim?></td>
+																	<td><?=$cari->cari_adres?></td>
+																	<td><?=$cari->cari_telefon?></td>
+																	<td><?=$cari->cari_mail?></td>
+																	<td><?=$cari->cari_yetkili?></td>
+																	<td><?=$cari->cari_vergiDairesi?></td>
+																	<td><?=$cari->cari_vergiNo?></td>
+																	<td><b class="fiyat"><?=$cari->cari_bakiye?></b></td>
+																	<td><button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-cyan waves-effect tahsilat">
+																		<i class="material-icons">credit_card</i>
+																		<span>Tahsilat</span>
+																	</button> <button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-green waves-effect duzenleCari">
+																		<i class="material-icons">create</i>
+																		<span>Düzenle</span>
+																	</button> <a href="<?=base_url("cari/sil/".$cari->cari_id)?>" class="btn bg-red waves-effect sil">
+																		<i class="material-icons">delete</i>
+																		<span>Sil</span>
+																	</a></td>
+																</tr>
+																<?php
+															}
 														}
-													}
-													?>
-												</tbody>
-											</table>
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="modal fade" id="duzenleCari" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="defaultModalLabel">Cari Düzenle</h4>
-								</div>
-								<div class="modal-body">
-									<form action="<?=base_url("cari/guncelle")?>" method="POST">
-										<?=validation_errors()?>
-										<div class="form-group form-float">
-											<input type="hidden" value="<?=set_value("cari_id")?>" id="cari_id" name="cari_id" class="form-control">
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_isim")?>" name="cari_isim" id="cari_isim" class="form-control">
-												<label class="form-label">Firma İsmi</label>
+						<div class="modal fade" id="duzenleCari" tabindex="-1" role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="defaultModalLabel">Cari Düzenle</h4>
+									</div>
+									<div class="modal-body">
+										<form action="<?=base_url("cari/guncelle")?>" method="POST">
+											<?=validation_errors()?>
+											<div class="form-group form-float">
+												<input type="hidden" value="<?=set_value("cari_id")?>" id="cari_id" name="cari_id" class="form-control">
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_mail")?>" name="cari_mail" id="cari_mail" class="form-control">
-												<label class="form-label">Firma Mail</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_isim")?>" name="cari_isim" id="cari_isim" class="form-control">
+													<label class="form-label">Firma İsmi</label>
+												</div>
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_telefon")?>" name="cari_telefon" id="cari_telefon" class="form-control">
-												<label class="form-label">Firma Telefon</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_mail")?>" name="cari_mail" id="cari_mail" class="form-control">
+													<label class="form-label">Firma Mail</label>
+												</div>
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_adres")?>" name="cari_adres" id="cari_adres" class="form-control">
-												<label class="form-label">Firma Adres</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_telefon")?>" name="cari_telefon" id="cari_telefon" class="form-control">
+													<label class="form-label">Firma Telefon</label>
+												</div>
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_yetkili")?>" name="cari_yetkili" id="cari_yetkili" class="form-control">
-												<label class="form-label">Firma Yetkili Adı</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_adres")?>" name="cari_adres" id="cari_adres" class="form-control">
+													<label class="form-label">Firma Adres</label>
+												</div>
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_vergiDairesi")?>" name="cari_vergiDairesi" id="cari_vergiDairesi" class="form-control">
-												<label class="form-label">Firma Vergi Dairesi</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_yetkili")?>" name="cari_yetkili" id="cari_yetkili" class="form-control">
+													<label class="form-label">Firma Yetkili Adı</label>
+												</div>
 											</div>
-										</div>
-										<div class="form-group form-float">
-											<div class="form-line focused">
-												<input type="text" value="<?=set_value("cari_vergiNo")?>" name="cari_vergiNo" id="cari_vergiNo" class="form-control">
-												<label class="form-label">Firma Vergi Numarası</label>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_vergiDairesi")?>" name="cari_vergiDairesi" id="cari_vergiDairesi" class="form-control">
+													<label class="form-label">Firma Vergi Dairesi</label>
+												</div>
 											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-success waves-effect">GÜNCELLE</button>
-											<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
-										</div>
-									</form>
+											<div class="form-group form-float">
+												<div class="form-line focused">
+													<input type="text" value="<?=set_value("cari_vergiNo")?>" name="cari_vergiNo" id="cari_vergiNo" class="form-control">
+													<label class="form-label">Firma Vergi Numarası</label>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-success waves-effect">GÜNCELLE</button>
+												<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
 
-					<div class="modal fade" id="tahsilat" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="defaultModalLabel">Tahsilat</h4>
-									<hr>
-								</div>
-								<div class="modal-body">
-									<form action="<?=base_url("cari/tahsilat")?>" method="POST">
-										<?=validation_errors()?>
-										<div class="form-group form-float">
-											<input type="hidden" value="<?=set_value("tahsilat_id")?>" id="tahsilat_id" name="tahsilat_id" class="form-control">
-										</div>
-
-										<div class="row clearfix">
-											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-												<input type="radio" name="tahsilat_radio" id="toplam" class="with-gap">
-												<label for="toplam">Toplam Tutar :</label>
+						<div class="modal fade" id="tahsilat" tabindex="-1" role="dialog">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="defaultModalLabel">Tahsilat</h4>
+										<hr>
+									</div>
+									<div class="modal-body">
+										<form action="<?=base_url("cari/tahsilat")?>" method="POST">
+											<?=validation_errors()?>
+											<div class="form-group form-float">
+												<input type="hidden" value="<?=set_value("tahsilat_id")?>" id="tahsilat_id" name="tahsilat_id" class="form-control">
 											</div>
-											<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
-												<div class="form-group">
-													<div id="toplam_tutar_div" class="form-line focused warning">
-														<input type="text" name="tahsilat_tutar" id="toplam_tutar" class="form-control fiyat" readonly>
+
+											<div class="row clearfix">
+												<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+													<input type="radio" name="tahsilat_radio" id="toplam" class="with-gap">
+													<label for="toplam">Toplam Tutar :</label>
+												</div>
+												<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
+													<div class="form-group">
+														<div id="toplam_tutar_div" class="form-line focused warning">
+															<input type="text" name="tahsilat_tutar" id="toplam_tutar" class="form-control fiyat" readonly>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+													<input type="radio" name="tahsilat_radio" id="diger" class="with-gap">
+													<label for="diger">Diğer Tutar :</label>
+												</div>
+												<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
+													<div class="form-group">
+														<div class="form-line success">
+															<input type="text" value="<?=set_value("diger_tutar")?>" name="tahsilat_tutar" id="diger_tutar" class="form-control fiyat" disabled>
+														</div>
 													</div>
 												</div>
 											</div>
-											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-												<input type="radio" name="tahsilat_radio" id="diger" class="with-gap">
-												<label for="diger">Diğer Tutar :</label>
-											</div>
-											<div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
-												<div class="form-group">
-													<div class="form-line success">
-														<input type="text" value="<?=set_value("diger_tutar")?>" name="tahsilat_tutar" id="diger_tutar" class="form-control fiyat" disabled>
-													</div>
-												</div>
-											</div>
-										</div>
 
 
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-success waves-effect">TAHSİL ET</button>
-											<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
-										</div>
-									</form>
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-success waves-effect">TAHSİL ET</button>
+												<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
 
-				</section>
-				<?php $this->load->view('include/footer'); ?>
+					</section>
+					<?php $this->load->view('include/footer'); ?>

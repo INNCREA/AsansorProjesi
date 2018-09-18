@@ -135,16 +135,28 @@ class Cari extends CI_Controller {
 				$cari_id = $this->input->post("tahsilat_id");
 				$tahsilat_tutar = $this->input->post("tahsilat_tutar");
 
+				/* Gelen string ifadenin decimal değere dönüştürülme işlemi */
 				$tahsilat_tutar = trim($tahsilat_tutar,'₺');
 				$tahsilat_tutar = trim($tahsilat_tutar,' ');
 				$tahsilat_tutar = str_replace(".","",$tahsilat_tutar);
 				$tahsilat_tutar = str_replace(",",".",$tahsilat_tutar);
 				$tahsilat_tutar = floatval($tahsilat_tutar);
-
+				/* Dönüştürme işlemi bitişi */
 				$this->load->model("cari_model");
 				$cari = $this->cari_model->cariCek($cari_id);
+				/* Tahsilat tutarının ana bakiyeden düşülmesi */
+				$kalan_bakiye = ($cari['0']->cari_bakiye) - $tahsilat_tutar;
 
-				echo ($cari['0']->cari_bakiye) - $tahsilat_tutar;
+				$veri["cari_bakiye"] = $kalan_bakiye;
+
+				$tahsilat = $this->cari_model->tahsilat($veri,$cari_id);
+
+				if($tahsilat)
+				{
+					$this->session->set_flashdata('islem', 'tahsilat');
+
+					/* Tahsilat makbuzu işlemleri burada gerçekletirilecek. */
+				}
 
 			}
 			else
@@ -153,7 +165,7 @@ class Cari extends CI_Controller {
 			}
 		}
 
-		//redirect("cari");
+		redirect("cari");
 		
 	}
 
