@@ -126,4 +126,9 @@ class Cari extends CI_Controller {
 		redirect('cari');
 	}
 
+	public function tahsilat()
+	{
+		
+	}
+
 }
