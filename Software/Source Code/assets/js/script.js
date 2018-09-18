@@ -154,6 +154,14 @@
 	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
 	$('.telefon').inputmask();
 
+	$('#diger').on("change", function(e){
+		document.getElementById("diger_tutar").disabled = false;
+	});
+
+	$('#toplam_tutar').on("change", function(e){
+		document.getElementById("diger_tutar").disabled = true;
+	});
+
 
 
 });

@@ -165,6 +165,7 @@ $this->load->view('include/sidebar');
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 class="modal-title" id="defaultModalLabel">Tahsilat</h4>
+								<hr>
 							</div>
 							<div class="modal-body">
 								<form action="<?=base_url("cari/tahsilat")?>" method="POST">
@@ -173,18 +174,39 @@ $this->load->view('include/sidebar');
 										<input type="hidden" value="<?=set_value("cari_id")?>" id="cari_id" name="cari_id" class="form-control">
 									</div>
 
-									<div class="form-group form-float">
-										<input type="radio" name="gender" id="male" class="with-gap">
-										<label for="male">Toplam Tutar : </label>
-
-										<input type="radio" name="gender" id="female" class="with-gap">
-										<label for="female" class="m-l-20">Diğer Tutar :</label>
-										<input type="text" value="<?=set_value("diger_tutar")?>" name="diger_tutar" id="diger_tutar" class="form-control">
+									<div class="row clearfix">
+										<div class="row clearfix">
+											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+												<input type="radio" name="tahsilat_tutari" id="toplam_tutar" class="with-gap">
+												<label for="toplam_tutar">Toplam Tutar :</label>
+											</div>
+											<div class="col-lg-8 col-md-9 col-sm-7 col-xs-6">
+												<div class="form-group">
+													<div class="form-line">
+														<span><b>2.110,00 ₺</b></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="row clearfix">
+											<div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
+												<input type="radio" name="tahsilat_tutari" id="diger" class="with-gap">
+												<label for="diger">Diğer Tutar :</label>
+											</div>
+											<div class="col-lg-8 col-md-9 col-sm-7 col-xs-6">
+												<div class="form-group">
+													<div class="form-line">
+														<input type="text" value="<?=set_value("diger_tutar")?>" name="diger_tutar" id="diger_tutar" class="form-control fiyat" disabled>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 
 
 									<div class="modal-footer">
-										<button type="submit" class="btn btn-success waves-effect">Tahsil Et</button>
+										<button type="submit" class="btn btn-success waves-effect">TAHSİL ET</button>
 										<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
 									</div>
 								</form>
