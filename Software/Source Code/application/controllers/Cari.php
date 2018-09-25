@@ -30,7 +30,7 @@ class Cari extends CI_Controller {
 			"id" => $id
 		);
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('cari_isim', 'Firma İsmi', 'trim|required');
+		$this->form_validation->set_rules('cari_isim', 'Firma İsmi', 'required');
 		$this->form_validation->set_rules('cari_mail', 'Firma Mail', 'trim|required|valid_email|is_unique[cari.cari_mail]');
 		$this->form_validation->set_rules('cari_telefon', 'Firma Telefon', 'trim|required');
 		$this->form_validation->set_rules('cari_adres', 'Firma Adres', 'trim|required');

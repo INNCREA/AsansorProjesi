@@ -9,14 +9,22 @@
 	.cerceve
 	{
 		border: 2px solid black;
-		width: all;
-		height: all;
+		width: 700px;
+		height: 450px;
+		margin: -10px;
+		padding: 0px;
 	}
+	body{
+		width: 992px !important;
+		height: 699px !important;
+		margin: 0px;
+		padding: 0px;
+	}
+	#header { position: fixed; left: 0; right: 0; top: 0; }
 
 </style>
 </head>
 <body>
-
 	<div class="cerceve">
 		Test
 

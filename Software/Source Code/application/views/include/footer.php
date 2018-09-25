@@ -1,5 +1,6 @@
 
-
+<!-- Count To Js -->
+<script src="<?php echo base_url('assets/'); ?>plugins/jquery-countto/jquery.countTo.js"></script>
 <!-- Select Plugin Js -->
 <script src="<?php echo base_url('assets/'); ?>plugins/bootstrap-select/js/bootstrap-select.js"></script>
 <!-- Slimscroll Plugin Js -->
@@ -27,6 +28,7 @@
 <script src="<?php echo base_url('assets/'); ?>plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 
 <script src="<?php echo base_url('assets/'); ?>js/demo.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/pages/index.js"></script>
 
 </body>
 
