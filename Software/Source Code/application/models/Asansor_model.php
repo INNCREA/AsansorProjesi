@@ -17,7 +17,7 @@ class Asansor_model extends CI_Model {
 			$this->db->where("asansor_yetkili", $id);
 		}
 		$this->db->join("musteri", "musteri.musteri_id = asansor.asansor_yetkili");
-		$this->db->join("bakim", "bakim.bakim_asansor = asansor.asansor_id" , "left");
+		$this->db->join("bakim", "bakim.bakim_asansor = asansor.asansor_id","left");
 		$r = $this->db->get("asansor")->result();
 		if($r){
 			return $r;

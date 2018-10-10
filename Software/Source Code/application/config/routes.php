@@ -75,3 +75,4 @@ $route['ajax/delete-stock'] = 'ariza/delete_stock';
 $route['ariza/guncelle'] = 'ariza/update';
 
 $route['bakim/(:num)'] = 'bakim/detay/$1';
+$route['cari-detay/(:any)'] = 'cari/detay/$1';

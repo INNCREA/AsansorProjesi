@@ -15,7 +15,7 @@
                         </h2>
                     </div>
                     <div class="body">
-                        <form action="<?=current_url()?>" method="POST">
+                        <form action="<?=current_url()?>" method="POST" onkeypress="return event.keyCode != 13;">
                             <?=isset($hata) ? $hata: NULL?>
                             <?=validation_errors()?>
                             <div class="form-group form-float">
@@ -80,14 +80,87 @@
                             </div>
                             <div class="form-group form-float">
                                 <div class="form-line">
-                                    <input type="text" value="<?=set_value("bakim_tutar")?>" name="bakim_tutar" class="form-control">
+                                    <input type="text" value="<?=set_value("bakim_tutar")?>" name="bakim_tutar" class="form-control fiyat">
                                     <label class="form-label">Bakım Ücreti</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="hidden" name="asansor_enlem" id="lat" value="">
                                 <input type="hidden" name="asansor_boylam" id="long" value="">
+                                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                                 <div id="map" class="col-md-12" style="height: 500px"></div>
+                                <style>
+                                #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #target {
+        width: 345px;
+      }
+                                </style>
                                 <script>
                                     var map;
                                     var marker;
@@ -103,9 +176,24 @@
                                             map.setCenter(marker.position);
                                             marker.setMap(map);
                                         });
+                                        var input = document.getElementById('pac-input');
+                                        var searchBox = new google.maps.places.SearchBox(input);
+                                        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                                        map.addListener('bounds_changed', function() {
+                                            searchBox.setBounds(map.getBounds());
+                                        });
+                                        searchBox.addListener('places_changed', function() {
+                                            var places = searchBox.getPlaces();
+                                            places.forEach(function(place) {
+                                                map.setCenter(place.geometry.location);
+                                                marker.setPosition(place.geometry.location);
+                                                marker.setMap(map);
+                                            });
+                                        });
+                                        
                                     }
                                 </script>
-                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPDu26gru2gaLxlJFaFfBaOsa3EHggnGY&callback=initMap" async defer></script>
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPDu26gru2gaLxlJFaFfBaOsa3EHggnGY&libraries=places&callback=initMap" async defer></script>
                             </div>
                             <button type="submit" class="btn btn-primary m-t-15 waves-effect">Asansörü Ekle</button>
                         </form>

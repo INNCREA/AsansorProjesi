@@ -149,6 +149,7 @@
 		document.getElementById("diger_tutar").disabled = false;
 		$('#toplam_tutar_div').removeClass("success");
 		$('#toplam_tutar_div').addClass("warning");
+		$('#diger_tutar').focus();
 	});
 
 	$('#toplam').on("change", function(e){
@@ -159,9 +160,24 @@
 	});
 
 
+	var maskCfg = {
+		'alias': 'decimal',
+		'groupSeparator': ".",
+		'autoGroup': true,
+		'digits': 2,
+		'radixPoint': ",",
+		'digitsOptional': false,
+		'allowMinus': true,
+		'suffix': ' ₺',
+		'autoUnmask': true,
+		'unmaskAsNumber': true,
+		'clearMaskOnLostFocus': true,
+		'rightAlign': false,
+		'showMaskOnHover': false,
+	};
 
 	$('.tarih').inputmask('dd.mm.yyyy', { placeholder: '__.__.____',showMaskOnHover: false });
-	$('.fiyat').inputmask({ mask: ["[999.999,99] ₺"], greedy: true ,  numericInput: true , showMaskOnHover: false, jitMasking: true});
+	$('.fiyat').inputmask('decimal', maskCfg);
 	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
 	$('.telefon').inputmask();
 

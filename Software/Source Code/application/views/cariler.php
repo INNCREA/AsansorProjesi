@@ -84,10 +84,13 @@ $this->load->view('include/sidebar');
 																	<td><?=$cari->cari_vergiDairesi?></td>
 																	<td><?=$cari->cari_vergiNo?></td>
 																	<td><b class="fiyat"><?=$cari->cari_bakiye?></b></td>
-																	<td><button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-cyan waves-effect tahsilat">
+																	<td><button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-amber waves-effect tahsilat">
 																		<i class="material-icons">credit_card</i>
-																		<span>Tahsilat</span>
-																	</button> <button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-green waves-effect duzenleCari">
+																		<span>Hızlı Tahsilat</span>
+																	</button> <a href="<?=base_url("cari-detay/".$cari->cari_id)?>" class="btn bg-cyan waves-effect">
+																		<i class="material-icons">search</i>
+																		<span>Detay</span>
+																	</a> <button type="button" data-id="<?=$cari->cari_id?>" data-url="<?=base_url('cari/cariCek/')?>" class="btn bg-green waves-effect duzenleCari">
 																		<i class="material-icons">create</i>
 																		<span>Düzenle</span>
 																	</button> <a href="<?=base_url("cari/sil/".$cari->cari_id)?>" class="btn bg-red waves-effect sil">

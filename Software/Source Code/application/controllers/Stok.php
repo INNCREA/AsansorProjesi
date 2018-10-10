@@ -50,7 +50,6 @@ class Stok extends CI_Controller {
 			$stok["stok_kdv"] = $this->input->post("stok_kdv");
 			$stok["stok_birim"] = $this->input->post("stok_birim");
 			$stok["stok_miktar"] = $this->input->post("stok_miktar");
-			$stok["stok_paraBirimi"] = "Türk Lirası";
 			$stokEkle = $this->stok_model->stokEkle($stok);
 			if($stokEkle)
 			{
@@ -122,7 +121,6 @@ class Stok extends CI_Controller {
 			$stok["stok_kdv"] = $this->input->post("stok_kdv");
 			$stok["stok_birim"] = $this->input->post("stok_birim");
 			$stok["stok_miktar"] = $this->input->post("stok_miktar");
-			$stok["stok_paraBirimi"] = "Türk Lirası";
 			$stokGuncelle = $this->stok_model->stokGuncelle($stok,$stok_id);
 			if($stokGuncelle)
 			{

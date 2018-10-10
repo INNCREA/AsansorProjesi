@@ -87,16 +87,18 @@ $this->load->view('include/sidebar');
                                                             <td>
                                                                 <!-- Bakım Durumu ayarlanıyor.  -->
 
-                                                                <?php if( strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi) > 59)
+                                                                <?php
+                                                                if( (strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi))/86400 > 59)
                                                                 {
                                                                     echo "<span class='badge bg-red font-12'>Yapılmadı</span>";
                                                                 } 
-                                                                else if($asansor->bakim_durum == "Yapıldı"){
+                                                                else if($asansor->bakim_durum == "Yapıldı" && ((strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi))/86400 < 30))
+                                                                {
 
-                                                                    echo "<span class='badge bg-green font-12'>".$asansor->bakim_durum."</span>";
+                                                                    echo "<span class='badge bg-green font-12'>Yapıldı</span>";
 
                                                                 }
-                                                                else if($asansor->bakim_durum == "" && strtotime(date("d.m.Y")) - strtotime($asansor->asansor_bakimTarihi) < 59)
+                                                                else 
                                                                 {
                                                                     echo "<span class='badge bg-cyan font-12'>Bakım Bekleniyor</span>";
                                                                 }

@@ -62,7 +62,7 @@ $this->load->view('include/sidebar');
 														?>
 														<tr>
 															<td><?=$bakim->bakim_id?></td>
-															<td><?=$bakim->asansor_kodu?></td>
+															<td><?=$bakim->asansor_adi?></td>
 															<td><?=$bakim->bakim_icerik?></td>
 															<td><?=($bakim->bakim_durum == "") ? "<span class='badge bg-cyan font-12'>Bakım Bekleniyor</span>" : (($bakim->bakim_durum == "Yapıldı") ? "<span class='badge bg-green font-12'>".$bakim->bakim_durum."</span>" : "<span class='badge bg-red font-12'>".$bakim->bakim_durum."</span>") ?>
 														</td>

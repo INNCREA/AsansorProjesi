@@ -12,6 +12,9 @@ class Pdf
 		$options = new Options();
 		$options->set('defaultFont', 'dejavu sans');
 		$options->set('isHtml5ParserEnabled', 'true');
+		$options->set('isPhpEnabled', 'true');
+		$options->set('isRemoteEnabled', 'true');
+		$options->set('debugPng', 'true');
 		$dompdf = new Dompdf($options);
 		$dompdf->loadHtml($html);
 		$dompdf->setPaper('a5', 'Landscape');

@@ -52,7 +52,6 @@ $this->load->view('include/sidebar');
                                                     <th>Stok Adı</th>
                                                     <th>Alış Fiyatı</th>
                                                     <th>Satış Fiyatı</th>
-                                                    <th>Para Birimi</th>
                                                     <th>KDV Değeri</th>
                                                     <th>Birim</th>
                                                     <th>Miktar</th>
@@ -67,9 +66,8 @@ $this->load->view('include/sidebar');
                                                        <tr>
                                                         <td><?=$stok->stok_kodu?></td>
                                                         <td><?=$stok->stok_adi?></td>
-                                                        <td><?=$stok->alis_fiyat?></td>
-                                                        <td><?=$stok->satis_fiyat?></td>
-                                                        <td><?=$stok->stok_paraBirimi?></td>
+                                                        <td class="fiyat"><?=$stok->alis_fiyat?></td>
+                                                        <td class="fiyat"><?=$stok->satis_fiyat?></td>
                                                         <td><?=$stok->stok_kdv?></td>
                                                         <td><?=$stok->stok_birim?></td>
                                                         <td><?=$stok->stok_miktar?></td>
