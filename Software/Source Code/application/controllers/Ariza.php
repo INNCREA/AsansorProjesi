@@ -40,7 +40,7 @@ class Ariza extends CI_Controller {
 		$getStock = $this->ariza_model->getStock();
 		if($getStock){
 			foreach ($getStock as $item) {
-				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->satis_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
+				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->satis_fiyat, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
 			}
 		}
 		$viewData['stok'] = $items;
@@ -156,7 +156,7 @@ class Ariza extends CI_Controller {
 		$items = [];
 		if($getStock){
 			foreach ($getStock as $item) {
-				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->stok_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
+				$items[] = ['id' => $item->stok_id, 'code' => $item->stok_kodu, 'name' => $item->stok_adi, 'price' => $item->satis_fiyat, 'unit' => $item->stok_birim, 'amount' => $item->stok_miktar];
 			}
 		}
 		echo json_encode($items);
@@ -171,7 +171,7 @@ class Ariza extends CI_Controller {
 			if($getItem){
 				$items = [];
 				foreach ($getItem as $item) {
-					$items[] = ['id' => $item->degisim_id, 'name' => $item->stok_adi, 'price' => $item->stok_fiyat, 'munit' => $item->stok_paraBirimi, 'unit' => $item->stok_birim, 'amount' => $item->degisim_miktar];
+					$items[] = ['id' => $item->degisim_id, 'name' => $item->stok_adi, 'price' => $item->satis_fiyat, 'unit' => $item->stok_birim, 'amount' => $item->degisim_miktar];
 				}
 				$this->setResponse(200, true, json_encode($items));
 			}else{
@@ -199,7 +199,7 @@ class Ariza extends CI_Controller {
 					"degisim_kodu" => $fid,
 					"degisim_stok" => $id,
 					"degisim_miktar" => $amount,
-					"degisim_tutar" => $getItem->stok_fiyat * $amount
+					"degisim_tutar" => $getItem->satis_fiyat * $amount
 				];
 				$addItem = $this->ariza_model->addStock($array);
 				if($addItem){

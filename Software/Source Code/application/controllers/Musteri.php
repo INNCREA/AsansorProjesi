@@ -51,7 +51,8 @@ class Musteri extends CI_Controller {
 			$musteri["musteri_kAdi"] = $this->input->post("musteri_kAdi");
 			$musteri["musteri_sifre"] = password_hash($this->input->post("musteri_sifre"), PASSWORD_DEFAULT);
 			$musteriEkle = $this->musteri_model->musteriEkle($musteri);
-			if($musteriEkle){
+			$cariEkle = $this->cariOlustur($musteri);
+			if($musteriEkle && $cariEkle){
 				$this->session->set_flashdata('islem', 'ekle');
 				redirect("musteri");
 			}else{
@@ -59,6 +60,29 @@ class Musteri extends CI_Controller {
 			}
 		}
 		$this->load->view("musteri_ekle", $viewData);
+	}
+
+	function cariOlustur($musteri)
+	{
+		$this->load->model('musteri_model');
+		$result = $this->musteri_model->musteriIdCek();
+		$musteri_id =  $result['0']->musteri_id;
+
+		$this->load->model('cari_model');
+		$cari["cari_isim"] = $musteri["musteri_adSoyad"];
+		$cari["cari_adres"] = $musteri["musteri_adres"];
+		$cari["cari_telefon"] = $musteri["musteri_tel"];
+		$cari["cari_mail"] = $musteri["musteri_mail"];
+		$cari["cari_yetkili"] = $musteri["musteri_adSoyad"];
+		$cari["cari_musteri"] = $musteri_id;
+
+		$cariEkle = $this->cari_model->cariEkle($cari);
+
+		if($cariEkle)
+		{
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 

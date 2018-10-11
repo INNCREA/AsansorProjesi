@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cari extends CI_Controller {
 
 	public function index(){
+
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
@@ -13,10 +14,12 @@ class Cari extends CI_Controller {
 		$data = "*";
 		$this->load->model("cari_model");
 		$result = $this->cari_model->cariListesi($data);
-		if($result){
+		if($result)
+		{
 			$viewData["cariler"] = $result;
 		}
-		else{
+		else
+		{
 			$viewData["cariler"] ="";
 		}
 		$this->load->view("cariler", $viewData);
@@ -50,6 +53,7 @@ class Cari extends CI_Controller {
 			$cari["cari_yetkili"] = $this->input->post("cari_yetkili");
 			$cari["cari_vergiDairesi"] = $this->input->post("cari_vergiDairesi");
 			$cari["cari_vergiNo"] = $this->input->post("cari_vergiNo");
+			$cari["cari_musteri"] = 0;
 			$cariEkle = $this->cari_model->cariEkle($cari);
 			if($cariEkle){
 				$this->session->set_flashdata('islem', 'ekle');
@@ -130,75 +134,88 @@ class Cari extends CI_Controller {
 	{
 		if($this->input->post("tahsilat_radio") == "on")
 		{
-		if($this->input->post("tahsilat_tutar") != null /*&& $this->input->post("tahsilat_tutar") != 0 */)
-		{
-			$cari_id = $this->input->post("tahsilat_id");
-			$tahsilat_tutar = $this->input->post("tahsilat_tutar");
-
-			/* Gelen string ifadenin decimal değere dönüştürülme işlemi */
-
-			$tahsilat_tutar = trim($tahsilat_tutar,'₺');
-			$tahsilat_tutar = trim($tahsilat_tutar,' ');
-			$tahsilat_tutar = str_replace(".","",$tahsilat_tutar);
-			$tahsilat_tutar = str_replace(",",".",$tahsilat_tutar);
-			$tahsilat_tutar = floatval($tahsilat_tutar);
-
-			/* Dönüştürme işlemi bitişi */
-
-			$this->load->model("cari_model");
-			$cari = $this->cari_model->cariCek($cari_id);
-
-			/* Tahsilat tutarının ana bakiyeden düşülmesi */
-
-			$kalan_bakiye = ($cari['0']->cari_bakiye) - $tahsilat_tutar;
-			$veri["cari_bakiye"] = $kalan_bakiye;
-			$tahsilat = $this->cari_model->tahsilat($veri,$cari_id);
-
-			/* Tahsilat tutarının ana bakiyeden düşülmesi sonu */
-
-			if($tahsilat)
+			if($this->input->post("tahsilat_tutar") != null /*&& $this->input->post("tahsilat_tutar") != 0 */)
 			{
-				$this->session->set_flashdata('islem', 'tahsilat');
+				$cari_id = $this->input->post("tahsilat_id");
+				$tahsilat_tutar = $this->input->post("tahsilat_tutar");
 
-				/* Tahsilat makbuzu işlemleri burada gerçekletirilecek. */
+				/* Gelen string ifadenin decimal değere dönüştürülme işlemi */
 
-				$kullanici = $this->session->userdata('isim');
-				$viewData = array(
-					"cari" => $cari['0']->cari_isim,
-					"tutar" => $tahsilat_tutar,
-					"tahsilat_turu" => "Nakit",
-					"makbuz_no" => "001",
-					"kullanici" => $kullanici
-				);
+				$tahsilat_tutar = trim($tahsilat_tutar,'₺');
+				$tahsilat_tutar = trim($tahsilat_tutar,' ');
+				$tahsilat_tutar = str_replace(".","",$tahsilat_tutar);
+				$tahsilat_tutar = str_replace(",",".",$tahsilat_tutar);
+				$tahsilat_tutar = floatval($tahsilat_tutar);
 
-				$this->load->view('test',$viewData);
-				$html = $this->output->get_output();
-				$this->load->library('pdf');
-				$filename = "Document_name";
-				$this->pdf->create($html, $filename);
+				/* Dönüştürme işlemi bitişi */
 
+				$this->load->model("cari_model");
+				$cari = $this->cari_model->cariCek($cari_id);
+
+				/* Tahsilat tutarının ana bakiyeden düşülmesi */
+
+				$kalan_bakiye = ($cari['0']->cari_bakiye) - $tahsilat_tutar;
+				$veri["cari_bakiye"] = $kalan_bakiye;
+				$tahsilat = $this->cari_model->tahsilat($veri,$cari_id);
+
+				/* Tahsilat tutarının ana bakiyeden düşülmesi sonu */
+
+				if($tahsilat)
+				{
+					$this->session->set_flashdata('islem', 'tahsilat');
+
+					/* Tahsilat makbuzu işlemleri burada gerçekletirilecek. */
+
+					$kullanici = $this->session->userdata('isim');
+					$viewData = array(
+						"cari" => $cari['0']->cari_isim,
+						"tutar" => $tahsilat_tutar,
+						"tahsilat_turu" => "Nakit",
+						"makbuz_no" => "001",
+						"kullanici" => $kullanici
+					);
+
+					$this->load->view('test',$viewData);
+					$html = $this->output->get_output();
+					$this->load->library('pdf');
+					$filename = "Document_name";
+					$this->pdf->create($html, $filename);
+
+
+				}
 
 			}
-
+			else
+			{
+				$this->session->set_flashdata('islem', 'bos');
+			}
 		}
 		else
 		{
 			$this->session->set_flashdata('islem', 'bos');
 		}
-	}
-
-	redirect("cari");
-	
-}
-
-
-public function detay($id = false)
-{
-	if(!$id || !is_numeric($id)){
 		redirect("cari");
+
 	}
 
-	echo "selam";
-}
+
+	public function detay($cid = false)
+	{
+		if(!$cid || !is_numeric($cid)){
+			redirect("cari");
+		}
+		$this->load->model('cari_model');
+		$cari = $this->cari_model->cariCek($cid);
+
+		$id = $this->session->userdata("id");
+		$rol = $this->session->userdata("rol");
+		$viewData = array(
+			"sayfaAdi" => "Cari İşlemleri",
+			"id" => $id,
+			"cari" => $cari['0']
+		);
+
+		$this->load->view("cari", $viewData);
+	}
 
 }

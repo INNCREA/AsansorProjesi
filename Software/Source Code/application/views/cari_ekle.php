@@ -23,52 +23,51 @@ $this->load->view('include/sidebar');
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_isim")?>" name="cari_isim" class="form-control">
-									<label class="form-label">Firma İsmi</label>
+									<label class="form-label">Hesap İsmi</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_mail")?>" name="cari_mail" class="form-control">
-									<label class="form-label">Firma Mail</label>
+									<label class="form-label">Mail</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_telefon")?>" name="cari_telefon" class="form-control">
-									<label class="form-label">Firma Telefon</label>
+									<label class="form-label">Telefon</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_adres")?>" name="cari_adres" class="form-control">
-									<label class="form-label">Firma Adres</label>
+									<label class="form-label">Adres</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_yetkili")?>" name="cari_yetkili" class="form-control">
-									<label class="form-label">Firma Yetkili Adı</label>
+									<label class="form-label">Hesap Yetkilisi</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_vergiDairesi")?>" name="cari_vergiDairesi" class="form-control">
-									<label class="form-label">Firma Vergi Dairesi</label>
+									<label class="form-label">Vergi Dairesi</label>
 								</div>
 							</div>
 							<div class="form-group form-float">
 								<div class="form-line">
 									<input type="text" value="<?=set_value("cari_vergiNo")?>" name="cari_vergiNo" class="form-control">
-									<label class="form-label">Firma Vergi Numarası</label>
+									<label class="form-label">Vergi Numarası</label>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary m-t-15 waves-effect">Firma Ekle</button>
+							<button type="submit" class="btn btn-primary m-t-15 waves-effect">Hesap Ekle</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- #END# Exportable Table -->
 	</div>
 </section>
 <?php $this->load->view('include/footer'); ?>

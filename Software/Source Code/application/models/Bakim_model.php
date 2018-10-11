@@ -35,6 +35,25 @@ class Bakim_model extends CI_Model
 		}
 		return FALSE;
 	}
+
+
+	/* Asansörleri listeler */
+
+	public function asansorleriCek()
+	{
+		$result = $this
+		->db
+		->get('asansor')
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
+
 	/* Bakım işlemini tamamlayıp tarihi günceller */
 
 	public 	function bakimGuncelle($data,$id)

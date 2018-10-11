@@ -7,6 +7,7 @@ class Panel extends CI_Controller {
 	{
 		parent::__construct();
 		$this->Security();
+		//$this->bakimKontrol();
 	}
 
 	function Security()
@@ -15,6 +16,20 @@ class Panel extends CI_Controller {
 		if(!isset($control) || $control != true)
 		{
 			redirect('giris');
+		}
+	}
+
+	/* Her ay tüm asansörlerin bakım ücretlerinin güncellenmesi */ 
+	function bakimKontrol()
+	{
+		if(date("d") == 11)
+		{
+			$this->load->model("bakim_model");
+			$asansorler = $this->bakim_model->asansorleriCek();
+			foreach($asansorler as $asansor)
+			{
+				$this->bakimGuncelle($asansor->asansor_yetkili,$asansor->asansor_bakimTutar);
+			}
 		}
 	}
 

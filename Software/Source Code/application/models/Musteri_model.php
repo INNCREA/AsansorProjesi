@@ -79,5 +79,23 @@ class Musteri_model extends CI_Model
 		}
 		return FALSE;
 	}
+
+
+	public function musteriIdCek()
+	{
+		$result = $this
+		->db
+		->select("musteri_id")
+		->order_by("musteri_id", "desc")
+		->limit(1)
+		->get("musteri")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
 }
 ?>
