@@ -165,5 +165,17 @@
 		<div style="float: right; margin-right: 50px; font-size: 12px;"><span>Teslim Alan</span><br><span> <?php echo $kullanici;?></span></div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	/*window.onload = function () {
+		window.print();
+		setTimeout(function(){window.history.back(-1)}, 3);
+	}*/
+
+	try{
+		this.print();
+		window.history.back();
+	}
+</script>
 </body>
 </html>

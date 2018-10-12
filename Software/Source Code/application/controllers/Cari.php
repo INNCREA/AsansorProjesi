@@ -136,6 +136,7 @@ class Cari extends CI_Controller {
 		{
 			if($this->input->post("tahsilat_tutar") != null /*&& $this->input->post("tahsilat_tutar") != 0 */)
 			{
+				$kullanici = $this->session->userdata('isim');
 				$cari_id = $this->input->post("tahsilat_id");
 				$tahsilat_tutar = $this->input->post("tahsilat_tutar");
 
@@ -162,26 +163,41 @@ class Cari extends CI_Controller {
 
 				if($tahsilat)
 				{
+					/** Yapılan tahsilat işleminin veritabanına kaydedilmesi */
+					$tarih =  date("d.m.Y");
+					$tahsilat_kayit["tahsilat_tarih"] = $tarih;
+					$tahsilat_kayit["tahsilat_turu"] = "Nakit";
+					$tahsilat_kayit["tahsilat_tutar"] = $tahsilat_tutar;
+					$tahsilat_kayit["tahsilat_cari"] = $cari_id;
+					$tahsilat_kayit["tahsilat_tahsilEden"] = $kullanici;
+
+					$this->load->model('cari_model');
+					$tahsialtEkle = $this->cari_model->tahsilatEkle($tahsilat_kayit);
+
+
+
+
 					$this->session->set_flashdata('islem', 'tahsilat');
 
 					/* Tahsilat makbuzu işlemleri burada gerçekletirilecek. */
 
-					$kullanici = $this->session->userdata('isim');
+
+					$this->load->model('cari_model');
+					$makbuzNo = $this->cari_model->tahsilatId();
+					$makbuz_no = $makbuzNo["0"]->tahsilat_id + 1;
 					$viewData = array(
 						"cari" => $cari['0']->cari_isim,
 						"tutar" => $tahsilat_tutar,
 						"tahsilat_turu" => "Nakit",
-						"makbuz_no" => "001",
+						"makbuz_no" => $makbuz_no,
 						"kullanici" => $kullanici
 					);
 
-					$this->load->view('test',$viewData);
+					$this->load->view('tahsilat',$viewData);
 					$html = $this->output->get_output();
 					$this->load->library('pdf');
-					$filename = "Document_name";
+					$filename = date("d.m.Y")."_".$makbuz_no;
 					$this->pdf->create($html, $filename);
-
-
 				}
 
 			}

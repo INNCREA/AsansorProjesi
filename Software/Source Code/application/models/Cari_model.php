@@ -30,6 +30,36 @@ class Cari_model extends CI_Model
 		return FALSE;
 	}
 
+	public function tahsilatEkle($data){
+
+		$result = $this
+		->db
+		->insert("tahsilat" , $data);
+
+		if($result)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function tahsilatId(){
+
+		$result = $this
+		->db
+		->select("tahsilat_id")
+		->order_by("tahsilat_id", "desc")
+		->limit(1)
+		->get("tahsilat")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
 
 	public function cariSil($id)
 	{

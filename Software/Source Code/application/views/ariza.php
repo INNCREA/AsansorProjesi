@@ -186,8 +186,8 @@ $this->load->view('include/sidebar');
 															<tr v-for="(y, index) in stock">
 																<td>{{ y.name }}</td>
 																<td>{{ y.amount }}</td>
-																<td>{{ y.price + " " + y.munit }} / {{ y.unit }}</td>
-																<td>{{ y.amount * y.price + " " + y.munit }}</td>
+																<td>{{ y.price + " TL"}} / {{ y.unit }}</td>
+																<td>{{ y.amount * y.price + " TL"}}</td>
 																<td><button class="btn bg-red" type="button" @click="deleteStock(index, y.id)">Kaldır</button></td>
 															</tr>
 														</tbody>
@@ -221,7 +221,7 @@ $this->load->view('include/sidebar');
 																	data: {id: this.items[this.selected_item].id, amount: this.selected_amount},
 																	success: function(res) {
 																		if(res.code==200){
-																			app.stock.push({id: res.data, name: app.items[app.selected_item].name, amount: app.selected_amount, price : app.items[app.selected_item].price, munit: app.items[app.selected_item].munit, unit: app.items[app.selected_item].unit});
+																			app.stock.push({id: res.data, name: app.items[app.selected_item].name, amount: app.selected_amount, price : app.items[app.selected_item].price, unit: app.items[app.selected_item].unit});
 																		}
 																	},
 																	error: function(res) {
