@@ -5,9 +5,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-17 01:27:56
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-29 19:33:11
+ * @Last Modified time: 2018-10-15 04:07:57
  */
 class Asansor extends CI_Controller {
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->Security();
+	}
+
+	function Security()
+	{
+		$control=$this->session->userdata('control');
+		if(!isset($control) || $control != true)
+		{
+			redirect('giris');
+		}
+	}
+	
 	/*
 	Güvenlikleri unutma!!!!
 	 */
@@ -33,17 +49,22 @@ class Asansor extends CI_Controller {
 		);
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('asansor_kod', 'Asansör Kodu', 'trim|required');
+		$this->form_validation->set_rules('asansor_adi', 'Asansör Adı', 'trim|required');
 		$this->form_validation->set_rules('asansor_enlem', 'Asansör Enlem', 'trim|required');
 		$this->form_validation->set_rules('asansor_boylam', 'Asansör Boylam', 'trim|required');
-		$this->form_validation->set_rules('asansor_yetkili', 'Asansör Yetkili', 'trim|required');
+		//$this->form_validation->set_rules('asansor_yetkili', 'Asansör Yetkili', 'trim|required');
 		$this->form_validation->set_rules('asansor_adres', 'Asansör Adres', 'trim|required');
 		$this->form_validation->set_rules('asansor_adresTarif', 'Asansör Adres Tarif', 'trim|required');
 		$this->form_validation->set_rules('asansor_tarih', 'Asansör Yapım Tarihi', 'trim|required');
-		$this->form_validation->set_rules('musteri_mail', 'Müşteri Mail', 'trim|required|valid_email|is_unique[musteri.musteri_mail]');
-		$this->form_validation->set_rules('musteri_tel', 'Müşteri Telefon', 'trim|required');
-		$this->form_validation->set_rules('musteri_kAdi', 'Müşteri Kullanıcı Adı', 'trim|required');
-		$this->form_validation->set_rules('musteri_sifre', 'Müşteri Şifre', 'trim|required');
-		$this->form_validation->set_rules('sifre_tekrar', 'Şifre Tekrar', 'trim|required|matches[musteri_sifre]');
+		if($this->input->post("musteri_turu") == 2){
+			$this->form_validation->set_rules('musteri_mail', 'Müşteri Mail', 'trim|required|valid_email|is_unique[musteri.musteri_mail]');
+			$this->form_validation->set_rules('musteri_tel', 'Müşteri Telefon', 'trim|required');
+			$this->form_validation->set_rules('musteri_kAdi', 'Müşteri Kullanıcı Adı', 'trim|required');
+			$this->form_validation->set_rules('musteri_sifre', 'Müşteri Şifre', 'trim|required');
+			$this->form_validation->set_rules('sifre_tekrar', 'Şifre Tekrar', 'trim|required|matches[musteri_sifre]');
+		}else{
+			$this->form_validation->set_rules('exis_customer', 'Eski Müşteri', 'trim|required');
+		}
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 		$this->form_validation->set_message('required', '%s alanı boş bırakılamaz');
 		$this->form_validation->set_message('valid_email', 'Lütfen geçerli bir e-posta giriniz.');
@@ -53,24 +74,43 @@ class Asansor extends CI_Controller {
 			
 			$asansor["asansor_bakimTarihi"] = $this->input->post("asansor_tarih");
 			$asansor["asansor_kodu"] = $this->input->post("asansor_kod");
+			$asansor["asansor_adi"] = $this->input->post("asansor_adi");
 			$asansor["asansor_latitude"] = $this->input->post("asansor_enlem");
 			$asansor["asansor_longitude"] = $this->input->post("asansor_boylam");
-			$asansor["asansor_yetkili"] = $this->input->post("asansor_yetkili");
+			//$asansor["asansor_yetkili"] = $this->input->post("asansor_yetkili");
 			$asansor["asansor_bakimTutar"] = $this->input->post("bakim_tutar");
 			$asansor["asansor_adres"] = $this->input->post("asansor_adres");
 			$asansor["asansor_adresTarif"] = $this->input->post("asansor_adresTarif");
 			$asansor["asansor_yapimTarihi"] = $this->input->post("asansor_tarih");
-			$customer["musteri_adSoyad"] = $this->input->post("musteri_adSoyad");
-			$customer["musteri_mail"] = $this->input->post("musteri_mail");
-			$customer["musteri_tel"] = $this->input->post("musteri_tel");
-			$customer["musteri_kAdi"] = $this->input->post("musteri_kAdi");
-			$customer["musteri_sifre"] = password_hash($this->input->post("musteri_sifre"), PASSWORD_DEFAULT);
+			$addCustomer = '';
+			if($this->input->post("musteri_turu") == 2){
+				$customer["musteri_adSoyad"] = $this->input->post("musteri_adSoyad");
+				$customer["musteri_mail"] = $this->input->post("musteri_mail");
+				$customer["musteri_tel"] = $this->input->post("musteri_tel");
+				$customer["musteri_kAdi"] = $this->input->post("musteri_kAdi");
+				$customer["musteri_sifre"] = password_hash($this->input->post("musteri_sifre"), PASSWORD_DEFAULT);
+				$cari["cari_isim"] = $customer["musteri_adSoyad"];
+				$cari["cari_mail"] = $customer["musteri_mail"];
+				$cari["cari_telefon"] = $customer["musteri_tel"];
+				$cari["cari_adres"] = '-';
+				$cari["cari_yetkili"] = $customer["musteri_adSoyad"];
+				$cari["cari_vergiDairesi"] = '-';
+				$cari["cari_vergiNo"] = '-';
+				$addCustomer = $this->asansor_model->addCustomer($customer);
+				$this->asansor_model->cariEkle($cari);
+				$asansor["asansor_yetkili"] = $addCustomer;
+			}else{
+				$addCustomer = true;
+				$asansor["asansor_yetkili"] = $this->input->post("exis_customer");
+			}
 			$addLift = $this->asansor_model->addLift($asansor);
-			$addCustomer = $this->asansor_model->addCustomer($customer);
+			
 			if($addLift && $addCustomer){
-				$this->load->library("eposta");
-				$customer["sifre"] = $this->input->post("musteri_sifre");
-				$this->eposta->sendUserMail($customer);
+				if($this->input->post("musteri_turu") == 2){
+					$this->load->library("eposta");
+					$customer["sifre"] = $this->input->post("musteri_sifre");
+					$this->eposta->sendUserMail($customer);
+				}
 				$this->session->set_flashdata('islem', 'ekle');
 				redirect("asansorler");
 			}else{

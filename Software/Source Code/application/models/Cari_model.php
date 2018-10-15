@@ -123,5 +123,21 @@ class Cari_model extends CI_Model
 		}
 		return FALSE;
 	}
+
+	public function musteriBakiyeCek($id)
+	{
+		$result = $this
+		->db
+		->select("cari_bakiye")
+		->where("cari_musteri",$id)
+		->get("cari")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
 }
 ?>

@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-23 14:13:40
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-31 23:08:56
+ * @Last Modified time: 2018-10-15 03:33:07
  */
 class Ariza_model extends CI_Model {
 
@@ -114,11 +114,24 @@ class Ariza_model extends CI_Model {
 	public function deleteStock($id)
 	{
 		$this->db->where("degisim_id", $id);
-		$r = $this->db->delete('degisim');
-		if($r){
-			return TRUE;
+		$this->db->limit(1);
+		$getStock = $this->db->get("degisim")->row();
+		if(!$getStock){
+			return FALSE;
 		}
-		return FALSE;
+		$this->db->trans_start();
+		$this->db->set("stok_miktar", "stok_miktar + $getStock->degisim_miktar", FALSE);
+		$this->db->where("stok_id", $getStock->degisim_stok);
+		$this->db->update("stok");
+		$this->db->where("degisim_id", $id);
+		$this->db->delete('degisim');
+		if ($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+        	return FALSE;
+		}else{
+			 $this->db->trans_commit();
+			 return TRUE;
+		}
 	}
 	public function listErrorCodes()
 	{

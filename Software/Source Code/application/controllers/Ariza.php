@@ -3,6 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ariza extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->Security();
+	}
+
+	function Security()
+	{
+		$control=$this->session->userdata('control');
+		if(!isset($control) || $control != true)
+		{
+			redirect('giris');
+		}
+	}
+
+
 	public function index()
 	{
 		$id = $this->session->userdata("id");
@@ -256,8 +272,8 @@ class Ariza extends CI_Controller {
 	public function setResponse($code, $status, $data)
 	{
 		echo $this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode(["status" => $status, "code" => $code, "data" => $data]))->_display();
-        exit;
+		->set_content_type('application/json')
+		->set_output(json_encode(["status" => $status, "code" => $code, "data" => $data]))->_display();
+		exit;
 	}
 }

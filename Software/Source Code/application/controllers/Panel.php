@@ -21,8 +21,8 @@ class Panel extends CI_Controller {
 
 	/* Her ay tüm asansörlerin bakım ücretlerinin güncellenmesi */ 
 	function bakimKontrol()
-	{
-		if(date("d") == 11)
+	{/*
+		if(date("d") == 12)
 		{
 			$this->load->model("bakim_model");
 			$asansorler = $this->bakim_model->asansorleriCek();
@@ -31,15 +31,37 @@ class Panel extends CI_Controller {
 				$this->bakimGuncelle($asansor->asansor_yetkili,$asansor->asansor_bakimTutar);
 			}
 		}
+		*/
 	}
+
+	function bakimGuncelle($id,$tutar)
+	{	
+
+		/* PHP veya MySQL de zamanlanmış görevler kullanılarak çözülecek. */ 
+
+
+		/* Müşterinin cari hesapta bulunan bakiyesi getiriliyor.
+		$this->load->model("cari_model");
+		$bakiye = $this->cari_model->musteriBakiyeCek($id);
+		var_dump($bakiye);
+		$eskiBakiye = $bakiye['0']->cari_bakiye;
+		$yeniBakiye = ($eskiBakiye) + ($tutar);
+		var_dump($yeniBakiye);
+
+
+		/* Müşterinin cari hesaptaki bakiyesi aylık bakım ücreti eklenerek güncelleniyor. */
+		//$this->load->model("bakim_model");
+		//$periyodikBakim = $this->bakim_model->periyodikBakim();*/
+	}
+
 
 	public function index()
 	{
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
-        $this->load->model("panel_model");
-        $gunlukAriza=$this->panel_model->gunlukAriza();
-        
+		$this->load->model("panel_model");
+		$gunlukAriza=$this->panel_model->gunlukAriza();
+
 		$viewData = array(
 			"sayfaAdi" => "Ana Sayfa",
 			"id" => $id,

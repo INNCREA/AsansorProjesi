@@ -84,5 +84,19 @@ class Bakim_model extends CI_Model
 		return FALSE;
 	}
 
+
+	public function periyodikBakim($id,$tutar)
+	{
+		$result = $this
+		->db
+		->where("asansor_id",$id)
+		->update('asansor', $data);
+
+		if($result)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
 }
 ?>

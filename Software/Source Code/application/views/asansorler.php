@@ -70,11 +70,11 @@ $this->load->view('include/sidebar');
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                     <?php
-                                                     if($asansorler){
-                                                      foreach ($asansorler as $asansor) {
-                                                         ?>
-                                                         <tr>
+                                                       <?php
+                                                       if($asansorler){
+                                                          foreach ($asansorler as $asansor) {
+                                                           ?>
+                                                           <tr>
                                                             <td><?=$asansor->asansor_kodu?></td>
                                                             <td><?=$asansor->asansor_adi?></td>
                                                             <td><?=$asansor->asansor_adres?></td>
@@ -108,9 +108,6 @@ $this->load->view('include/sidebar');
                                                             <td><a href="<?=base_url("ariza-olustur/".$asansor->asansor_id)?>" class="btn bg-amber waves-effect">
                                                                 <i class="material-icons">warning</i>
                                                                 <span>Arıza</span>
-                                                            </a> <a href="<?=base_url("bakim/bakimYap/".$asansor->asansor_id)?>" class="btn bg-green waves-effect">
-                                                                <i class="material-icons">build</i>
-                                                                <span>Bakım</span>
                                                             </a> <a href="<?=base_url("asansor/".$asansor->asansor_id)?>" class="btn bg-cyan waves-effect">
                                                                 <i class="material-icons">search</i>
                                                                 <span>Detay</span>

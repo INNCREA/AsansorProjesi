@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-21 23:46:33
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   Asus
- * @Last Modified time: 2018-07-23 20:54:20
+ * @Last Modified time: 2018-10-14 21:30:30
  */
 class Rapor_model extends CI_Model {
 
@@ -17,6 +17,8 @@ class Rapor_model extends CI_Model {
 			return $this->listCustomers("*");
 		}else if($report == "ariza"){
 			return $this->listFaults();
+		}else{
+			return $this->listMaints();
 		}
 	}
 	/*
@@ -51,6 +53,16 @@ class Rapor_model extends CI_Model {
 		$this->db->join("kullanici", "kullanici.kullanici_id = ariza.ariza_onaran");
 		$this->db->order_by("ariza_id", "desc");
 		$r = $this->db->get("ariza")->result();
+		if($r){
+			return $r;
+		}
+		return FALSE;
+	}
+	public function listMaints()
+	{
+		$this->db->join("asansor", "asansor.asansor_id = bakim.bakim_asansor", "left");
+		$this->db->join("kullanici", "kullanici.kullanici_id = bakim.bakim_yapan", "left");
+		$r = $this->db->get("bakim")->result();
 		if($r){
 			return $r;
 		}

@@ -3,6 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Hata extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->Security();
+	}
+
+	function Security()
+	{
+		$control=$this->session->userdata('control');
+		if(!isset($control) || $control != true)
+		{
+			redirect('giris');
+		}
+	}
+
 	public function index()
 	{
 		$asansor_id = $this->input->get_post("asansor_id");

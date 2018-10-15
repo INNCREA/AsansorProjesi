@@ -8,10 +8,6 @@
             return '$' + value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, ' ').replace('.', ',');
         }
     });
-
-    initRealTimeChart();
-    initDonutChart();
-    initSparkline();
 });
 
 var realtime = 'on';

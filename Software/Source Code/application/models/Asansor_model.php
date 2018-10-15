@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-17 05:38:16
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-31 22:32:04
+ * @Last Modified time: 2018-10-15 04:05:01
  */
 class Asansor_model extends CI_Model {
 	/*
@@ -16,6 +16,7 @@ class Asansor_model extends CI_Model {
 		if($rank == 3){
 			$this->db->where("asansor_yetkili", $id);
 		}
+		$this->db->group_by("asansor_id");
 		$this->db->join("musteri", "musteri.musteri_id = asansor.asansor_yetkili");
 		$this->db->join("bakim", "bakim.bakim_asansor = asansor.asansor_id","left");
 		$r = $this->db->get("asansor")->result();
@@ -114,6 +115,14 @@ class Asansor_model extends CI_Model {
 	/** Musteri ekler */
 	public function addCustomer($array){
 		$result = $this->db->insert("musteri" , $array);
+		if($result){
+			return $this->db->insert_id();
+		}
+		return FALSE;
+	}
+	public function cariEkle($data)
+	{
+		$result = $this->db->insert("cari" , $data);
 		if($result){
 			return TRUE;
 		}
