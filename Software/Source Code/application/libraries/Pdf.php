@@ -20,5 +20,8 @@ class Pdf
 		$dompdf->setPaper('a5', 'Landscape');
 		$dompdf->render();
 		$dompdf->stream($filename.'.pdf', array("Attachment"=>0));
+		ob_end_clean();
+		unset($html);
+		unset($dompdf);
 	}
 }

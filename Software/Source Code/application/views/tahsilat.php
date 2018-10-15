@@ -14,12 +14,15 @@
 		position: fixed;
 		border: solid 2px black;
 		margin: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	#baslik
 	{
 		position: relative;
 		height: 100px;
+		width:100%;
 	}
 
 	#icerik
@@ -29,7 +32,7 @@
 		margin: 2px;
 		margin-top: 5px;
 		height: 245px;
-		text-align: center;
+		padding: 5px;
 	}
 
 	#altbilgi
@@ -39,18 +42,20 @@
 		margin: 2px;
 		margin-top: 5px;
 		margin-bottom: 5px;
-		height: 100px;
+		height: 85px;
+		padding: 5px;
 	}
 
 	#firma
 	{
+		overflow: hidden;
 		position: absolute;
 		font-size: 10px;
 		border: solid 1px black;
 		margin: 2px;
+		padding: 1px;
 		width: 400px;
 		height: 100px;
-		overflow: hidden;
 	}
 	#resim
 	{
@@ -88,12 +93,23 @@
 
 	#cari
 	{
-
+		width: 100%;
+		margin-left: 250px;
+		font-weight: bold;
 	}
 
-	#tablo
+	#tablo,th,td
 	{
-		border: 2px solid black;
+		border-collapse: collapse;
+		margin-top: 10px;
+		border: 1px solid black;
+		width:100%
+	}
+
+	th,td
+	{
+		font-size: 14px;
+		text-align: center;
 	}
 </style>
 </head>
@@ -122,7 +138,7 @@
 
 			<span id="cari"> Sayın : <?php echo $cari; ?></span>
 			<br>
-			<table>
+			<table id="tablo">
 				<thead>
 					<tr>
 						<th> Banka Adı </th>
@@ -135,17 +151,74 @@
 					</tr>
 				</thead>
 				<tr>
-					<td> Test </td>
-					<td> Test </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
 				</tr>
-
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+					<td> - </td> 
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td> 
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+				</tr>
 			</table>
-
 		</div>
 
 		<div id="altbilgi">
 			
-			<div style="float: left;"> Açıklama <br> Toplam <?php echo $tutar; ?>
+			<div style="float: left;"> <span style="font-style: italic;">Açıklama</span> <br> Toplam <?php echo $tutar; ?>
 			<?php 
 			if($tahsilat_turu != "Nakit")
 			{ 
@@ -162,20 +235,12 @@
 			?> 
 			alındı.
 		</div>
-		<div style="float: right; margin-right: 50px; font-size: 12px;"><span>Teslim Alan</span><br><span> <?php echo $kullanici;?></span></div>
+		<div style="float: right; margin-right: 50px; font-size: 13px;"><span style="font-weight: bold">Teslim Alan</span><br><span style="margin-left: -5px;"> <?php echo $kullanici;?></span></div>
 	</div>
 </div>
 
 <script type="text/javascript">
-	/*window.onload = function () {
-		window.print();
-		setTimeout(function(){window.history.back(-1)}, 3);
-	}*/
-
-	try{
-		this.print();
-		window.history.back();
-	}
+	window.print();
 </script>
 </body>
 </html>

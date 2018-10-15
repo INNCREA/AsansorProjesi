@@ -210,7 +210,7 @@ class Cari extends CI_Controller {
 				$this->load->view('tahsilat',$viewData);
 				$html = $this->output->get_output();
 				$this->load->library('pdf');
-				$filename = date("d.m.Y")."_".$makbuz_no;
+				$filename = date("d.m.Y H:i:s")."_".$makbuz_no;
 				$this->pdf->create($html, $filename);
 			}
 
