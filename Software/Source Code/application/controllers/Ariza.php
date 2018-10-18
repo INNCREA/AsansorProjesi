@@ -18,7 +18,6 @@ class Ariza extends CI_Controller {
 		}
 	}
 
-
 	public function index()
 	{
 		$id = $this->session->userdata("id");
@@ -26,6 +25,7 @@ class Ariza extends CI_Controller {
 
 		$viewData = array(
 			"sayfaAdi" => "Arıza",
+			"altSayfaAdi" => "",
 			"id" => $id,
 			"rol" => $rol
 		);
@@ -44,7 +44,8 @@ class Ariza extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 
 		$viewData = array(
-			"sayfaAdi" => "Ariza",
+			"sayfaAdi" => "Arıza",
+			"altSayfaAdi" => "",
 			"id" => $uid,
 		);
 		$this->load->model("ariza_model");
@@ -68,7 +69,8 @@ class Ariza extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 		$this->load->model('ariza_model');
 		$viewData = array(
-			"sayfaAdi" => "Ariza Ekle",
+			"sayfaAdi" => "Arıza",
+			"altSayfaAdi" => "",
 			"id" => $uid,
 		);
 		$this->load->library('form_validation');
@@ -241,7 +243,7 @@ class Ariza extends CI_Controller {
 			$data['ariza_icerik'] = $this->input->post('ariza_aciklama');
 			$data['ariza_tutar'] = $this->input->post('ariza_tutar');
 			$data['ariza_durum'] = $this->input->post('ariza_durum');
-			$updateFault = $this->ariza_model->updateFault($id, $data);
+			$updateFault = $this->ariza_model->updateFault($id, $this->input->post('asansor_id'), $data);
 			if($updateFault){
 				$this->session->set_flashdata('durum', 'ok');
 				redirect('ariza/'.$id);

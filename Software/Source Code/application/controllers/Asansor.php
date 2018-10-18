@@ -32,7 +32,8 @@ class Asansor extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Asansörler",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Asansör Listesi",
 			"id" => $id
 		);
 		$this->load->model("asansor_model");
@@ -44,7 +45,8 @@ class Asansor extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Asansör Ekle",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Asansör Ekle",
 			"id" => $id
 		);
 		$this->load->library('form_validation');
@@ -129,7 +131,8 @@ class Asansor extends CI_Controller {
 		$uid = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Asansör Detay",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Asansör Listesi",
 			"id" => $uid
 		);
 		$this->load->model("asansor_model");

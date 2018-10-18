@@ -19,9 +19,30 @@ class Panel_model extends CI_Model
 		}
 		return false;
 	}
+
 	function gunlukBakim()
 	{
 
+	}
+
+	function toplamAriza()
+	{
+		return $this->db->count_all('ariza');
+	}
+
+	function toplamBakim()
+	{
+		return $this->db->count_all('bakim');
+	}
+
+	function toplamAsansor()
+	{
+		return $this->db->count_all('asansor');
+	}
+
+	function toplamCari()
+	{
+		return $this->db->count_all('cari');
 	}
 }
 ?>

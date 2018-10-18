@@ -6,7 +6,7 @@ class Cari extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->Security();
+		//$this->Security();
 	}
 
 	function Security()
@@ -24,6 +24,7 @@ class Cari extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
 			"sayfaAdi" => "Cari İşlemleri",
+			"altSayfaAdi" => "Cari Özet",
 			"id" => $id
 		);
 		$data = "*";
@@ -44,7 +45,8 @@ class Cari extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Cari Ekle",
+			"sayfaAdi" => "Cari İşlemleri",
+			"altSayfaAdi" => "Cari Ekle",
 			"id" => $id
 		);
 		$this->load->library('form_validation');
@@ -235,17 +237,115 @@ public function detay($cid = false)
 		redirect("cari");
 	}
 	$this->load->model('cari_model');
+	$this->load->model('bakim_model');
 	$cari = $this->cari_model->cariCek($cid);
+	$asansorler = $this->bakim_model->asansorCekId($cari['0']->cari_musteri);
+	$islemler = [];
+	foreach ($asansorler as $asansor)
+	{
+		$a = $this->cari_model->islemCek($asansor->asansor_id);
+		if($a != null)
+		{
+			array_push($islemler,$a);
+		}
+	}
+	
 
 	$id = $this->session->userdata("id");
 	$rol = $this->session->userdata("rol");
 	$viewData = array(
 		"sayfaAdi" => "Cari İşlemleri",
+		"altSayfaAdi" => "Cari Özet",
 		"id" => $id,
-		"cari" => $cari['0']
+		"cari" => $cari['0'],
+		"islemler" => $islemler
+	);
+	$this->load->view("cari", $viewData);
+}
+
+public function tahsilatlar()
+{
+	$this->load->model('cari_model');
+	$tahsilatlar = $this->cari_model->tahsilatCek();
+
+	$id = $this->session->userdata("id");
+	$rol = $this->session->userdata("rol");
+	$viewData = array(
+		"sayfaAdi" => "Cari İşlemleri",
+		"altSayfaAdi" => "Tahsilatlar",
+		"id" => $id,
+		"tahsilatlar" => $tahsilatlar
+	);
+	$this->load->view("tahsilatlar", $viewData);
+}
+
+public function gecmis_tahsilat($id)
+{
+	$this->load->model('cari_model');
+	$tahsilat = $this->cari_model->tahsilatCekId($id);
+
+	$viewData = array(
+		"cari" => $tahsilat['0']->cari_isim,
+		"tutar" => $tahsilat['0']->tahsilat_tutar,
+		"tahsilat_turu" => "Nakit",
+		"makbuz_no" => $id,
+		"kullanici" => $tahsilat['0']->tahsilat_tahsilEden,
 	);
 
-	$this->load->view("cari", $viewData);
+	$this->load->view('tahsilat',$viewData);
+	$html = $this->output->get_output();
+	$this->load->library('pdf');
+	$filename = date("d.m.Y H:i:s")."_".$id;
+	$this->pdf->create($html, $filename);
+}
+
+
+public function tahsilat_sil($id)
+{
+	if(!$id || !is_numeric($id)){
+		redirect("cari/tahsilatlar");
+	}
+	$this->load->model("cari_model");
+	$tahsilatSil = $this->cari_model->tahsilatSil($id);
+
+	if($tahsilatSil == TRUE)
+	{
+		$this->session->set_flashdata('islem', 'sil');
+		redirect('cari/tahsilatlar');
+	}
+	else
+	{
+		$this->session->set_flashdata('islem', 'basarisiz');
+	}
+	redirect("cari/tahsilatlar");
+}
+
+public function islemIncele()
+{
+	$tur = $this->input->post("tur");
+	$kod = $this->input->post("kod");
+
+	if($tur == "Arıza")
+	{
+		$this->load->model("cari_model");
+		$this->load->model("ariza_model");
+		$arizalar = $this->ariza_model->getFault($kod);
+		$degisimler = $this->cari_model->degisimCek($kod);
+		foreach ($arizalar as $key => $value)
+		{
+			$array[$key] = $value;
+		}
+		foreach ($degisimler as $key => $value)
+		{
+			$array[$key] = $value;
+		}
+		echo json_encode($array);
+	}
+	else if($tur == "Bakım")
+	{
+		$this->load->model("bakim_model");
+
+	}
 }
 
 }

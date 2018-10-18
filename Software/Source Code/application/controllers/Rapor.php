@@ -33,6 +33,7 @@ class Rapor extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
 			"sayfaAdi" => "Rapor İşlemleri",
+			"altSayfaAdi" => $report,
 			"raporAdi" => $reports[$report],
 			"id" => $id
 		); 

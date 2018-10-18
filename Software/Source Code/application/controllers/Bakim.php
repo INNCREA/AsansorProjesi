@@ -26,7 +26,8 @@ class Bakim extends CI_Controller {
 		$this->load->model("bakim_model");
 		$bakim = $this->bakim_model->bakimCek();
 		$viewData = array(
-			"sayfaAdi" => "Bakım İşlemleri",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Bakım Listesi",
 			"id" => $id,
 			"rol" => $rol,
 			"bakimlar" => $bakim
@@ -77,7 +78,8 @@ class Bakim extends CI_Controller {
 		$this->load->model("bakim_model");
 		$bakim = $this->bakim_model->bakimCek();
 		$viewData = array(
-			"sayfaAdi" => "Bakım İşlemleri",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Bakım Listesi",
 			"id" => $id,
 			"rol" => $rol,
 			"bakimlar" => $bakim

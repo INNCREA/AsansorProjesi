@@ -17,7 +17,7 @@
 						</div>
 						<div class="content">
 							<div class="text"><h5>ASANSÖR EKLE</h5></div>
-							<div class="number count-to" data-from="0" data-to="250" data-speed="2500" data-fresh-interval="1"></div>
+							<div class="number count-to" data-from="0" data-to="<?php echo $toplamAsansor; ?>" data-speed="1000" data-fresh-interval="1"></div>
 						</div>
 					</div>
 				</a>
@@ -30,7 +30,7 @@
 						</div>
 						<div class="content">
 							<div class="text"><h5>ARIZA EKLE</h5></div>
-							<div class="number count-to" data-from="0" data-to="257" data-speed="2500" data-fresh-interval="1"></div>
+							<div class="number count-to" data-from="0" data-to="<?php echo $toplamAriza; ?>" data-speed="1000" data-fresh-interval="1"></div>
 						</div>
 					</div>
 				</a>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="content">
 							<div class="text"><h5>BAKIM LİSTESİ</h5></div>
-							<div class="number count-to" data-from="0" data-to="243" data-speed="2500" data-fresh-interval="1"></div>
+							<div class="number count-to" data-from="0" data-to="<?php echo $toplamBakim; ?>" data-speed="1000" data-fresh-interval="1"></div>
 						</div>
 					</div>
 				</a>
@@ -56,7 +56,7 @@
 						</div>
 						<div class="content">
 							<div class="text"><h5>CARİ HESAP ÖZETİ</h5></div>
-							<div class="number count-to" data-from="0" data-to="1250" data-speed="2500" data-fresh-interval="1"></div>
+							<div class="number count-to" data-from="0" data-to="<?php echo $toplamCari; ?>" data-speed="1000" data-fresh-interval="1"></div>
 						</div>
 					</div>
 				</a>

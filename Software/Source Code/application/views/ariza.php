@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-23 14:08:20
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-08-28 21:06:47
+ * @Last Modified time: 2018-10-18 01:50:44
  */
 $this->load->view('include/header');
 $this->load->view('include/sidebar');
@@ -60,7 +60,7 @@ $this->load->view('include/sidebar');
 										<td><?php
 										$ad = $ariza->ariza_durum;
 										if($ad == "Yeni"){
-											echo '<span class="badge bg-yellow">'.$ad.'</span>';
+											echo '<span class="badge bg-amber">'.$ad.'</span>';
 										}else if($ad == "Onarıldı"){
 											echo '<span class="badge bg-green">'.$ad.'</span>';
 										}else{
@@ -75,7 +75,7 @@ $this->load->view('include/sidebar');
 										</tr>
 										<tr>
 											<td><strong>Arıza Tutar</strong></td>
-											<td><?=$ariza->ariza_tutar?> TL</td>
+											<td class="fiyat"><?=$ariza->ariza_tutar?></td>
 										</tr>
 									<?php } ?>
 									<tr>
@@ -85,7 +85,7 @@ $this->load->view('include/sidebar');
 								</tbody>
 							</table>
 							<div class="col-md-12">
-								<a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?=$ariza->asansor_latitude?>,<?=$ariza->asansor_longitude?>" class="btn bg-yellow waves-effect">Yol Tarifi Al</a>
+								<a target="_blank" href="https://www.google.com/maps/search/?api=1&query=<?=$ariza->asansor_latitude?>,<?=$ariza->asansor_longitude?>" class="btn bg-amber waves-effect">Yol Tarifi Al</a>
 								<?php if($ariza->ariza_durum != "Onarıldı" && $ariza->ariza_onaran == $this->session->userdata("id")){ ?>
 								<button type="button" class="btn bg-green waves-effect arizaGuncelle" data-url="<?=base_url("ariza/get_stock")?>" data-toggle="modal" data-target="#guncelle">
 									<i class="material-icons">create</i>
@@ -109,6 +109,7 @@ $this->load->view('include/sidebar');
 													<div class="form-group form-float">
 														<div id="hata"><?=@$this->session->flashdata('hata') ? $this->session->flashdata('hata') : NULL?></div>
 														<input type="hidden" value="<?=$ariza->ariza_id?>"name="ariza_id" class="form-control">
+														<input type="hidden" value="<?=$ariza->ariza_asansor?>" name="asansor_id" class="form-control">
 													</div>
 													<div class="form-group form-float">
 														<div class="form-line focused">

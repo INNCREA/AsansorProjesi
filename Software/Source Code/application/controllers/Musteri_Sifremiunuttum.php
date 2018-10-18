@@ -1,13 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sifremiunuttum extends CI_Controller {
-
-	
+class Musteri_Sifremiunuttum extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('sifremiunuttum');
+		$this->load->view('musteri_sifremiunuttum');
 	}
 	public function reset($code = false)
 	{
@@ -15,9 +13,9 @@ class Sifremiunuttum extends CI_Controller {
 		if(!$code){
 			redirect();
 		}
-		$this->load->model("sifremiunuttum_model");
+		$this->load->model("musteri_sifremiunuttum_model");
 		$this->load->helper("alert");
-		$getCode = $this->sifremiunuttum_model->checkResetCode($code);
+		$getCode = $this->musteri_sifremiunuttum_model->checkResetCode($code);
 		if($getCode){
 			if(time() <= $getCode->sifrem_time){
 				$this->load->library('form_validation');
@@ -29,13 +27,13 @@ class Sifremiunuttum extends CI_Controller {
 				if($this->form_validation->run() != FALSE){
 					$password = $this->input->post("password");
 					$password = password_hash($password, PASSWORD_DEFAULT);
-					$changePassword = $this->sifremiunuttum_model->changePassword($getCode->sifrem_kullanici_id, $password);
+					$changePassword = $this->musteri_sifremiunuttum_model->changePassword($getCode->sifrem_kullanici_id, $password);
 					if($changePassword){
 						$data["durum"] = setAlertSuccess("Şifreniz sıfırlandı. Yeni şifreniz ile giriş yapabilirsiniz.");
 					}else{
 						$data["durum"] = setAlertDanger("Şifreniz sıfırlanamadı!");
 					}
-					$this->sifremiunuttum_model->changeResetStatus($getCode->sifrem_id);
+					$this->musteri_sifremiunuttum_model->changeResetStatus($getCode->sifrem_id);
 				}
 			}else{
 				$data["durum"] = setAlertDanger("Kodun süresi dolmuş");
@@ -57,43 +55,42 @@ class Sifremiunuttum extends CI_Controller {
 			</div>');
 
 
-		if($this->form_validation->run())
-		{
+		if($this->form_validation->run()){
 			$email = $this->input->post("email");
-			$this->load->model("sifremiunuttum_model");
+			$this->load->model("musteri_sifremiunuttum_model");
 			$this->load->helper("alert");
-			$getEmail = $this->sifremiunuttum_model->checkEmail($email);
+			$getEmail = $this->musteri_sifremiunuttum_model->checkEmail($email);
 			if($getEmail){
 				$this->load->helper('string');
 				$hash = random_string('alnum', 16);
 				$passData = [
-					"sifrem_kullanici_id" => $getEmail->kullanici_id,
-					"sifrem_kullanici_email" => $getEmail->kullanici_mail,
+					"sifrem_kullanici_id" => $getEmail->musteri_id,
+					"sifrem_kullanici_email" => $getEmail->musteri_mail,
 					"sifrem_hash" => $hash,
 					"sifrem_time" => time()+20*60,
 					"sifrem_durum" => 1,
 					"sifrem_ip" => $this->input->ip_address(),
 				];
 				$this->load->library("eposta");
-				$sendMail = $this->eposta->passwordReset($getEmail->kullanici_adi, $hash, $getEmail->kullanici_mail);
+				$sendMail = $this->eposta->passwordReset($getEmail->musteri_adSoyad, $hash, $getEmail->musteri_mail, "customer");
 				if($sendMail){
-					$addReset = $this->sifremiunuttum_model->addResetPass($passData);
+					$addReset = $this->musteri_sifremiunuttum_model->addResetPass($passData);
 					if($addReset){
-						$this->session->set_flashdata('hata', setAlertSuccess("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz."));
+						$this->session->set_flashdata('hata', setAlertSuccess("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz. (3)"));
 					}else{
-						$this->session->set_flashdata('hata', setAlertDanger("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz. "));
+						$this->session->set_flashdata('hata', setAlertDanger("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz. (4)"));
 					}
 				}else{
 					$this->session->set_flashdata('hata', setAlertDanger("E-posta gönderilemedi. Lütfen tekrar deneyin..."));
 				}
 			}else{
-				$this->session->set_flashdata('hata', setAlertSuccess("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz."));
+				$this->session->set_flashdata('hata', setAlertSuccess("Sistemde kayıtlı e-postanız varsa bilgiler gönderilmiştir. Lütfen posta kutunuzu kontrol ediniz. (2)"));
 			}
-			redirect('sifremi-unuttum');
+			redirect('musteri-sifremi-unuttum');
 		}
 		else
 		{
-			redirect('sifremi-unuttum');
+			redirect('musteri-sifremi-unuttum');
 		}
 
 	}

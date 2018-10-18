@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
 
 	$('.duzenleKullanici').on("click", function(e) {
 		e.preventDefault();
@@ -143,8 +143,6 @@
 		});
 	});
 
-
-
 	$('#diger').on("change", function(e){
 		document.getElementById("diger_tutar").disabled = false;
 		$('#toplam_tutar_div').removeClass("success");
@@ -159,6 +157,55 @@
 		$('#toplam_tutar_div').addClass("focused success");
 	});
 
+	$('.islemIncele').on("click", function(e) {
+		e.preventDefault();
+		var id = $(this).attr('data-id');
+		var islem_turu = $(this).attr('data-turu');
+		var url = $(this).attr('data-url');
+		$.ajax({
+			dataType: 'json',
+			type: 'POST',
+			url: url,
+			data: {id:id,tur:islem_turu},
+			success: function(data){
+				$.each( data, function( key, value ) {
+					
+				});
+				$('#islemIncele').modal();
+			}
+		});
+		
+	});
+
+
+	$('.bilgiGuncelle').on("click", function(e) {
+		e.preventDefault();
+		var id = $(this).attr('data-id');
+		var url = $(this).attr('data-url');
+		$.ajax({
+			dataType: 'json',
+			type: 'POST',
+			url: url,
+			data: {id:id},
+			success: function(data){
+				$.each( data, function( key, value ) {
+					$('#musteri_id').val(value.musteri_id);
+					$('#musteri_adSoyad').val(value.musteri_adSoyad);
+					$('#musteri_mail').val(value.musteri_mail);
+					$('#musteri_tel').val(value.musteri_tel);
+					$('#musteri_adres').val(value.musteri_adres);
+					$('#musteri_kAdi').val(value.musteri_kAdi);
+				});
+				$('#bilgiGuncelle').modal();
+			}
+		});
+	});
+
+
+	$('.arizaBildir').on("click", function(e) {
+		e.preventDefault();
+		$('#arizaBildir').modal();
+	});
 
 	var maskCfg = {
 		'alias': 'decimal',

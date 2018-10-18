@@ -23,7 +23,8 @@ class Musteri extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Müşteriler",
+			"sayfaAdi" => "Müşteri İşlemleri",
+			"altSayfaAdi" => "Müşteri Listesi",
 			"id" => $id
 		);
 		$data = "*";
@@ -42,7 +43,8 @@ class Musteri extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Müşteri Ekle",
+			"sayfaAdi" => "Müşteri İşlemleri",
+			"altSayfaAdi" => "Müşteri Ekle",
 			"id" => $id
 		);
 		$this->load->library('form_validation');
@@ -132,7 +134,6 @@ class Musteri extends CI_Controller {
 
 	public function guncelle()
 	{
-
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('musteri_adSoyad', 'Müşteri Adı Soyadı', 'trim|required');
 		$this->form_validation->set_rules('musteri_mail', 'Müşteri Mail', 'trim|required|valid_email');

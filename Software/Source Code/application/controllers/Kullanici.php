@@ -25,6 +25,7 @@ class Kullanici extends CI_Controller {
 
 		$viewData = array(
 			"sayfaAdi" => "Kullanıcı İşlemleri",
+			"altSayfaAdi" => "Kullanıcı Listesi",
 			"id" => $id
 		);
 		$data = "*";
@@ -44,7 +45,8 @@ class Kullanici extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Kullanıcı Ekle",
+			"sayfaAdi" => "Kullanıcı İşlemleri",
+			"altSayfaAdi" => "Kullanıcı Ekle",
 			"id" => $id
 		);
 		$this->load->library('form_validation');
@@ -117,7 +119,8 @@ class Kullanici extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Kullanıcı Listesi",
+			"sayfaAdi" => "Kullanıcı İşlemleri",
+			"altSayfaAdi" => "Kullanıcı Listesi",
 			"id" => $id
 		);
 		$this->load->library('form_validation');

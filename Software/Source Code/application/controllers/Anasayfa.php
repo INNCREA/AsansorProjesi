@@ -5,6 +5,6 @@ class Anasayfa extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('giris');
+		$this->load->view('anasayfa');
 	}
 }

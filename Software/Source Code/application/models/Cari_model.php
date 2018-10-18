@@ -139,5 +139,84 @@ class Cari_model extends CI_Model
 		}
 		return FALSE;
 	}
+
+	public function tahsilatCek()
+	{
+		$this->db->join("cari","cari.cari_id = tahsilat.tahsilat_cari", "left");
+		$result = $this->db->get("tahsilat")->result();
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
+	public function tahsilatCekId($id)
+	{
+		$result = $this
+		->db
+		->where("tahsilat_id",$id)
+		->join("cari","cari.cari_id = tahsilat.tahsilat_cari", "left")
+		->get("tahsilat")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return false;
+	}
+
+	public function tahsilatSil($id)
+	{
+		$result = $this
+		->db
+		->where('tahsilat_id', $id)
+		->get('tahsilat')
+		->row();
+
+		if($result)
+		{
+			$delete = $this
+			->db
+			->where('tahsilat_id', $id)
+			->delete('tahsilat');
+
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function islemCek($id)
+	{
+		$result = $this
+		->db
+		->where("islem_asansor",$id)
+		->join("asansor","asansor.asansor_id = islem.islem_asansor", "left")
+		->get('islem')
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
+	public function degisimCek($id)
+	{
+		$result = $this
+		->db
+		->where("degisim_kodu",$id)
+		->join("stok","stok.stok_id = degisim.degisim_stok", "left")
+		->get('degisim')
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
 }
 ?>

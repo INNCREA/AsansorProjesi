@@ -26,5 +26,27 @@ class Database extends CI_Model
 			return false;
 		}
 	}
+
+	function M_access($username,$password,$data)
+	{
+		$result=$this
+		->db
+		->select($data)
+		->where('musteri_kAdi',$username)
+		->get("musteri")
+		->row();
+
+		if(count($result) != 1)
+		{
+			return false;
+		}
+		else
+		{
+			if(password_verify($password, $result->musteri_sifre)){
+				return $result;
+			}
+			return false;
+		}
+	}
 }
 ?>

@@ -27,6 +27,8 @@
   <!-- Custom Css -->
   <link href="<?php echo base_url('assets/'); ?>css/style.css" rel="stylesheet">
   <link href="<?php echo base_url('assets/'); ?>css/custom.css" rel="stylesheet">
+
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <!-- Jquery Core Js -->
   <script src="<?php echo base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url('assets/'); ?>js/alert.js"></script>
@@ -37,16 +39,7 @@
 
   <!-- SweetAlert Plugin Js -->
   <script src="<?php echo base_url('assets/'); ?>plugins/sweetalert/sweetalert.min.js"></script>
-  <link rel="manifest" href="/manifest.json" />
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  var OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "f8ae7f93-f4aa-472e-af92-618e8ca27791",
-    });
-  });
-</script>
+
   <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
   <link href="<?php echo base_url('assets/'); ?>css/theme-blue-grey.css" rel="stylesheet" />
 </head>
@@ -98,7 +91,7 @@
         <!--  <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
           <!-- #END# Call Search -->
           <li>
-            <a href="<?php echo base_url('panel/logout'); ?>">
+            <a href="<?php echo base_url('musteri-panel/logout'); ?>">
               <i class="material-icons">exit_to_app </i>
             </a>
           </li>

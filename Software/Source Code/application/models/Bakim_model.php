@@ -19,6 +19,40 @@ class Bakim_model extends CI_Model
 		return FALSE;
 	}
 
+	public function bakimCekId($id)
+	{
+		$result = $this
+		->db
+		->where("bakim_asansor",$id)
+		->join("asansor", "asansor.asansor_id = bakim.bakim_asansor")
+		->join("kullanici", "kullanici.kullanici_id = bakim.bakim_yapan" , "left")
+		->get("bakim")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
+	public function bakimCekIdd($id)
+	{
+		$result = $this
+		->db
+		->where("bakim_id",$id)
+		->join("asansor", "asansor.asansor_id = bakim.bakim_asansor")
+		->join("kullanici", "kullanici.kullanici_id = bakim.bakim_yapan" , "left")
+		->get("bakim")
+		->result();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
 	/* Asansörleri listeler */
 
 	public function asansorCek($id)
@@ -28,6 +62,21 @@ class Bakim_model extends CI_Model
 		->where("asansor_id" , $id)
 		->get('asansor')
 		->row();
+
+		if($result)
+		{
+			return $result;
+		}
+		return FALSE;
+	}
+
+	public function asansorCekId($id)
+	{
+		$result = $this
+		->db
+		->where("asansor_yetkili" , $id)
+		->get('asansor')
+		->result();
 
 		if($result)
 		{

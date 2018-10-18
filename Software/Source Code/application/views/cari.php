@@ -26,13 +26,13 @@
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#tahsilat" data-toggle="tab">
-                                    <i class="material-icons">account_balance_wallet</i> TAHSİLAT
+                                <a href="#hesap_ozeti" data-toggle="tab">
+                                    <i class="material-icons">history</i> İŞLEM GEÇMİŞİ
                                 </a>
                             </li>
                         </ul>
 
-                        <!-- Tab panes -->
+                        <!-- Tab 1 başlangıç -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="detay">
                                 <div class="row">
@@ -75,114 +75,78 @@
                                 </table>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tahsilat">
-                            <div class="panel-group full-body" id="accordion_5" role="tablist" aria-multiselectable="true">
-                                <div class="panel">
-                                    <div class="panel-heading bg-blue-grey" role="tab" id="headingOne_5">
-                                        <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion_5" href="#collapseOne_5" aria-expanded="false" aria-controls="collapseOne_5">
-                                                NAKİT
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapseOne_5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne_5">
-                                        <div class="panel-body">
-                                         <form action="<?=base_url("cari/tahsilat")?>" method="POST">
-                                            <?=validation_errors()?>
-                                            <div class="form-group form-float">
-                                                <input type="hidden" value="<?=$cari->cari_id?>" id="tahsilat_id" name="tahsilat_id" class="form-control">
-                                            </div>
+                        <!-- Tab 1 bitiş -->
 
-                                            <div class="row clearfix">
-                                                <div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-                                                    <input type="radio" name="tahsilat_radio" id="toplam" class="with-gap">
-                                                    <label for="toplam">Toplam Tutar :</label>
-                                                </div>
-                                                <div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
-                                                    <div class="form-group">
-                                                        <div id="toplam_tutar_div" class="form-line focused warning">
-                                                            <input type="text" name="tahsilat_tutar" value="<?=$cari->cari_bakiye?>" id="toplam_tutar" class="form-control fiyat" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-2 col-sm-3 col-xs-4 form-control-label">
-                                                    <input type="radio" name="tahsilat_radio" id="diger" class="with-gap">
-                                                    <label for="diger">Diğer Tutar :</label>
-                                                </div>
-                                                <div class="col-lg-9 col-md-10 col-sm-9 col-xs-8">
-                                                    <div class="form-group">
-                                                        <div class="form-line success">
-                                                            <input type="text" value="<?=set_value("diger_tutar")?>" name="tahsilat_tutar" id="diger_tutar" class="form-control fiyat" disabled>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-success waves-effect">TAHSİL ET</button>
-                                                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal" >VAZGEÇ</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-heading bg-blue-grey" role="tab" id="headingTwo_5">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_5" href="#collapseTwo_5" aria-expanded="false"
-                                        aria-controls="collapseTwo_5">
-                                        ÇEK
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo_5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_5">
-                                <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                    non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                    eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                    single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                    Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                                    raw denim aesthetic synth nesciunt you probably haven't heard of them
-                                    accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <div class="panel-heading bg-blue-grey" role="tab" id="headingThree_5">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_5" href="#collapseThree_5" aria-expanded="false"
-                                    aria-controls="collapseThree_5">
-                                    SENET
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree_5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_5">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-                                non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-                                Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                                raw denim aesthetic synth nesciunt you probably haven't heard of them
-                                accusamus labore sustainable VHS.
-                            </div>
+                        <!--  Tab 2 başlangıç  -->
+                        <div role="tabpanel" class="tab-pane fade" id="hesap_ozeti">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover temel-tablo dataTable">
+                                    <thead>
+                                        <tr>
+                                           <th>İşlem Türü</th>
+                                           <th>İşlem Kodu</th>
+                                           <th>İşlem Tarihi</th>
+                                           <th>Asansör Adı</th>
+                                           <th>İşlem Tutarı</th>
+                                           <th>İşlemler</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody>
+                                    <?php
+                                    if($islemler){
+                                        foreach ($islemler as $islem) {
+                                            ?>
+                                            <tr>
+                                                <td><?=$islem['0']->islem_turu?></td>
+                                                <td><?=$islem['0']->islem_kodu?></td>
+                                                <td><?=$islem['0']->islem_tarih?></td>
+                                                <td><?=$islem['0']->asansor_adi?></td>
+                                                <td class="fiyat"><?=$islem['0']->islem_tutar?></td>
+                                                <td> <button type="button" data-id="<?=$islem['0']->islem_kodu?>" data-turu="<?=$islem['0']->islem_turu?>" data-url="<?=base_url('cari/islemIncele/')?>" class="btn bg-green waves-effect islemIncele">
+                                                    <i class="material-icons">search</i>
+                                                    <span>İncele</span>
+                                                </button></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                    <!-- Tab 1 bitiş -->
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
+
+
+
+<div class="modal fade" id="islemIncele" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="defaultModalLabel">İşlem İncele</h4>
+                <hr>
+            </div>
+            <div class="modal-body">
+
+
+
+            </div>
+        </div>
+    </div>
 </div>
-<!-- #END# Tabs With Icon Title -->
 
 
 
 
-</div>
+
+
 </section>
 <?php $this->load->view('include/footer'); ?>

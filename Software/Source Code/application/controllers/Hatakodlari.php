@@ -24,7 +24,8 @@ class Hatakodlari extends CI_Controller {
 		$rol = $this->session->userdata("rol");
 
 		$viewData = array(
-			"sayfaAdi" => "Hata Kodları",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Hata Kodları",
 			"id" => $id
 		);
 		$data = "*";
@@ -44,7 +45,8 @@ class Hatakodlari extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Hata Kodları",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Hata Kodları",
 			"id" => $id
 		);
 
@@ -106,7 +108,8 @@ class Hatakodlari extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Hata Kodları",
+			"sayfaAdi" => "Asansör İşlemleri",
+			"altSayfaAdi" => "Hata Kodları",
 			"id" => $id
 		);
 		$this->load->library('form_validation');

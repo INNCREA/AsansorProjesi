@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-23 14:13:40
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   tepeu
- * @Last Modified time: 2018-10-15 03:33:07
+ * @Last Modified time: 2018-10-18 02:26:11
  */
 class Ariza_model extends CI_Model {
 
@@ -38,14 +38,38 @@ class Ariza_model extends CI_Model {
 		}
 		return FALSE;
 	}
-	public function updateFault($id, $array)
+	public function updateFault($id, $asansor_id, $array)
 	{
+		$this->db->trans_start();
+		$degisim = $this->getItems($id);
+		$ariza = $this->getFault($id);
+		$total = 0;
+		if($degisim){
+			foreach ($degisim as $a) {
+				$total += $a->degisim_tutar;
+			}
+		}
+		$total += (float) $array["ariza_tutar"];
 		$this->db->where("ariza_id", $id);
-		$r = $this->db->update("ariza", $array);
-		if($r){
+		$this->db->update("ariza", $array);
+		$datas = [
+			"islem_turu" => "Arıza",
+			"islem_kodu" => $id,
+			"islem_tarih" => date("d-m-Y"),
+			"islem_asansor" => $asansor_id,
+			"islem_tutar" => $total,
+		];
+		$this->db->insert("islem", $datas);
+		$this->db->where("cari_musteri", $ariza->asansor_yetkili);
+		$this->db->set("cari_bakiye", "cari_bakiye + $total", FALSE);
+		$this->db->update("cari");
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return FALSE;
+		}else{
+			$this->db->trans_commit();
 			return TRUE;
 		}
-		return FALSE;
 	}
 	public function addFault($array)
 	{
@@ -88,6 +112,7 @@ class Ariza_model extends CI_Model {
 	}
 	public function getItems($id)
 	{
+
 		$this->db->join("stok", "stok.stok_id = degisim.degisim_stok", "left");
 		$this->db->where("degisim_kodu", $id);
 		$r = $this->db->get('degisim')->result();
@@ -152,6 +177,16 @@ class Ariza_model extends CI_Model {
 		}
 		return FALSE;
 	}
+
+	public function listLiftsId($id)
+	{
+		$r = $this->db->where("asansor_yetkili",$id)->get("asansor")->result();
+		if($r){
+			return $r;
+		}
+		return FALSE;
+	}
+
 	public function listNewFaults()
 	{
 		$this->db->limit(15);

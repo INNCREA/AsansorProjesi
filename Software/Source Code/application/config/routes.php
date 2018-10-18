@@ -74,12 +74,25 @@ $route['ajax/get-items/(:num)'] = 'ariza/get_items/$1';
 $route['ajax/delete-stock'] = 'ariza/delete_stock';
 $route['ariza/guncelle'] = 'ariza/update';
 
-/*  Modülden gelecek arıza ve bakımlar buradan kayıt için controllerlara yönlendirilecek.
+$route['api/ariza/(:any)'] = 'modul/ariza/';
+$route['api/bakim/(:any)'] = 'modul/bakim/';
 
-$route['api/ariza/(:any)'] = 'ariza';
-$route['api/bakim/(:any)'] = 'bakim';
-
-*/
 
 $route['bakim/(:num)'] = 'bakim/detay/$1';
 $route['cari-detay/(:num)'] = 'cari/detay/$1';
+
+$route['musteri-panel'] = 'musteri_panel';
+
+$route['gecmis-tahsilat'] = 'gecmis_tahsilat';
+
+$route['musteri-giris'] = 'Musteri_Giris';
+$route['musteri-giris/login'] = 'Musteri_Giris/login';
+$route['musteri-panel/bilgiAl'] = 'Musteri_Panel/bilgiAl';
+$route['musteri-panel/guncelle'] = 'Musteri_Panel/guncelle';
+$route['musteri-panel/detay'] = 'Musteri_Panel/detay';
+$route['musteri-panel/bakim'] = 'Musteri_Panel/bakim';
+$route['musteri-panel/logout'] = 'Musteri_Panel/logout';
+$route['musteri-panel'] = 'Musteri_Panel';
+$route['musteri-sifremi-unuttum'] = 'Musteri_Sifremiunuttum';
+$route['musteri-sifremi-unuttum/mailkontrol'] = 'Musteri_Sifremiunuttum/mailkontrol';
+$route['musteri-sifre-sifirla/(:any)'] = 'Musteri_Sifremiunuttum/reset/$1';

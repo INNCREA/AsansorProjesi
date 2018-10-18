@@ -150,7 +150,7 @@ $this->load->view('include/sidebar');
 														<td><?=$ariza->asansor_kodu?></td>
 														<td><?=$ariza->musteri_adSoyad?></td>
 														<td><?=$ariza->kullanici_adSoyad?></td>
-														<td><?=$ariza->ariza_tutar?></td>
+														<td class="fiyat"><?=$ariza->ariza_tutar?></td>
 														<td><a href="<?=base_url("ariza/".$ariza->ariza_id)?>" class="btn bg-blue waves-effect">
 															<i class="material-icons">search</i>
 															<span>Detay</span>

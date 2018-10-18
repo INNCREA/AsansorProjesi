@@ -40,7 +40,7 @@ $this->load->view('include/sidebar');
                                 else if ($islem == 'basarisiz')
                                     { ?>
                                         <script>
-                                            swal("İşlemi başarılı !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
+                                            swal("İşlemi başarısız !", "İşlem gerçekleştirilirken bir hata oluştu. Lütfen tekrar deneyiniz !", "danger");
                                         </script>
                                     <?php } ?>
                                     <div class="table-responsive">

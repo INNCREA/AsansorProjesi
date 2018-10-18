@@ -1,6 +1,6 @@
 <?php
-$this->load->view('include/header');
-$this->load->view('include/sidebar');
+$this->load->view('include/m_header');
+$this->load->view('include/m_sidebar');
 ?>
 
 <section class="content">
@@ -13,7 +13,7 @@ $this->load->view('include/sidebar');
 				<div class="card">
 					<div class="header">
 						<h2>
-							Bakım Listesi
+							Bakım Geçmişi
 						</h2>
 					</div>
 					<div class="body">
@@ -35,24 +35,23 @@ $this->load->view('include/sidebar');
 										foreach ($bakimlar as $bakim) {
 											?>
 											<tr>
-												<td><?=$bakim->bakim_id?></td>
-												<td><?=$bakim->asansor_adi?></td>
-												<td><?=$bakim->bakim_icerik?></td>
-												<td><?=($bakim->bakim_durum == "") ? "<span class='badge bg-cyan font-12'>Bakım Bekleniyor</span>" : (($bakim->bakim_durum == "Yapıldı") ? "<span class='badge bg-green font-12'>".$bakim->bakim_durum."</span>" : "<span class='badge bg-red font-12'>".$bakim->bakim_durum."</span>") ?>
-											</td>
-											<td><?=$bakim->bakim_tarih?></td>
-											<td><?=$bakim->kullanici_adi?></td>
-										</tr>
-										<?php
+												<td><?=$bakim['0']->bakim_id?></td>
+												<td><?=$bakim['0']->asansor_adi?></td>
+												<td><?=$bakim['0']->bakim_icerik?></td>
+												<td><?=$bakim['0']->bakim_durum?></td>
+												<td><?=$bakim['0']->bakim_tarih?></td>
+												<td><?=$bakim['0']->kullanici_adi?></td>
+											</tr>
+											<?php
+										}
 									}
-								}
-								?>
-							</tbody>
-						</table>
+									?>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<?php $this->load->view('include/footer'); ?>
+	</section>
+	<?php $this->load->view('include/footer'); ?>

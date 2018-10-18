@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @Date:   2018-07-21 23:46:33
  * @Email: tepeumut1@gmail.com
  * @Last Modified by:   Asus
- * @Last Modified time: 2018-10-14 21:30:30
+ * @Last Modified time: 2018-10-15 15:07:22
  */
 class Rapor_model extends CI_Model {
 
@@ -47,7 +47,7 @@ class Rapor_model extends CI_Model {
 	}
 	public function listFaults()
 	{
-		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_kodu, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
+		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_adi, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
 		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor");
 		$this->db->join("musteri", "musteri.musteri_id = asansor.asansor_yetkili");
 		$this->db->join("kullanici", "kullanici.kullanici_id = ariza.ariza_onaran");

@@ -22,7 +22,8 @@ class Stok extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Stok Listesi",
+			"sayfaAdi" => "Stok İşlemleri",
+			"altSayfaAdi" => "Stok Listesi",
 			"id" => $id
 		);
 		$data = "*";
@@ -41,7 +42,8 @@ class Stok extends CI_Controller {
 		$id = $this->session->userdata("id");
 		$rol = $this->session->userdata("rol");
 		$viewData = array(
-			"sayfaAdi" => "Stok Ekle",
+			"sayfaAdi" => "Stok İşlemleri",
+			"altSayfaAdi" => "Stok Ekle",
 			"id" => $id
 		);
 		$this->load->library('form_validation');

@@ -74,7 +74,6 @@
 		float: right;
 		font-size: 12px;
 		margin-right: 6px;
-		font-weight: bold;
 	}
 
 	#no
@@ -83,7 +82,6 @@
 		margin-left: 20px;
 		float: left;
 		font-size: 16px;
-		font-weight: bold;
 	}
 
 	#bilgi
@@ -95,7 +93,6 @@
 	{
 		width: 100%;
 		margin-left: 250px;
-		font-weight: bold;
 	}
 
 	#tablo,th,td
@@ -113,7 +110,7 @@
 	}
 </style>
 </head>
-<body>
+<body onload="window.open(url, '_blank');">
 	<div id="cerceve">
 		<div id="baslik">
 			<div id="firma">
@@ -128,26 +125,26 @@
 				</div>
 			</div>
 			<div id="bilgi">
-				<h4 style="text-align: center;">TAHSİLAT MAKBUZU</h4><br>
-				<span id="no">No : <?php echo $makbuz_no; ?></span>
-				<span id="tarih"><?php echo date("d/m/Y"); ?> </span>
+				<h4 style="text-align: center;"><b>TAHSİLAT MAKBUZU</b></h4><br>
+				<span id="no"><b>No : <?php echo $makbuz_no; ?></b></span>
+				<span id="tarih"><b><?php echo date("d/m/Y"); ?> </b></span>
 			</div>
 		</div>
 
 		<div id="icerik">
 
-			<span id="cari"> Sayın : <?php echo $cari; ?></span>
+			<b><span id="cari"> Sayın : <?php echo $cari; ?></span></b>
 			<br>
 			<table id="tablo">
 				<thead>
 					<tr>
-						<th> Banka Adı </th>
-						<th> Şube </th>
-						<th> Çek No </th>
-						<th> Hesap No </th>
-						<th> Vadesi </th>
-						<th> Borçlusu </th>
-						<th> Tutarı </th>
+						<th> <b>Banka Adı</b> </th>
+						<th> <b>Şube</b> </th>
+						<th> <b>Çek No</b> </th>
+						<th> <b>Hesap No</b> </th>
+						<th> <b>Vadesi</b> </th>
+						<th> <b>Borçlusu</b> </th>
+						<th> <b>Tutarı</b> </th>
 					</tr>
 				</thead>
 				<tr>
@@ -218,7 +215,7 @@
 
 		<div id="altbilgi">
 			
-			<div style="float: left;"> <span style="font-style: italic;">Açıklama</span> <br> Toplam <?php echo $tutar; ?>
+			<div style="float: left;"> <span><i>Açıklama</i></span> <br> Toplam <?php echo $tutar; ?>
 			<?php 
 			if($tahsilat_turu != "Nakit")
 			{ 
@@ -235,12 +232,13 @@
 			?> 
 			alındı.
 		</div>
-		<div style="float: right; margin-right: 50px; font-size: 13px;"><span style="font-weight: bold">Teslim Alan</span><br><span style="margin-left: -5px;"> <?php echo $kullanici;?></span></div>
+		<div style="float: right; margin-right: 50px; font-size: 13px;"><span><b>Teslim Alan</b></span><br><span style="margin-left: -5px;"> <?php echo $kullanici;?></span></div>
 	</div>
 </div>
 
 <script type="text/javascript">
 	window.print();
+	window.location.back(-1);
 </script>
 </body>
 </html>
