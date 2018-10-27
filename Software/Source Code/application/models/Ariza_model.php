@@ -11,7 +11,7 @@ class Ariza_model extends CI_Model {
 
 	public function getFault($id)
 	{
-		$this->db->select("ariza.ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_icerik, ariza_tutar, asansor_kodu, asansor_arizaTarihi, 	asansor_latitude, asansor_longitude, asansor_adres, asansor_yetkili, musteri_id, musteri_adSoyad, musteri_adres, musteri_tel, musteri_mail, hata_aciklama, kullanici_adSoyad");
+		$this->db->select("ariza.ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_icerik, ariza_tutar, asansor_kodu, asansor_adi, asansor_arizaTarihi, asansor_latitude, asansor_longitude, asansor_adres, asansor_yetkili, musteri_id, musteri_adSoyad, musteri_adres, musteri_tel, musteri_mail, hata_aciklama, kullanici_adSoyad");
 		$this->db->limit(1);
 		$this->db->where("ariza_id", $id);
 		$this->db->from('ariza');
@@ -190,7 +190,7 @@ class Ariza_model extends CI_Model {
 	public function listNewFaults()
 	{
 		$this->db->limit(15);
-		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, asansor_kodu, asansor_yetkili, musteri_id, musteri_adSoyad");
+		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, asansor_kodu, asansor_adi,  asansor_yetkili, musteri_id, musteri_adSoyad");
 		//$this->db->where("ariza.ariza_tarih", date("d.m.Y"));
 		$this->db->where("ariza.ariza_durum", "Yeni");
 		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor", "left");
@@ -205,7 +205,7 @@ class Ariza_model extends CI_Model {
 	public function listFixedFaults()
 	{
 		$this->db->limit(15);
-		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_kodu, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
+		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_kodu, asansor_adi, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
 		//$this->db->where("ariza.ariza_tarih", date("d.m.Y"));
 		$this->db->where("ariza.ariza_durum", "Onarıldı");
 		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor", "left");
@@ -221,7 +221,7 @@ class Ariza_model extends CI_Model {
 	public function listNFixedFaults()
 	{
 		$this->db->limit(15);
-		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_kodu, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
+		$this->db->select("ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_tutar, asansor_kodu, asansor_adi, asansor_yetkili, musteri_id, musteri_adSoyad, kullanici_id, kullanici_adSoyad");
 		//$this->db->where("ariza.ariza_tarih", date("d.m.Y"));
 		$this->db->where("ariza.ariza_durum", "Onarılmadı");
 		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor", "left");

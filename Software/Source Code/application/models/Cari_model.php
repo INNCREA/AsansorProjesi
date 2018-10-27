@@ -192,7 +192,7 @@ class Cari_model extends CI_Model
 		$result = $this
 		->db
 		->where("islem_asansor",$id)
-		->join("asansor","asansor.asansor_id = islem.islem_asansor", "left")
+		->join("asansor","asansor.asansor_id = islem.islem_asansor")
 		->get('islem')
 		->result();
 
@@ -205,16 +205,34 @@ class Cari_model extends CI_Model
 
 	public function degisimCek($id)
 	{
-		$result = $this
-		->db
-		->where("degisim_kodu",$id)
-		->join("stok","stok.stok_id = degisim.degisim_stok", "left")
-		->get('degisim')
-		->result();
+		$this->db->select("ariza.ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_icerik, ariza_tutar, asansor_kodu, asansor_arizaTarihi, asansor_latitude, asansor_longitude, asansor_adi, asansor_adres, asansor_yetkili, musteri_id, musteri_adSoyad, musteri_adres, musteri_tel, musteri_mail, hata_aciklama, kullanici_adSoyad, degisim_kodu, degisim_miktar, degisim_tutar, stok_adi, satis_fiyat, stok_birim");
+		$this->db->where("ariza_id", $id);
+		$this->db->from('ariza');
+		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor", "left");
+		$this->db->join("musteri", "musteri.musteri_id = asansor.asansor_yetkili", "left");
+		$this->db->join("hata", "hata.hata_kodu = ariza.ariza_kodu", "left");
+		$this->db->join("kullanici", "kullanici.kullanici_id = ariza.ariza_onaran", "left");
+		$this->db->join("degisim", "degisim.degisim_kodu = ariza.ariza_id", "left");
+		$this->db->join("stok","stok.stok_id = degisim.degisim_stok", "left");
+		$r = $this->db->get()->result();
+		if($r){
+			return $r;
+		}
+		return FALSE;
+	}
 
-		if($result)
-		{
-			return $result;
+	public function arizaCek($id)
+	{
+		$this->db->select("ariza.ariza_id, ariza_kodu, ariza_durum, ariza_tarih, ariza_timestamp, ariza_onaran, ariza_asansor, ariza_icerik, ariza_tutar, asansor_kodu, asansor_arizaTarihi, asansor_latitude, asansor_longitude, asansor_adi, asansor_adres, asansor_yetkili, musteri_id, musteri_adSoyad, musteri_adres, musteri_tel, musteri_mail, hata_aciklama, kullanici_adSoyad");
+		$this->db->where("ariza_id", $id);
+		$this->db->from('ariza');
+		$this->db->join("asansor", "asansor.asansor_id = ariza.ariza_asansor", "left");
+		$this->db->join("musteri", "musteri.musteri_id = asansor.asansor_yetkili", "left");
+		$this->db->join("hata", "hata.hata_kodu = ariza.ariza_kodu", "left");
+		$this->db->join("kullanici", "kullanici.kullanici_id = ariza.ariza_onaran", "left");
+		$r = $this->db->get()->result();
+		if($r){
+			return $r;
 		}
 		return FALSE;
 	}

@@ -83,15 +83,15 @@
                                 <table class="table table-bordered table-striped table-hover temel-tablo dataTable">
                                     <thead>
                                         <tr>
-                                           <th>İşlem Türü</th>
-                                           <th>İşlem Kodu</th>
-                                           <th>İşlem Tarihi</th>
-                                           <th>Asansör Adı</th>
-                                           <th>İşlem Tutarı</th>
-                                           <th>İşlemler</th>
-                                       </tr>
-                                   </thead>
-                                   <tbody>
+                                         <th>İşlem Türü</th>
+                                         <th>İşlem Kodu</th>
+                                         <th>İşlem Tarihi</th>
+                                         <th>Asansör Adı</th>
+                                         <th>İşlem Tutarı</th>
+                                         <th>İşlemler</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
                                     <?php
                                     if($islemler){
                                         foreach ($islemler as $islem) {
@@ -102,7 +102,7 @@
                                                 <td><?=$islem['0']->islem_tarih?></td>
                                                 <td><?=$islem['0']->asansor_adi?></td>
                                                 <td class="fiyat"><?=$islem['0']->islem_tutar?></td>
-                                                <td> <button type="button" data-id="<?=$islem['0']->islem_kodu?>" data-turu="<?=$islem['0']->islem_turu?>" data-url="<?=base_url('cari/islemIncele/')?>" class="btn bg-green waves-effect islemIncele">
+                                                <td> <button type="button" data-id="<?=$islem['0']->islem_kodu?>" data-turu="<?=$islem['0']->islem_turu?>" data-url="<?=base_url('cari/islemIncele')?>" class="btn bg-green waves-effect islemIncele">
                                                     <i class="material-icons">search</i>
                                                     <span>İncele</span>
                                                 </button></td>
@@ -126,8 +126,13 @@
 </div>
 
 
-
-<div class="modal fade" id="islemIncele" tabindex="-1" role="dialog">
+<style type="text/css">
+td
+{
+    margin-left: 5px;
+}
+</style>
+<div class="modal fade" id="inceleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -135,13 +140,48 @@
                 <hr>
             </div>
             <div class="modal-body">
+                <!-- <div class="row"> -->
 
 
+                    <div id="arizaDiv" style="display: none;">
+                        <h5 style="text-align: center">Arıza Detayı</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Arızanın Kodu</strong> <span class="pull-right" id="ariza_kodu"></span></li>
+                            <li class="list-group-item"><strong>Arızanın İçeriği</strong> <span class="pull-right" id="ariza_icerik"></span></li>
+                            <li class="list-group-item"><strong>Arızanın Tarihi</strong> <span class="pull-right" id="ariza_timestamp"></span></li>
+                            <li class="list-group-item"><strong>Arızalanan Asansör</strong> <span class="pull-right" id="ariza_asansor"></span></li>
+                            <li class="list-group-item"><strong>Arızayı Onaran</strong> <span class="pull-right" id="ariza_onaran"></span></li>
+                            <li class="list-group-item fiyat"><strong>Arızanın Tutarı</strong> <span class="pull-right" id="ariza_tutar"></span></li>
+                        </ul>
+                    </div>
+                    <div id="degisimDiv" style="display: none;">
+                        <h5 style="text-align: center">Değişim Detayı</h5>
+                        <ul class="list-group degisimUl">
+                            <li class="list-group-item"><strong>Değişen Parça</strong> <span class="pull-right" id="stok_adi"></span></li>
+                            <li class="list-group-item"><strong>Birim Fiyat</strong> <span class="pull-right" id="fiyat"></span></li>
+                            <li class="list-group-item"><strong>Değişen Miktar</strong> <span class="pull-right" id="adet"></span></li>
+                            <li class="list-group-item"><strong>Birim</strong> <span class="pull-right" id="birim"></span></li>
+                            <li class="list-group-item fiyat"><strong>Değişim Tutarı</strong> <span class="pull-right" id="tutar"></span></li>
+                        </ul>
+                    </div>
+                    <div id="bakimDiv" style="display: none;">
+                        <h5 style="text-align: center">Bakım Detayı</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Bakım Yapılan Asansör</strong> <span class="pull-right" id="bakim_asansor"></span></li>
+                            <li class="list-group-item"><strong>Bakım Durumu</strong> <span class="pull-right" id="bakim_durum"></span></li>
+                            <li class="list-group-item"><strong>Bakım Tarihi</strong> <span class="pull-right" id="bakim_tarih"></span></li>
+                            <li class="list-group-item"><strong>Bakımı Yapan</strong> <span class="pull-right" id="bakim_yapan"></span></li>
+                            <li class="list-group-item"><strong>Bakım İçeriği</strong> <span class="pull-right" id="bakim_icerik"></span></li>
+                        </ul>
+                    </div>
 
+
+                    <!-- </div> -->
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 

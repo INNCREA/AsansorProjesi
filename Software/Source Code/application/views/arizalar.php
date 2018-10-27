@@ -51,7 +51,7 @@ $this->load->view('include/sidebar');
 											<tr>
 												<th>Ariza Kod</th>
 												<th>Ariza Tarihi</th>
-												<th>Asansor Kodu</th>
+												<th>Asansor Adı</th>
 												<th>Asansor Yetkili</th>
 												<th></th>
 											</tr>
@@ -64,7 +64,7 @@ $this->load->view('include/sidebar');
 													<tr>
 														<td><?=$ariza->ariza_kodu?></td>
 														<td><?=$ariza->ariza_timestamp?></td>
-														<td><?=$ariza->asansor_kodu?></td>
+														<td><?=$ariza->asansor_adi?></td>
 														<td><?=$ariza->musteri_adSoyad?></td>
 														<td><a href="<?=base_url("ariza/".$ariza->ariza_id)?>" class="btn bg-cyan waves-effect">
 															<i class="material-icons">search</i>
@@ -89,7 +89,7 @@ $this->load->view('include/sidebar');
 											<tr>
 												<th>Ariza Kod</th>
 												<th>Ariza Tarihi</th>
-												<th>Asansor Kodu</th>
+												<th>Asansor Adı</th>
 												<th>Asansor Yetkili</th>
 												<th>Ariza Onaran</th>
 												<th></th>
@@ -103,7 +103,7 @@ $this->load->view('include/sidebar');
 													<tr>
 														<td><?=$ariza->ariza_kodu?></td>
 														<td><?=$ariza->ariza_timestamp?></td>
-														<td><?=$ariza->asansor_kodu?></td>
+														<td><?=$ariza->asansor_adi?></td>
 														<td><?=$ariza->musteri_adSoyad?></td>
 														<td><?=$ariza->kullanici_adSoyad?></td>
 														<td><a href="<?=base_url("ariza/".$ariza->ariza_id)?>" class="btn bg-blue waves-effect">
@@ -132,7 +132,7 @@ $this->load->view('include/sidebar');
 											<tr>
 												<th>Ariza Kod</th>
 												<th>Ariza Tarihi</th>
-												<th>Asansor Kodu</th>
+												<th>Asansor Adı</th>
 												<th>Asansor Yetkili</th>
 												<th>Ariza Onaran</th>
 												<th>Ariza Tutar</th>
@@ -147,7 +147,7 @@ $this->load->view('include/sidebar');
 													<tr>
 														<td><?=$ariza->ariza_kodu?></td>
 														<td><?=$ariza->ariza_timestamp?></td>
-														<td><?=$ariza->asansor_kodu?></td>
+														<td><?=$ariza->asansor_adi?></td>
 														<td><?=$ariza->musteri_adSoyad?></td>
 														<td><?=$ariza->kullanici_adSoyad?></td>
 														<td class="fiyat"><?=$ariza->ariza_tutar?></td>

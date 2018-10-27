@@ -160,21 +160,53 @@ $(function () {
 	$('.islemIncele').on("click", function(e) {
 		e.preventDefault();
 		var id = $(this).attr('data-id');
-		var islem_turu = $(this).attr('data-turu');
 		var url = $(this).attr('data-url');
+		var tur = $(this).attr('data-turu');
+		var count = 0;
 		$.ajax({
 			dataType: 'json',
 			type: 'POST',
 			url: url,
-			data: {id:id,tur:islem_turu},
+			data: {tur:tur,id:id},
 			success: function(data){
+				var degisim = '';
 				$.each( data, function( key, value ) {
+					if(value.ariza_id != null)
+					{
+						$('#arizaDiv').css("display", "block");
+						$('#ariza_kodu').html(value.ariza_kodu);
+						$('#ariza_durum').html(value.ariza_durum);
+						$('#ariza_icerik').html(value.ariza_icerik);
+						$('#ariza_timestamp').html(value.ariza_timestamp);
+						$('#ariza_asansor').html(value.asansor_adi);
+						$('#ariza_onaran').html(value.kullanici_adSoyad);
+						$('#ariza_tutar').html(value.ariza_tutar+" ₺");
+						//console.log(value.stok_id);
+						if(value.degisim_kodu != null)
+						{
+								$('#degisimDiv').css("display", "block");
+								degisim = degisim + '<li class="list-group-item"><strong>Değişen Parça</strong> <span class="pull-right">'+ value.stok_adi +'</span></li>';
+								degisim = degisim + '<li class="list-group-item"><strong>Birim Fiyat</strong> <span class="pull-right">'+ value.satis_fiyat +'</span></li>';
+								degisim = degisim + '<li class="list-group-item"><strong>Değişen Miktar</strong> <span class="pull-right">'+ value.degisim_miktar +'</span></li>';
+								degisim = degisim + '<li class="list-group-item"><strong>Birim</strong> <span class="pull-right">'+ value.stok_birim +'</span></li>';
+								degisim = degisim + '<li class="list-group-item fiyat"><strong>Değişim Tutarı</strong> <span class="pull-right">'+ value.degisim_tutar +'</span></li>';
+								degisim = degisim + '<hr>';
+								$(".degisimUl").html(degisim);
+						}
+						else
+						{
+							$('#degisimDiv').css("display", "none");
+						}
+					}
+					else if (value.bakim_id != null)
+					{
+
+					}
 					
 				});
-				$('#islemIncele').modal();
+				$('#inceleModal').modal();
 			}
 		});
-		
 	});
 
 

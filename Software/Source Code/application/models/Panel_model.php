@@ -7,7 +7,7 @@ class Panel_model extends CI_Model
 	
 	function gunlukAriza()
 	{
-		$this->db->select("ariza_id,ariza_kodu,ariza_timestamp,ariza_asansor,asansor_kodu,asansor_yetkili,musteri_adSoyad");
+		$this->db->select("ariza_id,ariza_kodu,asansor_adi,ariza_timestamp,ariza_asansor,asansor_kodu,asansor_yetkili,musteri_adSoyad");
 		$this->db->where("ariza.ariza_tarih", date("d.m.Y"));
 		$this->db->join("asansor","asansor.asansor_id = ariza.ariza_asansor", "left");
 		$this->db->join("musteri","musteri.musteri_id = asansor.asansor_yetkili","left");

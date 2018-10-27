@@ -323,23 +323,35 @@ public function tahsilat_sil($id)
 public function islemIncele()
 {
 	$tur = $this->input->post("tur");
-	$kod = $this->input->post("kod");
-
+	$id = $this->input->post("id");
+	
 	if($tur == "Arıza")
 	{
 		$this->load->model("cari_model");
-		$this->load->model("ariza_model");
-		$arizalar = $this->ariza_model->getFault($kod);
-		$degisimler = $this->cari_model->degisimCek($kod);
-		foreach ($arizalar as $key => $value)
+
+		$arizalar = $this->cari_model->arizaCek($id);
+		$degisimler = $this->cari_model->degisimCek($id);
+		
+		if($degisimler != FALSE)
 		{
-			$array[$key] = $value;
+
+			echo json_encode($degisimler);
+
+			//$array = $arizalar;
+
+			/*if($degisimler != FALSE)
+			{
+				//$array = array_merge($arizalar,$degisimler);
+				//array_push($array,$degisimler);
+			}*/
 		}
-		foreach ($degisimler as $key => $value)
+		else
 		{
-			$array[$key] = $value;
+			echo json_encode($arizalar);
 		}
-		echo json_encode($array);
+		
+
+		
 	}
 	else if($tur == "Bakım")
 	{

@@ -77,7 +77,7 @@
 									<tr>
 										<th>Arıza Kod</th>
 										<th>Arıza Tarihi</th>
-										<th>Asansör Kodu</th>
+										<th>Asansör Adı</th>
 										<th>Asansör Yetkilisi</th>
 										<th style="width: 18%">İşlemler</th>
 									</tr>
@@ -90,7 +90,7 @@
 											<tr>
 												<td><?=$ariza->ariza_kodu?></td>
 												<td><?=$ariza->ariza_timestamp?></td>
-												<td><?=$ariza->asansor_kodu?></td>
+												<td><?=$ariza->asansor_adi?></td>
 												<td><?=$ariza->musteri_adSoyad?></td>
 												<td> <a href="<?=base_url("ariza/".$ariza->ariza_id)?>" class="btn bg-cyan waves-effect">
 													<i class="material-icons">search</i>
