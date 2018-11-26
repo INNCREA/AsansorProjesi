@@ -51,7 +51,7 @@ class Cari_model extends CI_Model
 		->order_by("tahsilat_id", "desc")
 		->limit(1)
 		->get("tahsilat")
-		->result();
+		->row();
 
 		if($result)
 		{
@@ -87,7 +87,7 @@ class Cari_model extends CI_Model
 		->db
 		->where("cari_id",$id)
 		->get("cari")
-		->result();
+		->row();
 
 		if($result)
 		{
@@ -102,6 +102,19 @@ class Cari_model extends CI_Model
 		->db
 		->where("cari_id",$id)
 		->update("cari", $data);
+
+		if($result)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function islemTahsilatEkle($data)
+	{
+		$result = $this
+		->db
+		->insert("islem" , $data);
 
 		if($result)
 		{
@@ -191,6 +204,7 @@ class Cari_model extends CI_Model
 	{
 		$result = $this
 		->db
+		->group_by("islem_kodu")
 		->where("islem_asansor",$id)
 		->join("asansor","asansor.asansor_id = islem.islem_asansor")
 		->get('islem')

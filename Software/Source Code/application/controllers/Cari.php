@@ -172,7 +172,7 @@ class Cari extends CI_Controller {
 
 			/* Tahsilat tutarının ana bakiyeden düşülmesi */
 
-			$kalan_bakiye = ($cari['0']->cari_bakiye) - $tahsilat_tutar;
+			$kalan_bakiye = ($cari->cari_bakiye) - $tahsilat_tutar;
 			$veri["cari_bakiye"] = $kalan_bakiye;
 			$tahsilat = $this->cari_model->tahsilat($veri,$cari_id);
 
@@ -189,20 +189,15 @@ class Cari extends CI_Controller {
 				$tahsilat_kayit["tahsilat_tahsilEden"] = $kullanici;
 
 				$this->load->model('cari_model');
-				$tahsialtEkle = $this->cari_model->tahsilatEkle($tahsilat_kayit);
-
-
-
-
+				$tahsilatEkle = $this->cari_model->tahsilatEkle($tahsilat_kayit);
 				$this->session->set_flashdata('islem', 'tahsilat');
 
-				/* Tahsilat makbuzu işlemleri burada gerçekletirilecek. */
+				/* Tahsilat makbuzu işlemleri burada gerçekleştirilecek. */
 
-				$this->load->model('cari_model');
 				$makbuzNo = $this->cari_model->tahsilatId();
-				$makbuz_no = $makbuzNo["0"]->tahsilat_id + 1;
+				$makbuz_no = $makbuzNo->tahsilat_id + 1;
 				$viewData = array(
-					"cari" => $cari['0']->cari_isim,
+					"cari" => $cari->cari_isim,
 					"tutar" => $tahsilat_tutar,
 					"tahsilat_turu" => "Nakit",
 					"makbuz_no" => $makbuz_no,
@@ -212,7 +207,7 @@ class Cari extends CI_Controller {
 				$this->load->view('tahsilat',$viewData);
 				$html = $this->output->get_output();
 				$this->load->library('pdf');
-				$filename = date("d.m.Y H:i:s")."_".$makbuz_no;
+				$filename = date("d-m-Y")."_".$makbuz_no;
 				$this->pdf->create($html, $filename);
 			}
 
@@ -239,25 +234,26 @@ public function detay($cid = false)
 	$this->load->model('cari_model');
 	$this->load->model('bakim_model');
 	$cari = $this->cari_model->cariCek($cid);
-	$asansorler = $this->bakim_model->asansorCekId($cari['0']->cari_musteri);
+	$asansorler = $this->bakim_model->asansorCekId($cari->cari_musteri);
 	$islemler = [];
 	foreach ($asansorler as $asansor)
 	{
-		$a = $this->cari_model->islemCek($asansor->asansor_id);
-		if($a != null)
+		$result = $this->cari_model->islemCek($asansor->asansor_id);
+		if($result != null)
 		{
-			array_push($islemler,$a);
+			foreach ($result as $key) {
+				array_push($islemler,$key);
+			}
+			
 		}
 	}
-	
-
 	$id = $this->session->userdata("id");
 	$rol = $this->session->userdata("rol");
 	$viewData = array(
 		"sayfaAdi" => "Cari İşlemleri",
 		"altSayfaAdi" => "Cari Özet",
 		"id" => $id,
-		"cari" => $cari['0'],
+		"cari" => $cari,
 		"islemler" => $islemler
 	);
 	$this->load->view("cari", $viewData);
@@ -334,23 +330,12 @@ public function islemIncele()
 		
 		if($degisimler != FALSE)
 		{
-
 			echo json_encode($degisimler);
-
-			//$array = $arizalar;
-
-			/*if($degisimler != FALSE)
-			{
-				//$array = array_merge($arizalar,$degisimler);
-				//array_push($array,$degisimler);
-			}*/
 		}
 		else
 		{
 			echo json_encode($arizalar);
 		}
-		
-
 		
 	}
 	else if($tur == "Bakım")

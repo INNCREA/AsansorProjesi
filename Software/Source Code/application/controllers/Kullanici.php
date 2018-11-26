@@ -77,11 +77,12 @@ class Kullanici extends CI_Controller {
 			$kullanici["kullanici_sifre"] = password_hash($this->input->post("kullanici_sifre"), PASSWORD_DEFAULT);
 			$kullaniciEkle = $this->kullanici_model->kullaniciEkle($kullanici);
 			if($kullaniciEkle){
-				/*$this->load->library("eposta");
-				$customer["sifre"] = $this->input->post("musteri_sifre");
-				$customer["sifre"] = $this->input->post("musteri_sifre");
-				$this->eposta->sendUserMail($customer);
-	*/
+				$this->load->library("eposta");
+				$data["sifre"] = $this->input->post("kullanici_sifre");
+				$data["musteri_adSoyad"] = $kullanici["kullanici_adSoyad"];
+				$data["musteri_kAdi"] = $kullanici["kullanici_adi"];
+				$data["musteri_mail"] = $kullanici["kullanici_mail"];
+				$this->eposta->sendUserMail($data);
 				$this->session->set_flashdata('islem', 'ekle');
 				redirect("kullanici");
 			}else{

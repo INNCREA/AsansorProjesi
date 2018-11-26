@@ -53,21 +53,27 @@ class Modul extends CI_Controller {
 			$asansor_id = $this->input->post("asansor_id");
 			$bakim = $this->input->post("bakim");
 			echo "Asansör kodu = ".$asansor_id." Bakım = ".$bakim;
+
+			/*  Bakım işlemleri veritabanına kaydedildikten sonra kullanıcıya mail atılacak.  */
 		}
 		unset($key);
 		$this->session->sess_destroy();
 		redirect('giris');
 	}
+
+
+
+
 	public function arizaBildirim($asansor, $id)
 	{
 	    $content      = array(
-	        "en" => $asansor.' asansorunde bir arıza oluştu.'
+	        "en" => $asansor.' asansöründe bir arıza oluştu.'
 	    );
 	    $hashes_array = array();
 	    array_push($hashes_array, array(
 	        "id" => "like-button",
 	        "text" => "Arızaya Git",
-	        "url" => "http://inncrealift.tk/ariza/".$id,
+	        "url" => "https://inncrealift.com/ariza/".$id,
 	    ));
 	    $fields = array(
 	        'app_id' => "f8ae7f93-f4aa-472e-af92-618e8ca27791",

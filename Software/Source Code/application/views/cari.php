@@ -83,26 +83,26 @@
                                 <table class="table table-bordered table-striped table-hover temel-tablo dataTable">
                                     <thead>
                                         <tr>
-                                         <th>İşlem Türü</th>
-                                         <th>İşlem Kodu</th>
-                                         <th>İşlem Tarihi</th>
-                                         <th>Asansör Adı</th>
-                                         <th>İşlem Tutarı</th>
-                                         <th>İşlemler</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
+                                           <th>İşlem Türü</th>
+                                           <th>İşlem Kodu</th>
+                                           <th>İşlem Tarihi</th>
+                                           <th>Asansör Adı</th>
+                                           <th>İşlem Tutarı</th>
+                                           <th>İşlemler</th>
+                                       </tr>
+                                   </thead>
+                                   <tbody>
                                     <?php
                                     if($islemler){
                                         foreach ($islemler as $islem) {
                                             ?>
                                             <tr>
-                                                <td><?=$islem['0']->islem_turu?></td>
-                                                <td><?=$islem['0']->islem_kodu?></td>
-                                                <td><?=$islem['0']->islem_tarih?></td>
-                                                <td><?=$islem['0']->asansor_adi?></td>
-                                                <td class="fiyat"><?=$islem['0']->islem_tutar?></td>
-                                                <td> <button type="button" data-id="<?=$islem['0']->islem_kodu?>" data-turu="<?=$islem['0']->islem_turu?>" data-url="<?=base_url('cari/islemIncele')?>" class="btn bg-green waves-effect islemIncele">
+                                                <td><?=$islem->islem_turu?></td>
+                                                <td><?=$islem->islem_kodu?></td>
+                                                <td><?=$islem->islem_tarih?></td>
+                                                <td><?=$islem->asansor_adi?></td>
+                                                <td class="fiyat"><?=$islem->islem_tutar?></td>
+                                                <td> <button type="button" data-id="<?=$islem->islem_kodu?>" data-turu="<?=$islem->islem_turu?>" data-url="<?=base_url('cari/islemIncele')?>" class="btn bg-green waves-effect islemIncele">
                                                     <i class="material-icons">search</i>
                                                     <span>İncele</span>
                                                 </button></td>

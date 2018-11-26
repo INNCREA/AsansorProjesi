@@ -29,7 +29,6 @@ class Eposta
 		$config['smtp_crypto'] = 'ssl';
 		$config['mailtype']  = 'html';
 		$this->ci->email->initialize($config);
-		//$this->ci->email->from('no-reply@webcrea.pw');
 		$this->ci->email->from('no-reply@inncrealift.com', 'No-Reply');
 		$this->ci->email->to($email);
 		$this->ci->email->subject('Şifre Sıfırlama');
@@ -167,253 +166,253 @@ class Eposta
 			</table>
 			</body>
 			</html>');
-	if($this->ci->email->send()){
-		return TRUE;
-	}
-	echo $this->ci->email->print_debugger();
-	exit;
-	return FALSE;
-	}
-	public function sendUserMail($data)
-	{
-		$this->ci->load->library('email');
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'mail.inncrealift.com';
-		$config['smtp_user'] = 'no-reply@inncrealift.com';
-		$config['smtp_pass'] = 'EmreFirat58';
-		$config['smtp_port'] = 	587;
-		$config['charset'] = 'utf-8';
-		$config['priority'] = '1';
-		//$config['smtp_crypto'] = 'tls';
-		$config['mailtype']  = 'html';
-		$this->ci->email->initialize($config);
-		$this->ci->email->from('no-reply@inncrealift.com', 'No-Reply');
-		$this->ci->email->to($data["musteri_mail"]);
-		$this->ci->email->subject('Kullanıcı Bilgileri: '.$data["musteri_kAdi"]);
-		$this->ci->email->message('<!doctype html>
-			<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-			<head>
-			<title>Kullanıcı Bilgileri</title>
-			<!--[if !mso]><!-- -->
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<!--<![endif]-->
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<style type="text/css">
+if($this->ci->email->send()){
+	return TRUE;
+}
+echo $this->ci->email->print_debugger();
+exit;
+return FALSE;
+}
+public function sendUserMail($data)
+{
+	$this->ci->load->library('email');
+	$config['protocol'] = 'smtp';
+	$config['smtp_host'] = 'revolver.guzelhosting.com';
+	$config['smtp_user'] = 'no-reply@inncrealift.com';
+	$config['smtp_pass'] = 'EmreFirat58';
+	$config['smtp_port'] = 	465;
+	$config['charset'] = 'utf-8';
+	$config['priority'] = '1';
+	$config['smtp_crypto'] = 'ssl';
+	$config['mailtype']  = 'html';
+	$this->ci->email->initialize($config);
+	$this->ci->email->from('no-reply@inncrealift.com', 'No-Reply');
+	$this->ci->email->to($data["musteri_mail"]);
+	$this->ci->email->subject('Kullanıcı Bilgileri: '.$data["musteri_kAdi"]);
+	$this->ci->email->message('<!doctype html>
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+		<head>
+		<title>Kullanıcı Bilgileri</title>
+		<!--[if !mso]><!-- -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--<![endif]-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
 	  #outlook a { padding: 0; }
-			.ReadMsgBody { width: 100%; }
-			.ExternalClass { width: 100%; }
-			.ExternalClass * { line-height:100%; }
-			body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-			table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-			img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
-			p { display: block; margin: 13px 0; }
-			</style>
-			<!--[if !mso]><!-->
-			<style type="text/css">
-			@media only screen and (max-width:480px) {
-				@-ms-viewport { width:320px; }
-				@viewport { width:320px; }
-			}
-			</style>
-			<!--<![endif]-->
-			<!--[if mso]>
-			<xml>
-			<o:OfficeDocumentSettings>
-			<o:AllowPNG/>
-			<o:PixelsPerInch>96</o:PixelsPerInch>
-			</o:OfficeDocumentSettings>
-			</xml>
-			<![endif]-->
-			<!--[if lte mso 11]>
-			<style type="text/css">
-			.outlook-group-fix {
-				width:100% !important;
-			}
-			</style>
-			<![endif]-->
-			<style type="text/css">
-			@media only screen and (min-width:480px) {
-				.mj-column-per-100 { width:100%!important; }
-			}
-			</style>
-			</head>
-			<body style="background: #F4F4F4;">
-			
-			<div class="mj-container" style="background-color:#F4F4F4;"><!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-			<tr>
-			<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-			<![endif]--><div style="margin:0px auto;max-width:600px;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;"><!--[if mso | IE]>
-			<v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
-			<v:fill origin="0.5, 0" position="0.5,0" type="tile" src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png" />
-			<v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-			<![endif]--><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;" align="center" border="0" background="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-			<td style="vertical-align:top;width:600px;">
-			<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:24px;text-align:left;"><style></style><p style="text-align: center; margin: 10px 0;"><b><span style="font-size:28px"><span style="color:#ffffff">KULLANICI BİLGİLERİ</span></span></b></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]--></td></tr></tbody></table><!--[if mso | IE]>
-			<p style="margin:0;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office"> </o:p></p>
-			</v:textbox>
-			</v:rect>
-			<![endif]--></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]-->
-			<!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-			<tr>
-			<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-			<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-			<td style="vertical-align:top;width:600px;">
-			<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["musteri_adSoyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş bilgileriniz aşağıdaki gibidir.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Kullanıcı Adı: '.$data["musteri_kAdi"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Şifre: '.$data["sifre"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Aşağıdaki linkten panele giriş yapabilirsiniz.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş Link: <a target="_blank" href="'.base_url("giris").'">'.base_url("giris").'</a></span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]-->
-			<!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-			<tr>
-			<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-			<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-			<table role="presentation" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-			<td style="vertical-align:top;width:600px;">
-			<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:15px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Saygılarımızla, Inncrea</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
-			</td></tr></table>
-			<![endif]--></div>
-			</body>
-			</html>');
-	if($this->ci->email->send()){
-		return TRUE;
-	}
-	return FALSE;
-	}
-	public function sendMaintMail($data)
-	{
-		$this->ci->load->library('email');
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'mail.inncrealift.com';
-		$config['smtp_user'] = 'no-reply@inncrealift.com';
-		$config['smtp_pass'] = 'EmreFirat58';
-		$config['smtp_port'] = 	587;
-		$config['charset'] = 'utf-8';
-		$config['priority'] = '1';
-		//$config['smtp_crypto'] = 'tls';
-		$config['mailtype']  = 'html';
-		$this->ci->email->initialize($config);
-		$this->ci->email->from('no-reply@inncrealift.com', 'No-Reply');
-		$this->ci->email->to($data["mail"]);
-		$this->ci->email->subject('Asansor Bakım Bildirimi');
-		$this->ci->email->message('<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-<head>
-  <title>Test</title>
-  <!--[if !mso]><!-- -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!--<![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style type="text/css">
+		.ReadMsgBody { width: 100%; }
+		.ExternalClass { width: 100%; }
+		.ExternalClass * { line-height:100%; }
+		body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+		table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+		img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+		p { display: block; margin: 13px 0; }
+		</style>
+		<!--[if !mso]><!-->
+		<style type="text/css">
+		@media only screen and (max-width:480px) {
+			@-ms-viewport { width:320px; }
+			@viewport { width:320px; }
+		}
+		</style>
+		<!--<![endif]-->
+		<!--[if mso]>
+		<xml>
+		<o:OfficeDocumentSettings>
+		<o:AllowPNG/>
+		<o:PixelsPerInch>96</o:PixelsPerInch>
+		</o:OfficeDocumentSettings>
+		</xml>
+		<![endif]-->
+		<!--[if lte mso 11]>
+		<style type="text/css">
+		.outlook-group-fix {
+			width:100% !important;
+		}
+		</style>
+		<![endif]-->
+		<style type="text/css">
+		@media only screen and (min-width:480px) {
+			.mj-column-per-100 { width:100%!important; }
+		}
+		</style>
+		</head>
+		<body style="background: #F4F4F4;">
+
+		<div class="mj-container" style="background-color:#F4F4F4;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;"><!--[if mso | IE]>
+		<v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+		<v:fill origin="0.5, 0" position="0.5,0" type="tile" src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png" />
+		<v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+		<![endif]--><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;" align="center" border="0" background="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:24px;text-align:left;"><style></style><p style="text-align: center; margin: 10px 0;"><b><span style="font-size:28px"><span style="color:#ffffff">KULLANICI BİLGİLERİ</span></span></b></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table><!--[if mso | IE]>
+		<p style="margin:0;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office"> </o:p></p>
+		</v:textbox>
+		</v:rect>
+		<![endif]--></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]-->
+		<!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["musteri_adSoyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş bilgileriniz aşağıdaki gibidir.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Kullanıcı Adı: '.$data["musteri_kAdi"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Şifre: '.$data["sifre"].'</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Lütfen şifrenizi kimseyle paylaşmayınız.<br>Aşağıdaki linkten panele giriş yapabilirsiniz.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Giriş Link: <a target="_blank" href="'.base_url("giris").'">'.base_url("giris").'</a></span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]-->
+		<!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:15px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Saygılarımızla, INNCREA</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></div>
+		</body>
+		</html>');
+if($this->ci->email->send()){
+	return TRUE;
+}
+return FALSE;
+}
+public function sendMaintMail($data)
+{
+	$this->ci->load->library('email');
+	$config['protocol'] = 'smtp';
+	$config['smtp_host'] = 'revolver.guzelhosting.com';
+	$config['smtp_user'] = 'no-reply@inncrealift.com';
+	$config['smtp_pass'] = 'EmreFirat58';
+	$config['smtp_port'] = 	465;
+	$config['charset'] = 'utf-8';
+	$config['priority'] = '1';
+	$config['smtp_crypto'] = 'ssl';
+	$config['mailtype']  = 'html';
+	$this->ci->email->initialize($config);
+	$this->ci->email->from('no-reply@inncrealift.com', 'No-Reply');
+	$this->ci->email->to($data["mail"]);
+	$this->ci->email->subject('Asansor Bakım Bildirimi');
+	$this->ci->email->message('<!doctype html>
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+		<head>
+		<title>Test</title>
+		<!--[if !mso]><!-- -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--<![endif]-->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style type="text/css">
   #outlook a { padding: 0; }
-  .ReadMsgBody { width: 100%; }
-  .ExternalClass { width: 100%; }
-  .ExternalClass * { line-height:100%; }
-  body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-  table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-  img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
-  p { display: block; margin: 13px 0; }
-</style>
-<!--[if !mso]><!-->
-<style type="text/css">
-  @media only screen and (max-width:480px) {
-    @-ms-viewport { width:320px; }
-    @viewport { width:320px; }
-  }
-</style>
-<!--<![endif]-->
-<!--[if mso]>
-<xml>
-  <o:OfficeDocumentSettings>
-    <o:AllowPNG/>
-    <o:PixelsPerInch>96</o:PixelsPerInch>
-  </o:OfficeDocumentSettings>
-</xml>
-<![endif]-->
-<!--[if lte mso 11]>
-<style type="text/css">
-  .outlook-group-fix {
-    width:100% !important;
-  }
-</style>
-<![endif]-->
-<style type="text/css">
-  @media only screen and (min-width:480px) {
-    .mj-column-per-100 { width:100%!important; }
-  }
-</style>
-</head>
-<body style="background: #F4F4F4;">
-  
-  <div class="mj-container" style="background-color:#F4F4F4;"><!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]--><div style="margin:0px auto;max-width:600px;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;"><!--[if mso | IE]>
-      <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
-        <v:fill origin="0.5, 0" position="0.5,0" type="tile" src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png" />
-        <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-      <![endif]--><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;" align="center" border="0" background="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="vertical-align:top;width:600px;">
-      <![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:24px;text-align:left;"><style></style><p style="text-align: center; margin: 10px 0;"><b><span style="font-size:28px"><span style="color:#ffffff">ASANSOR BAKIM BILDIRIMI</span></span></b></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]--></td></tr></tbody></table><!--[if mso | IE]>
-        <p style="margin:0;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office"> </o:p></p>
-        </v:textbox>
-      </v:rect>
-      <![endif]--></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]-->
-      <!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="vertical-align:top;width:600px;">
-      <![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["ad_soyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">'.$data["asansor_adi"].' isimli asansörünüzün aylık periyodik bakımı yapılmıştır.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Bakım içeriği: '.$data["bakim_icerik"].'</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]-->
-      <!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
-      <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="vertical-align:top;width:600px;">
-      <![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:15px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Saygılarımızla, Inncrea</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
-      </td></tr></table>
-      <![endif]--></div>
-</body>
-</html>');
-	if($this->ci->email->send()){
-		return TRUE;
-	}
-	return FALSE;
-	}
+		.ReadMsgBody { width: 100%; }
+		.ExternalClass { width: 100%; }
+		.ExternalClass * { line-height:100%; }
+		body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+		table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+		img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+		p { display: block; margin: 13px 0; }
+		</style>
+		<!--[if !mso]><!-->
+		<style type="text/css">
+		@media only screen and (max-width:480px) {
+			@-ms-viewport { width:320px; }
+			@viewport { width:320px; }
+		}
+		</style>
+		<!--<![endif]-->
+		<!--[if mso]>
+		<xml>
+		<o:OfficeDocumentSettings>
+		<o:AllowPNG/>
+		<o:PixelsPerInch>96</o:PixelsPerInch>
+		</o:OfficeDocumentSettings>
+		</xml>
+		<![endif]-->
+		<!--[if lte mso 11]>
+		<style type="text/css">
+		.outlook-group-fix {
+			width:100% !important;
+		}
+		</style>
+		<![endif]-->
+		<style type="text/css">
+		@media only screen and (min-width:480px) {
+			.mj-column-per-100 { width:100%!important; }
+		}
+		</style>
+		</head>
+		<body style="background: #F4F4F4;">
+
+		<div class="mj-container" style="background-color:#F4F4F4;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;"><!--[if mso | IE]>
+		<v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+		<v:fill origin="0.5, 0" position="0.5,0" type="tile" src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png" />
+		<v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+		<![endif]--><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent url(http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png) top center / auto repeat;" align="center" border="0" background="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qn.png"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:24px;text-align:left;"><style></style><p style="text-align: center; margin: 10px 0;"><b><span style="font-size:28px"><span style="color:#ffffff">ASANSOR BAKIM BILDIRIMI</span></span></b></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table><!--[if mso | IE]>
+		<p style="margin:0;mso-hide:all"><o:p xmlns:o="urn:schemas-microsoft-com:office:office"> </o:p></p>
+		</v:textbox>
+		</v:rect>
+		<![endif]--></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]-->
+		<!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:20px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Merhaba '.$data["ad_soyad"].',</span></p><p style="margin: 10px 0;"><span style="font-size:18px">'.$data["asansor_adi"].' isimli asansörünüzün aylık periyodik bakımı yapılmıştır.</span></p><p style="margin: 10px 0;"><span style="font-size:18px">Bakım içeriği: '.$data["bakim_icerik"].'</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]-->
+		<!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+		<tr>
+		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+		<![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;"><!--[if mso | IE]>
+		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="vertical-align:top;width:600px;">
+		<![endif]--><div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-top:15px;padding-bottom:0px;" align="left"><div style="cursor:auto;color:#5e6977;font-family:Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;"><style></style><p style="margin: 10px 0;"><span style="font-size:18px">Saygılarımızla, INNCREA</span></p></div></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+		</td></tr></table>
+		<![endif]--></div>
+		</body>
+		</html>');
+if($this->ci->email->send()){
+	return TRUE;
+}
+return FALSE;
+}
 }
 
 /* End of file Eposta.php */

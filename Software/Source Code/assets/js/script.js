@@ -109,16 +109,14 @@ $(function () {
 			url: url,
 			data: {id:id},
 			success: function(data){
-				$.each( data, function( key, value ) {
-					$('#cari_id').val(value.cari_id);
-					$('#cari_isim').val(value.cari_isim);
-					$('#cari_mail').val(value.cari_mail);
-					$('#cari_telefon').val(value.cari_telefon);
-					$('#cari_adres').val(value.cari_adres);
-					$('#cari_yetkili').val(value.cari_yetkili);
-					$('#cari_vergiDairesi').val(value.cari_vergiDairesi);
-					$('#cari_vergiNo').val(value.cari_vergiNo);
-				});
+				$('#cari_id').val(data.cari_id);
+				$('#cari_isim').val(data.cari_isim);
+				$('#cari_mail').val(data.cari_mail);
+				$('#cari_telefon').val(data.cari_telefon);
+				$('#cari_adres').val(data.cari_adres);
+				$('#cari_yetkili').val(data.cari_yetkili);
+				$('#cari_vergiDairesi').val(data.cari_vergiDairesi);
+				$('#cari_vergiNo').val(data.cari_vergiNo);
 				$('#duzenleCari').modal();
 			}
 		});
@@ -134,10 +132,8 @@ $(function () {
 			url: url,
 			data: {id:id},
 			success: function(data){
-				$.each( data, function( key, value ) {
-					$('#tahsilat_id').val(value.cari_id);
-					$('#toplam_tutar').val(value.cari_bakiye);
-				});
+				$('#tahsilat_id').val(data.cari_id);
+				$('#toplam_tutar').val(data.cari_bakiye);
 				$('#tahsilat').modal();
 			}
 		});
@@ -181,17 +177,16 @@ $(function () {
 						$('#ariza_asansor').html(value.asansor_adi);
 						$('#ariza_onaran').html(value.kullanici_adSoyad);
 						$('#ariza_tutar').html(value.ariza_tutar+" ₺");
-						//console.log(value.stok_id);
 						if(value.degisim_kodu != null)
 						{
-								$('#degisimDiv').css("display", "block");
-								degisim = degisim + '<li class="list-group-item"><strong>Değişen Parça</strong> <span class="pull-right">'+ value.stok_adi +'</span></li>';
-								degisim = degisim + '<li class="list-group-item"><strong>Birim Fiyat</strong> <span class="pull-right">'+ value.satis_fiyat +'</span></li>';
-								degisim = degisim + '<li class="list-group-item"><strong>Değişen Miktar</strong> <span class="pull-right">'+ value.degisim_miktar +'</span></li>';
-								degisim = degisim + '<li class="list-group-item"><strong>Birim</strong> <span class="pull-right">'+ value.stok_birim +'</span></li>';
-								degisim = degisim + '<li class="list-group-item fiyat"><strong>Değişim Tutarı</strong> <span class="pull-right">'+ value.degisim_tutar +'</span></li>';
-								degisim = degisim + '<hr>';
-								$(".degisimUl").html(degisim);
+							$('#degisimDiv').css("display", "block");
+							degisim = degisim + '<li class="list-group-item"><strong>Değişen Parça</strong> <span class="pull-right">'+ value.stok_adi +'</span></li>';
+							degisim = degisim + '<li class="list-group-item"><strong>Birim Fiyat</strong> <span class="pull-right">'+ value.satis_fiyat +' ₺</span></li>';
+							degisim = degisim + '<li class="list-group-item"><strong>Değişen Miktar</strong> <span class="pull-right">'+ value.degisim_miktar +'</span></li>';
+							degisim = degisim + '<li class="list-group-item"><strong>Birim</strong> <span class="pull-right">'+ value.stok_birim +'</span></li>';
+							degisim = degisim + '<li class="list-group-item"><strong>Değişim Tutarı</strong> <span class="pull-right">'+ value.degisim_tutar +' ₺</span></li>';
+							degisim = degisim + '<hr>';
+							$(".degisimUl").html(degisim);
 						}
 						else
 						{
@@ -259,7 +254,5 @@ $(function () {
 	$('.fiyat').inputmask('decimal', maskCfg);
 	$('.email').inputmask({ alias: "email",showMaskOnHover: false });
 	$('.telefon').inputmask();
-
-
 
 });
